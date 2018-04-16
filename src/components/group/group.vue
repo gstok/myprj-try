@@ -7,7 +7,9 @@
                     <span class='addplus'>+</span>新建客户
                 </Button>
             </div>
+
             <p class="GgroupTit">群组</p>
+
             <ul class="groupUl">
                 <li class="groupLi" @click="pushGroupId('')"><i class="icon icon-dankehu"></i>
                     <!--<span title='全部'>全部({{allcustNum}})</span>-->
@@ -33,17 +35,23 @@
                     </Form>
                 </li>
             </ul>
+
             <div class='GgroupAddBtn' @click='addGroupPop' v-show='addGroupShow'>
-                <span>+</span>新建群组</div>
-                <Form v-show='!addGroupShow' label-position="top" ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin-top: 10px;">
-                    <FormItem style="margin-bottom:0" prop="grouptitle">
-                        <Input v-model="formValidate.grouptitle" placeholder="请输入群组名称"></Input>
-                    </FormItem>
-                    <FormItem style="float: right;margin: 10px 0">
-                        <Button type="primary" @click="addGroup('formValidate')">确定</Button>
-                        <Button type="ghost" @click="notAdd" style="margin-left: 8px">取消</Button>
-                    </FormItem>
-                </Form>
+                <span>+</span>新建群组
+            </div>
+
+            <!--这里是新建群组的表单-->
+            <Form v-show='!addGroupShow' label-position="top" ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin-top: 10px;">
+                <FormItem style="margin-bottom:0" prop="grouptitle">
+                    <Input v-model="formValidate.grouptitle" placeholder="请输入群组名称"></Input>
+                </FormItem>
+                <FormItem style="float: right;margin: 10px 0">
+                    <Button type="primary" @click="addGroup('formValidate')">确定</Button>
+                    <Button type="ghost" @click="notAdd" style="margin-left: 8px">取消</Button>
+                </FormItem>
+            </Form>
+
+            <!--模态弹框-->
             <Modal v-model="modalDel" width="360" :mask-closable="false">
                 <p slot="header" style="color:#f60;text-align:center">
                     <Icon type="information-circled"></Icon>
@@ -128,6 +136,16 @@
                 this.iconShow = true;
                 this.iconIdx = index;
             },
+
+            async mytest () {
+                await new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve();
+                    }, 4000);
+                });
+            },
+
+
             getGroupList: function () {
                 let that = this;
                 this.$post("/user-apis/pc/newCust/getList.action").then(res => {
@@ -136,6 +154,11 @@
                         that.allcustNum  = res.data.data.count;
                     }
                 });
+                // let res = await this.$post("/user-apis/pc/newCust/getList.action");
+                // if (res.code === 200) {
+                //     that.groupLists = res.data.data.list;
+                //     that.allcustNum  = res.data.data.count;
+                // }
             },
             //点击新建群组按钮
             addGroupPop: function () {
@@ -223,6 +246,10 @@
                 this.$emit('addCust');
                 this.$emit('gstokTest');
             }
+        },
+        async mounted () {
+            await this.mytest();
+            console.log("你好，世界");
         }
     }
 </script>
