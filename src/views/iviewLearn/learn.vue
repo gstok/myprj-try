@@ -7,6 +7,10 @@
     <Layout>
         <Row style="margin-top: 20px;">
             <Tabs type="card" value="name1">
+                <TabPane label="下拉框尝试" name="name7">
+                </TabPane>
+
+
                 <TabPane label="穿梭框学习" name="name1">
                     <Row style="margin-top: 20px;">
                         <Transfer
