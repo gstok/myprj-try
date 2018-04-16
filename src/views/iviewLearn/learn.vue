@@ -22,7 +22,24 @@
                 </FormItem>
             </Form>
         </Row>
-        <Row>2</Row>
+        <Row>
+            <Button>默认的按钮</Button>
+            <Button disabled type="primary">主要按钮样式</Button>
+            <Button type="ghost">Ghost</Button>
+            <Button type="dashed">Dashed</Button>
+            <Button type="text">Text</Button>
+            <Button size="large" long shape="circle" type="warning">警告</Button>
+            <Button size="large" type="success" loading>成功</Button>
+
+            <ButtonGroup vertical>
+                <Button type="success">
+                    <Icon type="chevron-left"></Icon>
+                    成功
+                </Button>
+                <Button type="warning">警告</Button>
+                <Button type="error">失败</Button>
+            </ButtonGroup>
+        </Row>
     </Layout>
 </template>
 
