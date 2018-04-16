@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="tanxinpage" v-cloak>
+        <!-- menu -->
+        <div class="menu"></div>
+        <!-- menu end  -->
+        <div id="page-wrapper">
+            <!-- top -->
+            <div id="top">
+                <my-top></my-top>
+            </div>
+            <!-- top end -->
+            <div class="row topTitle">
+                <div class="col-md-12 clearfix">
+                    <h2 class="fl">
+                        <a href="javascript:;"><i class="shu"></i>弹信</a>
+                    </h2>
+                    <a class="btn fr rightAdd" module="flash" permission-code="ADD" @click=newlyData()>{{addtitle}}</a>
+                    <div class="fr clearfix flashfilter" v-if='filterShow==true'>
+                        <p class="fl"><span>模板名称</span><input type="text" class="flashName"></p>
+                        <div class="btnGroup fl rightBtn">
+                            <a href="javascript:;" class="zcBtn" @click=searchSend()>查询</a>
+                            <a href="javascript:;" class="zcBtn" @click=reset()>重置</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="page-inner" class="nopad page-inner">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#shortmessage" data-toggle="tab" @click="smslist(0,20,2)">弹信模板</a></li>
+                    <li><a class="flashSMSCard" href="#flashSMSCard" data-toggle="tab" @click="flashSMSCard()">弹信名片</a></li>
+                    <li><a class="indexList" href="#smsendrecord" data-toggle="tab" @click="smsSendLog(0,20)">发送记录</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <!-- 弹信模板 -->
+                    <div class="row nopm tab-pane fade active in" id="shortmessage">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable" id="flashList">
+                                <thead>
+                                    <tr>
+                                        <th>弹信模板名</th>
+                                        <th :style="{ width: 260 + 'px' }">内容</th>
+                                        <th>模板状态</th>
+                                        <th>创建时间</th>
+                                        <th class="textcenter">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="smsLists.length == 0">
+                                        <td colspan="6" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                <tr v-for="smsList in smsLists">
+                                    <td>
+                                        <a v-if='hasPermission("flash", "GET")' class="typeblue" href="javascript:;" @click="editpage(smsList.id,smsList.flashType)">{{smsList.flashName}}</a>
+                                        <template v-else>
+                                            <a class="typeblue">{{smsList.flashName}}</a>
+                                        </template>
+                                    </td>
+                                    <td class="emailSubBox">
+                                        <div class="emailSub" data-container="body" data-toggle="popover" data-placement="top" :data-content="smsList.content">{{smsList.content}}</div>
+                                    </td>
+                                    <!-- 审核不通过，鼠标悬停显示原因 -->
+                                    <td v-if='smsList.status!=2' data-container="body" data-toggle="popover" data-placement="top" :data-content="smsList.applyResult">{{smsList.displayStatus}}</td>
+                                    <template v-else>
+                                        <td data-container="body" data-toggle="popover" data-placement="top" :data-content="smsList.displayStatus">{{smsList.displayStatus}}</td>
+                                    </template>
+                                    <td>{{smsList.displayCreateTime}}</td>
+                                    <td class="textcenter">
+                                        <span v-if="smsList.status == '0' ||smsList.status == '3' ||smsList.status == '1'|| (!hasPermission('flash', 'SEND'))"><i class="icon icon-jianrongceshi disabled"></i></span>
+                                        <template v-else>
+                                            <span data-container="body" data-toggle="popover" data-placement="top" data-content="测试"><a href="javascript:;" @click="testPopup(smsList.id)"><i class="icon icon-jianrongceshi"></i></a></span><!-- 测试 -->
+                                        </template>
+                                        <span class="tdline">▏</span>
+                                        <span v-if="smsList.status == '0' ||smsList.status == '3'">
+                                            <a v-if='hasPermission("flash", "VERIFY")' href="javascript:;" data-container="body" data-toggle="popover" data-placement="top" data-content="审核" @click="verifyData(smsList.flashType,smsList.id)"><i class="icon icon-ZHicon_"></i></a><!-- 审核 -->
+                                            <template v-else>
+                                                <a><i class="icon icon-ZHicon_ disabled"></i></a><!-- 审核 -->
+                                            </template>
+                                        </span>
+                                        <template v-else>
+                                                <span v-if = "smsList.status == '1'||(!hasPermission('flash', 'SEND'))" ><i class="icon icon-send disabled"></i></span><!-- 发送 -->
+                                                <template v-else>
+                                                    <span data-container="body" data-toggle="popover" data-placement="top" data-content="发送"><a href="javascript:;" @click="sendData(smsList.id)"><i class="icon icon-send"></i></a></span>
+                                                </template>
+                                        </template>
+
+                                        <span class="tdline">▏</span>
+                                        <span v-if='hasPermission("flash", "DEL")' data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><a href="javascript:;" @click="deleteData(smsList.id,smsList.flashName)"><i class="icon icon-shanchu"></i></a></span>
+                                        <!-- 删除 -->
+                                        <template v-else>
+                                            <span><a><i class="icon icon-shanchu disabled"></i></a></span><!-- 删除 -->
+                                        </template>
+                                    </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="flashListpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 弹信名片 -->
+                    <div class="row nopm tab-pane fade" id="flashSMSCard">
+                        <div class="col-md-12 table-responsive">
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                    <tr>
+                                        <th>名片名</th>
+                                        <th :style="{ width: 260 + 'px' }">内容</th>
+                                        <th>审核状态</th>
+                                        <th>申请人</th>
+                                        <th>申请日期</th>
+                                        <th class="textcenter">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="smsLists.length == 0">
+                                        <td colspan="6" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                <tr v-for="smsList in smsLists">
+                                    <td>
+                                        <a v-if='hasPermission("flash", "GET")' class="typeblue" href="javascript:;" @click="editpage(smsList.id,smsList.flashType)">{{smsList.flashName}}</a>
+                                        <template v-else>
+                                            <a class="typeblue">{{smsList.flashName}}</a>
+                                        </template>
+                                    </td>
+                                    <td class="emailSubBox">
+                                        <div class="emailSub" data-container="body" data-toggle="popover" data-placement="top" :data-content="smsList.content">{{smsList.content}}</div>
+                                    </td>
+                                    <!-- 审核不通过，鼠标悬停显示原因 -->
+                                    <td v-if="smsList.status!=2" data-container="body" data-toggle="popover" data-placement="top" :data-content="smsList.applyResult">{{smsList.displayStatus}}</td>
+                                    <template v-else>
+                                        <td data-container="body" data-toggle="popover" data-placement="top" :data-content="smsList.displayStatus">{{smsList.displayStatus}}</td>
+                                    </template>
+                                    <td>{{smsList.createUserName}}</td>
+                                    <td>{{smsList.displayCreateTime}}</td>
+                                    <td class="textcenter">
+                                        <span v-if="smsList.status == '0' ||smsList.status == '3' ||smsList.status == '1'|| (!hasPermission('flash', 'SEND'))"><i class="icon icon-jianrongceshi disabled"></i></span>
+                                        <template v-else>
+                                            <span data-container="body" data-toggle="popover" data-placement="top" data-content="测试"><a href="javascript:;" @click="testPopup(smsList.id)"><i class="icon icon-jianrongceshi"></i></a></span><!-- 测试 -->
+                                        </template>
+                                        <span class="tdline">▏</span>
+                                        <span v-if="smsList.status == '0' ||smsList.status == '3'">
+                                            <a v-if="hasPermission('flash', 'VERIFY')" href="javascript:;" data-container="body" data-toggle="popover" data-placement="top" data-content="审核" @click="verifyData(smsList.flashType,smsList.id)"><i class="icon icon-ZHicon_"></i></a><!-- 审核 -->
+                                            <template v-else>
+                                                <a><i class="icon icon-ZHicon_ disabled"></i></a><!-- 审核 -->
+                                            </template>
+                                        </span>
+                                        <template v-else>
+                                                <span v-if = "smsList.status == '1'||(!hasPermission('flash', 'SEND'))" ><i class="icon icon-send disabled"></i></span><!-- 发送 -->
+                                                <template v-else>
+                                                    <span data-container="body" data-toggle="popover" data-placement="top" data-content="发送"><a href="javascript:;" @click="sendData(smsList.id)"><i class="icon icon-send"></i></a></span>
+                                                </template>
+                                        </template>
+
+                                        <span class="tdline">▏</span>
+                                        <span v-if="hasPermission('flash', 'DEL')" data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><a href="javascript:;" @click="deleteData(smsList.id,smsList.flashName)"><i class="icon icon-shanchu"></i></a></span>
+                                        <!-- 删除 -->
+                                        <template v-else>
+                                            <span><a><i class="icon icon-shanchu disabled"></i></a></span><!-- 删除 -->
+                                        </template>
+                                    </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="flashSMSCardpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 发送记录 -->
+                    <div class="row nopm tab-pane fade" id="smsendrecord">
+                        <div class="col-md-12 table-responsive">
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                    <tr>
+                                        <th>弹信名称</th>
+                                        <th :style="{ width: 260 + 'px' }">内容</th>
+                                        <th>弹信类型</th>
+                                        <th>发送群体</th>
+                                        <th>发送时间</th>
+                                        <th>数据反馈</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="recordlists.length == 0">
+                                        <td colspan="6" class="textcenter">暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                <tr v-for="recordlist in recordlists">
+                                    <td class="sendlistTd">{{recordlist.flashName}}</td>
+                                    <td class="emailSubBox">
+                                        <div class="emailSub" data-container="body" data-toggle="popover" data-placement="top" :data-content="recordlist.content">{{recordlist.content}}</div>
+                                    </td>
+                                    <td class="sendlistTd" v-if="recordlist.flashType==2">弹信模板</td>
+                                    <template v-else ><td class="sendlistTd">弹信名片</td></template>
+                                    <td class="sendlistTd">{{recordlist.groupName}}</td>
+                                    <td class="sendlistTd">{{recordlist.displayCreateTime}}</td>
+                                    <td class="spctd">
+                                        <span v-if="!recordlist.arriveUv" data-container="body" data-toggle="popover" data-placement="top" :data-content="'发送：'+recordlist.targetNum+'人,收到：0人'">到达率：
+                                            <template v-if="recordlist.arriveUv == null||recordlist.targetNum == 0">0%</template>
+                                            <template v-else>{{100*((recordlist.arriveUv)/(recordlist.targetNum)).toFixed(1)}}%</template>
+                                        </span>
+                                        <template v-else>
+                                            <span data-container="body" data-toggle="popover" data-placement="top" :data-content="'发送：'+recordlist.targetNum+'人,收到：'+recordlist.arriveUv+'人'">到达率：
+                                                <template v-if="recordlist.arriveUv == null||recordlist.targetNum == 0">0%</template>
+                                                <template v-else>{{(100*(recordlist.arriveUv)/(recordlist.targetNum)).toFixed(1)}}%</template>
+                                            </span>
+                                        </template>
+                                    </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="sendrecordpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--复制 、测试  弹窗 -->
+        <div class="copyBox" v-show="copyShow">
+            <input type="hidden" v-model="micropageid" />
+            <div class="xc_layer"></div>
+            <div class="popBox">
+                <div class="ttBox">
+                    <a class="clsBtn" @click="closeData()"></a><span class="tt">输入</span></div>
+                <div class="txtBox">
+                    <p v-show="testShow">弹信名<input class="inputBox" v-model="title"></p>
+                    <!--复制-->
+                    <p v-show="!testShow">手机号码<input class="inputBox" v-model="phone" style="border: 1px solid gray;"></p>
+                    <!--测试-->
+                </div>
+                <div class="btnArea">
+                    <div class="btnGroup" v-show="testShow"><a class="sgBtn ok" @click="copyData()">确定</a></div>
+                    <!--复制-->
+                    <div class="btnGroup" v-show="!testShow"><a class="sgBtn ok" @click="testData()">确定</a></div>
+                    <!--测试-->
+                </div>
+            </div>
+
+        </div>
+        <!--复制 、测试  弹窗 end-->
+    </div>
+    <script src="../../js/jquery-2.2.3.min.js"></script>
+    <script src="../../libs/bootstrap/bootstrap.min.js"></script>
+    <script src="../../libs/xcConfirm/xcConfirm.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/paging.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/marketing/flashSMS/list.js"></script>
+</body>
+
+</html>

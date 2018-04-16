@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href="../../css/jquery-ui.min.css" rel="stylesheet" type='text/css'/>
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/jcrop/jquery.Jcrop.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/wxlogin/wxlogin.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/addFriends/addfriends.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="addfriendsPage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <a href="/view/marketing/addFriends/addfriends.html"><i class="shu"></i>定位加好友</a>
+                </h2>
+                <a class="btn fr rightAdd" module="wxLocfrd" permission-code="ADD" @click='newlytask()'>+创建任务</a>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad page-inner">
+            <ul class="nav nav-tabs">
+                <li class="active tasklist"><a href="#tasklist" data-toggle="tab">任务列表</a></li>
+                <li><a href="#nearby" class='nearby' data-toggle="tab">附近的人</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="row nopm tab-pane fade active in" id="tasklist">
+                    <div class="col-md-12" >
+                        <table class="table table-striped innerTable">
+                            <thead>
+                            <tr>
+                                <th style="width:200px;">任务名称</th>
+                                <th>定位点</th>
+                                <th>添加对象</th>
+                                <th>验证信息</th>
+                                <th>任务完成时间</th>
+                                <th>发送请求人数</th>
+                                <th>任务状态</th>
+                                <th class="textcenter">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="tasklists.length == 0">
+                                <td colspan="8" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                            </tr>
+                            <template v-else>
+                                <tr v-for="tasklist in tasklists">
+                                    <td>{{tasklist.locTaskName}}</td>
+                                    <td><span class='addrTd' data-container="body" data-toggle="popover" data-placement="top" :data-content="tasklist.locAddress">{{tasklist.locAddress}}</span></br>{{tasklist.locLatitude}},</br>{{tasklist.locLongitude}}</td>
+                                    <td>{{tasklist.tagFitler}}</td>
+                                    <td>{{tasklist.helloMsg}}</td>
+                                    <td v-if='tasklist.status == 5'>{{tasklist.displayFinishTime}}</td>
+                                    <template v-else><td></td></template>
+                                    <td>{{tasklist.friendsNum}}</td>
+                                    <td>{{tasklist.displayStatus}}</td>
+                                    <td class="textcenter">
+                                        <span v-if='tasklist.status == 0 || tasklist.status == 3|| tasklist.status == 5'><!-- 未启动   中断-->
+                                            <a v-if='hasPermission("wxLocfrd", "UPDATE")' href="javascript:;" @click="startTask(tasklist.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="启动"><i class="icon icon-qidong" ></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-qidong disabled"></i></a>
+                                            </template>
+                                        </span>
+                                        <span v-if='tasklist.status == 0 || tasklist.status == 5' class="tdline">▏</span>
+                                        <span v-if='tasklist.status == 0 || tasklist.status == 5'><!-- 未启动   完成-->
+                                            <a v-if='hasPermission("wxLocfrd", "UPDATE")' href="javascript:;" @click="viewData(tasklist.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="编辑"><i class="icon icon-bianji" ></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-bianji disabled"></i></a>
+                                            </template>
+                                        </span>
+                                        <span v-if='tasklist.status == 5' class="tdline">▏</span>
+                                        <span v-if='tasklist.status == 5'><!--完成-->
+                                            <a v-if='hasPermission("wxLocfrd", "GET")' href="javascript:;" @click="nearfriends(tasklist.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="附近的人"><i class="icon icon-fujinderen"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-fujinderen disabled"></i></a>
+                                            </template>
+                                        </span>
+                                        <span v-if='tasklist.status == 0 || tasklist.status == 5' class="tdline">▏</span>
+                                        <span v-if='tasklist.status == 0 || tasklist.status == 5'><!-- 未启动   完成-->
+                                            <a v-if='hasPermission("wxLocfrd", "DEL")' href="javascript:;" @click="deleteData(tasklist.id,tasklist.locTaskName)" data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><i class="icon icon-shanchu"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-shanchu disabled"></i></a>
+                                            </template>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="tasklistpage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row nopm tab-pane fade" id="nearby">
+                    <div class="col-md-12 table-responsive">
+                        <div class="search">
+                            <label for="">任务名称：</label>
+                            <div style='width: 200px; float: left;'>
+                                <select name="" id="alltask" class='form-control'>
+                                    <option value="">全部任务</option>
+                                    <option v-for='list in getTaskLists' :value="list.id">{{list.name}}</option>
+                                </select>
+                            </div>
+                            <a href="javascript:;" class="cancel zcBtn" @click="reset()">重置</a>
+                            <a href="javascript:;" class="save btn-primary btn" @click="search()">查询</a>
+                        </div>
+                        <table class="table table-striped innerTable">
+                            <thead>
+                            <tr>
+                                <th style="width: 25%">微信昵称</th>
+                                <th style="width: 25%">签名</th>
+                                <th style="width: 25%">所在区域</th>
+                                <th>发送请求时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="nearbylists.length == 0">
+                                <td colspan="4" class="textcenter">暂无数据</td>
+                            </tr>
+                            <template v-else>
+                                <tr v-for="nearby in nearbylists">
+                                    <td>
+                                        <div class='nickName'><span data-container="body" data-toggle="popover" data-placement="top" :data-content="nearby.nickName">{{nearby.nickName}}</span>
+                                            <div class='headimgBox'>
+                                                <img :src="nearby.headImgUri" alt="" class='seximg'>
+                                                <img v-if="nearby.sex == '男'" src="/view/images/littleman.png" alt="">
+                                                <template v-else>
+                                                    <img v-if="nearby.sex == '女'" src="/view/images/littlewoman.png" alt="">
+                                                    <template v-else>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{nearby.signature}}</td>
+                                    <td>{{nearby.province}}{{nearby.city}}</td>
+                                    <td>{{nearby.displayCreateTime}}</td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="nearbypage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="WechartloginBox">
+
+    </div>
+</div>
+<!--定位加好友 end-->
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../libs/wxlogin/wxlogin.js"></script>
+<script src="../../js/marketing/addFriends/addfriends.js"></script>
+</body>
+</html>

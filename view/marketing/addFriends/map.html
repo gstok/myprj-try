@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/positionPicker.html -->
+    <!-- <base href="//webapi.amap.com/ui/1.0/ui/misc/PositionPicker/examples/" /> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href="../../css/jquery-ui.min.css" rel="stylesheet" type='text/css'/>
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <!-- <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/jcrop/jquery.Jcrop.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' /> -->
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/wxlogin/wxlogin.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/addFriends/addfriends.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .amap-touch-toolbar .amap-zoomcontrol {
+            right: 0;
+            bottom: -45px;
+        }
+    </style>
+</head>
+<body id='addfriendsmappage'>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+
+        <div id="page-inner">
+            <div id="container" class="map" tabindex="0"></div>
+            <div id='right'>
+                <div class='title'>任务名称</div>
+                <div class="mapinp">
+                    <input type='text' id='locTaskName' class='form-control' placeholder="输入任务名称"/>
+                </div>
+
+                <div class='title'>搜索定位点</div>
+                <div class="mapinp">
+                    <input id="pickerInput" class='form-control' placeholder="输入关键字选取地点" />
+                </div>
+
+                <div id="poiInfo"></div>
+                <!-- <div class='title'>选择模式</div> -->
+                <!-- <input type='radio' name='mode' value='dragMap' checked>拖拽地图模式</input>
+                </br>
+                <input type='radio' name='mode' value='dragMarker'>拖拽Marker模式</input> -->
+                <button id='start' class='hide'>开始选点</button>
+                <!-- <button id='stop'>关闭选点</button> -->
+                <!-- <div class='title'>选址结果</div> -->
+                <div class='title'>定位点:</div>
+                <div class="mapinp" id='address'></div>
+                <div class='title'>经纬度:</div>
+                <div class="mapinp" id='lnglat'></div>
+                <div class='title'>搜索范围偏移量:</div>
+                <div class="clearfix mapinp">
+                    <div class="slierNum">0</div>
+                    <div class="slierbar"></div>
+                    <div class="slierNum slierNum2">2km</div>
+                </div>
+                <!-- <div class='c'>最近的路口:</div>
+                <div id='nearestJunction'></div>
+                <div class='c'>最近的路:</div>
+                <div id='nearestRoad'></div>
+                <div class='c'>最近的POI:</div>
+                <div id='nearestPOI'></div> -->
+                <div class='title'>添加对象</div>
+                <div class="mapinp">
+                    <input type='radio' name='sex' value='男' checked>男</input>
+                    <input type='radio' name='sex' value='女'>女</input>
+                    <input type='radio' name='sex' value='全部'>全部</input>
+                </div>
+
+                <div class='title'>验证信息</div>
+                <div class="mapinp">
+                    <input type='text' class='form-control' id='helloMsg' placeholder='验证信息'/>
+                </div>
+                <div class="mybtn-group">
+                    <a href="javascript:;" class="btn btn-primary" onclick="createTask(1)">执行任务</a>
+                    <a href="javascript:;" class="btn btn-default" onclick="createTask(0)">暂存</a>
+                    <a href="javascript:;" class="btn btn-default" onclick="createTask(2)">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="WechartloginBox">
+
+    </div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/jquery-ui.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+
+<script type="text/javascript" src='//webapi.amap.com/maps?v=1.4.4&key=25efae7852192f49eb4ea7e61fb2959a&plugin=AMap.ToolBar'></script>
+<!-- UI组件库 1.0 -->
+<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+<script src="/view/libs/wxlogin/wxlogin.js"></script>
+<script type="text/javascript" src="/view/js/marketing/addFriends/map.js"></script>
+</body>
+</html>

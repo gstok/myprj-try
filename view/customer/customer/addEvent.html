@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+            <div  class="popup-inner addEvent content-inner">
+            <div class="row title">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i><span class="titleSpan"><a href="/view/customer/customer/customer.html">客户</a> / <a class="adetail" href="/view/customer/customer/customeDetail.html"> 客户详情</a> / 关联事件</span></h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnDetail()">&times;</a>
+                </div>
+            </div>
+        <hr>
+            <div class="customerForm taskForm">
+                <ul>
+                    <li>
+                        <span>事件来源</span>
+                        <select name="" id="addSource">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>事件名</span>
+                        <!-- <input type="text" class="addTaskTitle needLeft"> -->
+                        <select name="" id="addCusName"><option value="">请选择</option></select>
+                    </li>
+
+                    <li>
+                        <span>发生时间</span>
+                        <input type="text" class="wicon" id="occurrenceTime" placeholder="选择日期" readonly >
+                    </li>
+
+                    <li>
+                        <span>事件记录</span>
+                        <textarea name="" id="addRemark" cols="30" rows="10" class="remark"></textarea>
+                    </li>
+                </ul>
+                <div class="btnGroup">
+
+                    <a href="javascript:;" class="save btn btn-primary addEventSave">保存</a>
+                    <a href="javascript:;" class="cancel btn btn-default cancelPropup" onclick="returnDetail()">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/customer/addEvent.js"></script>
+<script>
+    $("#occurrenceTime").jeDate({
+        multiPane:true,
+        onClose:false,
+        minDate:'2015-06-16 10:20:25',
+        maxDate:'9999-06-16 18:30:35',
+        format: 'YYYY-MM-DD hh:mm:ss'
+    });
+</script>
+
+</body>
+</html>

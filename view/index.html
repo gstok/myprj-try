@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='css/main.css' rel='stylesheet' type='text/css' />
+    <link href='css/index.css' rel='stylesheet' type='text/css' />
+    <link href='libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<!-- <div id="menu">
+  <my-menu></my-menu>
+</div> -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+    <div id="page-inner" class="index-inner">
+        <div class="clearfix firstLine">
+            <div class="todayTask fl">
+              <div class="thumbnail indextop" style="height: 120px;">
+
+                <h3>今日需完成任务</h3>
+                <p><strong class="todayTaskContent">0</strong></p>
+              </div>
+            </div>
+           <div class="row topRow fl">
+                <div class="col-sm-4 col-md-4 col-lg-4 ">
+                  <div class="thumbnail" style="height: 120px;" onclick="undistributed()">
+                    <p><strong class="undistributed">0</strong></p>
+                    <h3><img src="/view/images/wfp.png" alt="" class="rw">未分配任务</h3>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4 ">
+                  <div class="thumbnail" style="height: 120px;" onclick="inProcess()">
+                  <p><strong class="inProcess">0</strong></p>
+                    <h3><img src="/view/images/qbclz.png" alt="" class="rw">所有处理中的任务</h3>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4 ">
+                  <div class="thumbnail last" style="height: 120px;" onclick="myInProcess()">
+                  <p><strong class="myInProcess">0</strong></p>
+                    <h3><img src="/view/images/clz.png" alt="" class="rw">我的处理中任务</h3>
+                  </div>
+                </div>
+            </div>
+        </div>
+         <!-- 客户统计一栏 -->
+         <h2 class="customertit">客户统计</h2>
+         <div class="clue clearfix" style="height: 120px;">
+             <div class="new"><span>新客户</span><strong class="newContent">0</strong><div class="div" w="0"></div><i>0%</i>
+        <!--      <em class="icon icon-iconfontjiantou xiangxia"></em><span class="triangle-up"></span> -->
+             </div>
+             <div class="chuci"><span>初次接触客户</span><strong class="chuciContent">0</strong><div class="div" w="0"></div><i>0%</i></div>
+
+             <div class="yixiang"><span>意向客户</span><strong class="yixiangContent">0</strong><div class="div" w="0"></div><i>0%</i></div>
+
+             <div class="chengjiao"><span>成交客户</span><strong class="chengjiaoContent">0</strong><div class="div" w="0"></div><i>0%</i></div>
+             <div class="sum"><span>累计客户</span><strong class="sumContent">0</strong></div>
+         </div>
+        <!-- 新增用户 -->
+        <div class="clearfix allNew">
+           <div class="row newFriend fl">
+                <div class="col-sm-4 col-md-4 col-lg-4 huakun">
+                  <div class="thumbnail" style="height: 190px;" >
+                    <div class="newMain">
+                      <h2>华坤道威新增</h2>
+                      <p class="sumAdd">累计新增 (人)：<span class="hkdwNewAdd">0</span></p>
+                      <p class="lastNew">最近5次数据需求新增 (人)</p>
+                    </div>
+                    <div id="huakunChart" class="curve" style="width:100%;height:50%;"></div>
+                    <div class="dian">
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i>0</i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i>0</i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i>0</i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i>0</i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i>0</i></p></em></span>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4 marketing">
+                  <div class="thumbnail" style="height: 190px;" >
+                    <div class="newMain">
+                      <h2>活动新增</h2>
+                      <p>累计新增 (人)：<span class="makingNewAdd">0</span></p>
+                      <p class="lastNew">最近7天新增 (人)</p>
+                    </div>
+                    <div id="marketChart" class="curve" style="width:100%;height:50%;"></div>
+                    <div class="dian">
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4 myadd">
+                  <div class="thumbnail" style="height: 190px;" >
+                    <div class="newMain">
+                      <h2>自定义新增</h2>
+                      <p>累计新增 (人)：<span class="myNewAdd">0</span></p>
+                      <p class="lastNew">最近7天新增 (人)</p>
+                    </div>
+                    <div id="myChart" class="curve" style="width:100%;height:50%;"></div>
+                    <div class="dian">
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+            <div class="newWeixin fr" style="height: 190px;" >
+              <div class="thumbnail indextop addFriend" style="height: 190px;">
+                <div class="newMain">
+                  <h2>发送好友请求</h2>
+                  <p>累计新增 (人)：<span class="wxNewAdd">0</span></p>
+                  <p class="lastNew">最近7天新增 (人)</p>
+                </div>
+                 <div id="friendChart" class="curve" style="width:100%;height:50%;"></div>
+                 <div class="dian">
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                      <span class="lightGray"><b>●</b><em><p></p><p>新增：<i></i></p></em></span>
+                 </div>
+
+              </div>
+            </div>
+        </div>
+        <!-- 访问图表 -->
+        <div class="clearfix viewDataBox" module="pageAnaly" permission-code="GET">
+           <div class="row">
+               <div class="col-sm-6 thumbnail">
+                  <div id="chart_box1" style="width:100%;height:350px;"></div>
+               </div>
+               <div class="col-sm-6 thumbnail">
+                  <div id="chart_box2" style="width:100%;height:350px;"></div>
+               </div>
+           </div>
+        </div>
+        <!-- 页面统计 -->
+        <div class="pageCount" style="height: 350px;">
+          <div class="countTitle">
+            <ul class="clearfix ">
+              <li><a href="javascript:;" class="on">微页面统计</a></li>
+              <li><a href="javascript:;">短信营销统计</a></li>
+              <li><a href="javascript:;">邮件营销统计</a></li>
+              <li><a href="javascript:;">微信群营销统计</a></li>
+              <li><a href="javascript:;">弹信营销统计</a></li>
+            </ul>
+          </div>
+          <ul class="weipage">
+              <li class="first">
+                  <span class="firstSpan">模板名</span><span></span class='badxq'><span class="secondSpan">页面访问(次)</span><span class="ThirdSpan">表单提交(次)</span><span class="lastSpan">分享(次)</span>
+              </li>
+
+              <li>
+                  <span class="firstSpan top1" ><em class="deepBlue">●</em><a href="javascript:;" class="top1Title" data-container="body" data-toggle="popover" data-placement="top" data-content=""></a></span><span class="badxq"></span><span class="secondSpan">0</span><span class="ThirdSpan">0</span><span class="lastSpan">0</span>
+              </li>
+              <li>
+                  <span class="firstSpan top2" ><em class="lightBlue">●</em><a href="javascript:;" class="top2Title" data-container="body" data-toggle="popover" data-placement="top" data-content=""></a></span><span class="badxq"></span><span class="secondSpan">0</span><span class="ThirdSpan">0</span><span class="lastSpan">0</span>
+              </li>
+              <li>
+                  <span class="firstSpan top3" ><em class="deepGreen">●</em><a href="javascript:;" class="top2Title" data-container="body" data-toggle="popover" data-placement="top" data-content=""></a></span><span class="badxq"></span><span class="secondSpan">0</span><span class="ThirdSpan">0</span><span class="lastSpan">0</span>
+              </li>
+              <li>
+                  <span class="firstSpan top4" ><em class="lightGreen">●</em><a href="javascript:;" class="top2Title" data-container="body" data-toggle="popover" data-placement="top" data-content=""></a></span><span class="badxq"></span><span class="secondSpan">0</span><span class="ThirdSpan">0</span><span class="lastSpan">0</span>
+              </li>
+              <li class="last">
+                  <span class="firstSpan top5" ><em class="biglightGray">●</em><a href="javascript:;" class="top3Title" data-container="body" data-toggle="popover" data-placement="top" data-content=""></a></span><span class="badxq"></span><span class="secondSpan">0</span><span class="ThirdSpan">0</span><span class="lastSpan">0</span>
+              </li>
+          </ul>
+          <ul class="nodata hide">
+            <p class="textcenter">暂无数据</p>
+          </ul>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-2.2.3.min.js"></script>
+<script src="libs/bootstrap/bootstrap.min.js"></script>
+<script src="libs/xcConfirm/xcConfirm.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/common.js"></script>
+<script src="js/main.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

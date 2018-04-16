@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href="../../css/jquery-ui.min.css" rel="stylesheet" type='text/css'/>
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .cover_edit{position: absolute;left: 0;top:20px;background:#fff;opacity: 0.1;width:390px;height:525px;z-index: 3}
+    </style>
+</head>
+<body>
+<div id="newlypage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12">
+                <div class="newlypagetitbox">
+                    <i class="shu"></i><span><a href="/view/marketing/micro/micropage.html">微页面</a> / {{micropagetit}}</span>
+                </div>
+            </div>
+        </div>
+        <div id="page-inner">
+            <input type="hidden" id="newid"/>
+            <div class="row microNewly">
+                <div class="microMenu absolute">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#microEdit" data-toggle="tab">页面编辑</a></li>
+                        <li><a href="#microSetting" data-toggle="tab" style="padding-right:76px">页面设置</a></li>
+                    </ul>
+                    <div class="tab-content pr">
+                        <div class="row microEdit tab-pane fade active in" id="microEdit">
+                            <div class="mSlider">
+                                <div class="widgetbox clearfix">
+                                    <div class="sliderTit">上下边距</div>
+                                    <div id="micropage-tbmargin" class="slierbar slierbarBg"></div>
+                                    <div id="micro-tbmargin" class="slierNum">20</div>
+                                </div>
+                                <div class="widgetbox clearfix">
+                                    <div class="sliderTit">左右边距</div>
+                                    <div id="micropage-lrmargin" class="slierbar slierbarBg"></div>
+                                    <div id="micro-lrmargin" class="slierNum">20</div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="sliderTit">背景颜色</div>
+                                    <input type="color" class="colorval" id="colorvalmicrobg">
+                                </div>
+                            </div>
+                            <div class="row controlsBox">
+                                <div class="controltit">基本组件</div>
+                                <ul class="controlsGroup clearfix">
+                                    <!-- 文本 -->
+                                    <li class="draggable-text col-sm-6">
+                                        <div class="draggable">
+                                            <!-- 左边文本组件 -->
+                                            <div id="txt">
+                                                <div class="txtcontent">{{editorCont}}</div>
+                                                <div class="editgroup-box">
+                                                    <div class="editgroupBg"></div>
+                                                    <div class="editgroup">
+                                                        <a href="javascript:;" class="txtBtn upEdit">编辑</a>
+                                                        <span class="tdline">▏</span>
+                                                        <a href="javascript:;" class="delete">删除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 左边组件显示，不拖动 -->
+                                            <div class="control control-text">
+                                                <div class="icon icon-wenzi"></div>
+                                                <div data-type="text">文本</div>
+                                            </div>
+                                            <!-- 左边文本编辑框 -->
+                                        </div>
+                                        <div class="editTxt hide editzj">
+                                            <!-- <p>请编辑内容</p> -->
+                                            <textarea id="editor_id" name="content"  v-model = "editorCont" style="visibility:hidden;">
+                                            </textarea>
+                                            <textarea id="schtmlnr" style="display:none;"></textarea>
+                                            <input type="file" id="fileEdit" name="file" style="display:none" onchange="upDataEdit();">
+                                            <div class="mSlider row">
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">内边距</div>
+                                                    <div id="inside-margin" class="slierbar slierbarBg"></div>
+                                                    <div id="textinside-margin" class="slierNum">0</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">边框尺寸</div>
+                                                    <div id="txt-border" class="slierbar slierbarBg"></div>
+                                                    <div id="txt-bordernum" class="slierNum">0</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">外边距</div>
+                                                    <div id="outside-margin" class="slierbar slierbarBg"></div>
+                                                    <div id="textoutside-margin" class="slierNum">0</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">边框颜色</div>
+                                                    <input type="color" class="colorval" id="colorvalborder">
+                                                </div>
+                                            </div>
+                                            <div class="newlypagebtns">
+                                                <a class="btn btn-primary sure" id="txtSure">确定</a>
+                                                <a class="btn btn-default cancel">取消</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- 上传图片 -->
+                                    <li class="draggable-pic col-sm-6">
+                                        <!-- 左边图片组件，实际拖动 -->
+                                        <div class="draggable">
+                                            <div id="pics">
+                                                <img src="/view/images/img-default.png" alt="" width='100' class="picscontent">
+                                                <div class="editgroup-box">
+                                                    <div class="editgroupBg"></div>
+                                                    <div class="editgroup">
+                                                        <a href="javascript:;" class="picsBtn upEdit">编辑</a>
+                                                        <span class="tdline">▏</span>
+                                                        <a href="javascript:;" class="delete">删除</a>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <!-- 左边组件显示，不拖动 -->
+                                            <div class="control control-image">
+                                                <i class="icon icon-tupian-copy"></i>
+                                                <div data-type="image">图片</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 左边图片编辑框 -->
+                                        <div class="editPhoto hide editzj">
+                                            <div class="uploadpic">
+                                                <img src="/view/images/timg.jpg" id="control-pic" class="pic">
+                                                <div class="uploadpicbox">
+                                                    <div class="uploadpicbg"></div>
+                                                    <div class="uploadicon" @click="up_controlpic()">
+                                                        <i class="icon icon-shangchuan"></i>
+                                                        <p>上传</p>
+                                                    </div>
+                                                    <p class="uploadp">文件不超过2M</p>
+                                                </div>
+                                            </div>
+                                            <input type="file" id="file-control" name="file" style="display:none" onchange="upData();">
+                                            <div class="newlypagebtns">
+                                                <a class="btn btn-primary sure">确定</a>
+                                                <a class="btn btn-default cancel">取消</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- 分隔符 -->
+                                    <li class="draggable-fgf col-sm-6">
+                                        <div class="draggable">
+                                            <!-- 左边分隔符组件 -->
+                                            <div id="fgf">
+                                                <div class="fgfcontent">&nbsp;</div>
+                                                <div class="editgroup-box">
+                                                    <div class="editgroupBg"></div>
+                                                    <div class="editgroup">
+                                                        <a href="javascript:;" class="fgfBtn upEdit">编辑</a>
+                                                        <span class="tdline">▏</span>
+                                                        <a href="javascript:;" class="delete">删除</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- 左边组件显示，不拖动 -->
+                                            <div class="control control-divider">
+                                                <div class="icon icon-fengexian"></div>
+                                                <div data-type="divider">分隔符</div>
+                                            </div>
+                                        </div>
+                                        <!-- 左边分隔符编辑框 -->
+                                        <div class="editFgf hide editzj">
+                                            <div class="fgfbox">
+                                                <div class="fgfmodel"></div>
+                                            </div>
+                                            <div class="mSlider row">
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">尺寸</div>
+                                                    <div id="fgfu-size" class="slierbar slierbarBg"></div>
+                                                    <div id="fgf-size" class="slierNum">1</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">上边距</div>
+                                                    <div id="fgfu-topmargin" class="slierbar slierbarBg"></div>
+                                                    <div id="fgf-topmargin" class="slierNum">20</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">下边距</div>
+                                                    <div id="fgfu-bottommargin" class="slierbar slierbarBg"></div>
+                                                    <div id="fgf-bottommargin" class="slierNum">20</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <div class="sliderTit">分隔符颜色</div>
+                                                    <input type="color" class="fgf-colorval">
+                                                </div>
+                                            </div>
+                                            <div class="newlypagebtns">
+                                                <a class="btn btn-primary sure">确定</a>
+                                                <a class="btn btn-default cancel">取消</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- 左边表单组件 -->
+                                    <li class="draggable-table col-sm-6">
+                                        <div class="draggable">
+                                            <div id="tables">
+                                                <div class="tablescontent tabsSlider"></div>
+                                                <div class="editgroup-box">
+                                                    <div class="editgroupBg"></div>
+                                                    <div class="editgroup">
+                                                        <a href="javascript:;" class="tablesBtn upEdit">编辑</a>
+                                                        <span class="tdline">▏</span>
+                                                        <a href="javascript:;" class="delete">删除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 左边组件显示，不拖动 -->
+                                            <div class="control control-form">
+                                                <div class="icon icon-biaoge"></div>
+                                                <div data-type="form">表单</div>
+                                            </div>
+                                        </div>
+                                        <!-- 左边表单编辑框 -->
+                                        <div class="edittables hide editzj">
+                                            <div class="tabsSlider pr">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <label class="title" for="" >姓名&emsp;</label>
+                                                        <div class="tabinputBox">
+                                                            <input class="pageInput" id='name' class='pageInput'/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <label class="title" for="">性别&emsp;</label>
+                                                        <div class="sexDiv tabinputBox">
+                                                            <input type="radio" name="sex" id="man" value="男" checked="checked">
+                                                            <label for="sex">男</label>
+                                                            <input type="radio" name="sex" id="female" value="女">
+                                                            <label for="sex">女</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <label class="title" for="">手机号</label>
+                                                        <div class="tabinputBox">
+                                                            <input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="13" class="pageInput" id="phone"  />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <label class="title" for="">验证码</label>
+                                                        <div class="tabinputBox pr">
+                                                            <input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="6" class="pageInput" id="code" />
+                                                            <button type="button" class="btn btn-default tabCodebtn" disabled="disabled">获取验证码</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tabBtn">
+                                                    <span>〈</span>
+                                                    <span class="triangle-right"></span>
+                                                    <button type="button" class="btn btn-primary">提交</button>
+                                                    <span class="triangle-left"></span>
+                                                    <span>〉</span>
+                                                </div>
+                                            </div>
+                                            <!--<div class="mSlider row">
+                                                <div class="widgetbox clearfix">
+                                                    <input type="radio" name="addurl" class="radioTab">
+                                                    <div class="sliderCont">提交后跳转回当前页面，并显示提交内容</div>
+                                                </div>
+                                                <div class="widgetbox clearfix">
+                                                    <input type="radio" name="addurl" class="radioTab">
+                                                    <div class="sliderCont">
+                                                        提交后跳转到指定页面
+                                                        <input type="text" class="form-control" style="margin-top:10px;" placeholder="输入要跳转页面的url"/>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <div class="newlypagebtns">
+                                                <a class="btn btn-primary sure">确定</a>
+                                                <a class="btn btn-default cancel">取消</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="row microSetting tab-pane fade" id="microSetting">
+                            <div class="microSet">
+                                <div class="form-group">
+                                    <label>页面标题<font color="#FF0000">*</font>（最长64字符）</label>
+                                    <input type="text" class="form-control" placeholder="页面标题" maxlength="64" v-model="title">
+                                </div>
+                                <div class="form-group">
+                                    <label>摘要<font color="#FF0000">*</font>（最长256字符）</label>
+                                    <textarea class="form-control" rows="3" maxlength="256" v-model="summary"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="uploadBox">
+                                        <label>封面图片<font color="#FF0000">*</font>（不超过2M）</label>
+                                        <div class="uploadimg">
+                                            <img src="/view/images/faceimg.png" id="face_img" @click="up_face()">
+                                        </div>
+                                        <input type="file" id="file" name="file" style="display:none" onchange="upDataface();">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>作者签名<font color="#FF0000">*</font></label>
+                                    <input type="text" class="form-control" placeholder="请输入文章中显示的作者名" v-model="authorSign"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>企业签名<font color="#FF0000">*</font></label>
+                                    <input type="text" class="form-control" placeholder="请输入文章中显示的企业名" v-model="companySign"/>
+                                </div>
+                                <div class="form-group" v-show="tagShow">
+                                    <label style="width: 100%">内容标签（可多选）</label><!--v-model="ideaTag"-->
+                                    <select class="tag-selectAdd form-control conTag" data-placeholder="选择标签" multiple>
+                                        <option v-for="ideaTaglist in ideaTaglists" :value="ideaTaglist.id">{{ideaTaglist.tagName}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" v-show="!tagShow">
+                                    <label style="width: 100%">内容标签（可多选）</label><!--v-model="ideaTag"-->
+                                    <select class="tag-select form-control conTag" data-placeholder="选择标签" multiple>
+                                        <!--<option v-for="ideaTaglist in ideaTaglists" :value="ideaTaglist.id">{{ideaTaglist.tagName}}</option>-->
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="cover_edit"></div>
+                    </div>
+                </div>
+
+                <div class="microPage">
+                    <div class="microPagebox">
+                        <div class="sortableBox">
+                            <div class="sortable page-preview" id="sortable">
+                                <div class="pageTit">{{title}}</div>
+                                <div class="pageAuthor">{{date}} {{authorSign}} {{companySign}}</div>
+                                <div id="cont"></div>
+                            </div>
+                        </div>
+                        <div class="newlypagebtns">
+                            <a class="btn btn-primary save" @click="savepage()">保存</a>
+                            <a class="btn btn-default" @click="cancelpage()">取消</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/jquery-ui.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../libs/kindeditor/kindeditor-min.js"></script>
+<script src="../../libs/kindeditor/lang/zh-CN.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/ajaxfileupload.js"></script>
+<script src="../../js/marketing/marketing.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/marketing/micro/micronewly.js"></script>
+</body>
+</html>

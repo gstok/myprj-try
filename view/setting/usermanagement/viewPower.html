@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .level2 { *zoom: 1; }
+        .level2:before, .level2:after { display: table; content: ""; height: 0; }
+        .level2:after { clear: both; }
+
+        .level2 li.level3{float: left}
+        .level2 li.level3 span.button.center_docu,
+        .level2 li.level3 span.button.bottom_docu{
+            width:15px;background:transparent;
+        }
+    </style>
+
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+
+    <div class="row topTitle firstTopTitle">
+        <div class="col-md-12 clearfix">
+            <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i><span class="titleSpan"><a href="/view/task/task.html">用户管理</a><em> / 查看权限</em> </span></h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnback()">&times;</a>
+                </div>
+        </div>
+    </div>
+    <div id="page-inner">
+
+
+            <div class=" tab-pane fade active in" id="ztree">
+                <div id="treeDemo" class="ztree"></div>
+            </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
+<script src="../../js/setting/usermanagement/viewpower.js"></script>
+</body>
+<!-- 拖拽效果 -->
+<!-- <script>$("#sortable").sortable();</script> -->
+</html>

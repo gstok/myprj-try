@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/setting.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                   <a href="javascript:;"><i class="shu"></i><a href="/view/setting/setting.html">系统设置</a> / 弹信</a>
+                </h2>
+                <a href="javascript:;" class="btn fr rightAdd addSign" onclick="addSign()">+新建签名</a>
+                <a href="javascript:;" class="btn fr rightAdd hide addCard" onclick="addCard()">+新建名片</a>
+            </div>
+        </div>
+        <div id="page-inner" class="tanxin">
+            <!-- 表格区域 -->
+     <!--        <ul class="nav nav-tabs">
+                <li class="active"><a  href="#tanxinSign" class="tanxinSign" data-toggle="tab" onclick="tanxinSign()">签名</a></li>
+                <li><a  href="#tanxinCard" class="tanxinCard" data-toggle="tab" onclick="tanxinCard()">弹信名片</a></li>
+            </ul> -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="tanxinSign">
+                    <div class="col-md-12">
+                        <table class="table table-striped innerTable" id="tanxinSignList">
+                            <thead>
+                            <tr>
+                                <th>弹信签名</th>
+                                <th>审核状态</th>
+                                <th>申请人</th>
+                                <th>申请日期</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>【数据客】</td>
+                                <td>已审核</td>
+                                <td>12345</td>
+                                <td>2017-5-23</td>
+                                <td><a href="javascript:;" class="tbBtn zcBtn" onclick="deltanxin()">删除</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="tanxinSignListpage"></div>
+                        </div>
+                    </div>
+                </div>
+       <!--          <div class="row tab-pane fade" id="tanxinCard">
+                    <div class="col-md-12">
+                        <table class="table table-striped innerTable" id="tanxinCardList">
+                            <thead>
+                            <tr>
+                                <th>名片名称</th>
+                                <th>内容</th>
+                                <th>审核状态</th>
+                                <th>申请人</th>
+                                <th>申请日期</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>【数据客】</td>
+                                <td>内容</td>
+                                <td>已审核</td>
+                                <td>12345</td>
+                                <td>2017-5-23</td>
+                                <td><a href="javascript:;" class="goodBtn" onclick="deltanxinCard()">删除</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="tanxinCardListpage"></div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+<div class="bg"></div>
+<!-- 新建签名 -->
+<div class="modelContent" id="addSign">
+    <div class="MotalTit"><i >新建签名</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <ul class="addSignUl">
+                <li>审核结果将在3-5个工作日内以短信的方式通知联系人</li>
+                <li>
+                    <textarea name="" id="signature" cols="30" rows="10" placeholder="申请多个标签时，用;隔开"></textarea>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addsure()">保存</div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script type="text/javascript" src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/setting/setting.js"></script>
+<script src="../../js/setting/contact/flashSmsSign.js"></script>
+</body>
+</html>

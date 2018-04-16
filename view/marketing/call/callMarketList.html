@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+     <link href='../../css/select2.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../css/jquery.multiselect.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/marketing.css" type="text/css"/>
+    <style>
+
+        .close{float:none;opacity:1.0}
+        .close:hover{opacity:1.0}
+        #isTelephone{position: absolute;left:-60px;top:16px;display: none}
+        .dropdown-menu{position: absolute;right:0;top:53px;left:auto;display: none}
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+    <div class="row topTitle firstTopTitle">
+        <div class="col-md-12 clearfix">
+            <h2 class="fl">
+               <a href="javascript:;"><i class="shu"></i>电话</a>
+            </h2>
+        </div>
+    </div>
+    <div id="page-inner" class="content-inner form-inner">
+        <div class="phoneFilter">
+            <ul class="clearfix">
+
+                <li class="clearfix fl">
+                <div class="">
+                    <span>客户名称</span>
+                     <select id="custName" class="selectpicker show-tick " data-live-search="true" multiple style="min-width: 150px">
+                     </select>
+                    <!-- <input type="text" id="custName" > -->
+                    <span class="dailspan">拨打人</span>
+                     <select id="dail" class="selectpicker show-tick " data-live-search="true" style="width: 130px">
+
+                    </select>
+                    <span>呼叫结果</span>
+                     <select id="callResult" class="selectpicker show-tick " data-live-search="true" style="width: 130px">
+
+                    </select>
+                    <span>沟通结果</span>
+                     <select id="communicate" class="selectpicker show-tick " data-live-search="true" style="width: 130px">
+
+                    </select>
+                    <div class="seabox" style='margin: 18px 0'>
+                        <span>拨打时间</span>
+                        <input type="text" class="createInput wicon margin10" id="inpstart" placeholder="选择日期" readonly ><em>-</em>
+                        <input type="text" class="createInput wicon margin10" id="inpend" placeholder="选择日期" readonly >
+                    <a href="javascript:;" class="cancel tbBtn zcBtn" onclick="reset()">重置</a>
+                 <a href="javascript:;" class="save tbBtn zcBtn" onclick="searchPhone()">查询</a>
+
+                    </div>
+
+                </div>
+
+                </li>
+
+            </ul>
+        <!--    <div class="contentLine"></div> -->
+        </div>
+        <p>拨打时长：<span id='sumTime'></span></p>
+        <!-- 客户表格区域 -->
+        <div class="tab-content">
+            <div class="row tab-pane fade active in" id="shortmessage">
+                <div class="col-md-12">
+                    <table class="table table-hover table-striped innerTable" id="phoneList">
+                        <thead>
+                            <tr>
+                                <th class="textLeft">客户名称</th>
+                                <th>拨打人</th>
+                                <th>呼叫结果</th>
+                                <th>沟通结果</th>
+                                <th>通话时长</th>
+                                <th>通话开始/结束时间</th>
+                                <th>备注</th>
+                                <th class="textcenter">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="fr">
+                        <div id="phoneListpage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 是否拨打电话 -->
+        <div class="modelContent" id="writeCall">
+            <div class="MotalTit"><i >拨打记录</i><span class="close">&times;</span></div>
+            <div class="contentInfo">
+                <a id="" name="6" href="#6">&nbsp;</a>
+                <div class="PopupCont clearfix">
+                    <ul class="addSignUl">
+                        <li><span>拨打时间：</span><span id="callTime"></span></li>
+                        <li>
+                            <span>沟通结果：</span>
+                            <select name="" id="resultResponse">
+                                <option value="">已购买</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>备&emsp;&emsp;注：</span>
+                            <textarea name="" id="remark" cols="30" rows="10"></textarea>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footerBtn callbtn">
+                    <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+                    <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addCall()">保存</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg"></div>
+        <div class="calling hide">
+            <div class="callingcont">
+                <p>拨号呼叫中，请注意接听您的手机</p>
+                <p><img src="../../images/calling.gif" alt=""><span class="numseconds">5</span>秒...</p>
+            </div>
+        </div>
+        <audio id="audio" src="" controls="controls" preload="auto" class="hide">
+        </audio>
+
+
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/jquery.multiselect.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/select2.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/choosetime.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+
+
+<!-- 下拉多选调用 -->
+
+<script src="../../js/marketing/call/list.js"></script>
+</body>
+</html>

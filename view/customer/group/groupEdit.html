@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/filter.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/group.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <!-- 新建智能群组start -->
+        <div  class="popup-inner addIntelligentGroup" id="addIntelligentGroup">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i>编辑智能群组</h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnBack()">&times;</a>
+                </div>
+            </div>
+          <!-- 筛选start -->
+            <div class="customerForm ">
+                <div class="filterGroup">
+                    <div class="cell-right hide big-cell">且</div>
+                        <div class="term">
+                        <div class="cell-right hide"></div>
+                            <p class="qiehuo"><span>且</span><i></i></p>
+                            <div class="contains ">
+                               <select name="" class="filterFirst">
+                                 <option value="">请选择</option>
+                                 <option value="1">用户属性</option>
+                                 <option value="2">客户来源</option>
+                                 <option value="4">用户标签</option>
+                                 <option value="3">事件属性</option>
+                               </select>
+                               <select name="" class="filterSecond">
+                                    <option value="">请选择</option>
+                               </select>
+                               <div class="filterThird">
+                                    <select name="">
+                                        <option value="">请选择</option>
+                                    </select>
+                               </div>
+                            <span class="delete"><a href="javascript:;">删除</a></span>
+                            </div>
+                            <div class="newItem"><a href='javascript:;'>+ 添加筛选条件</a></div>
+                        </div>
+                </div>
+                <div class="btnGroup">
+                    <a href="javascript:;" class="cancel zcBtn " onclick="yulan()">预览</a>
+                    <a href="javascript:;" class="save zcBtn " onclick="addsure()">保存</a>
+                </div>
+                <!-- 筛选end -->
+                <hr>
+                <!-- 表格区域 -->
+                <div class="tab-content innerTable">
+                    <div class="row tab-pane fade active in" id="shortmessage">
+                        <div class="col-md-12">
+                            <table class="table table-striped" id="">
+                                <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>手机号</th>
+                                    <th>销售阶段</th>
+                                    <th>客户标签</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td colspan='5'>暂无数据</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="groupListpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格区域end -->
+            </div>
+        </div>
+        <!-- 新建智能群组end -->
+
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/filter2.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../libs/highcharts/highcharts.js"></script>
+<script src="../../libs/highcharts/map.js"></script>
+<script src="../../js/customer/groupEdit.js"></script>
+</body>
+</html>

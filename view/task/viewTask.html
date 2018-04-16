@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../css/task/task.css' rel='stylesheet' type='text/css' />
+    <link href='../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+    <!-- 查看任务start -->
+        <div class="popup-inner content-inner ckTask">
+            <div class="row title">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i><span class="titleSpan"><a href="/view/task/task.html">任务</a><em> / 查看任务</em> </span></h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnCustomer()">&times;</a>
+                </div>
+            </div>
+        <hr>
+            <div class="customerForm taskForm">
+                <ul>
+                    <li>
+                        <span>标题：</span><span class="addTaskTitle needLeft" id="taskNameck"></span>
+                    </li>
+                    <li>
+                        <span>任务类型：</span><span id="typeIdck"></span>
+
+                    </li>
+                    <li>
+                        <span>优先级：</span>
+                        <span id="levelck"></span>
+                    </li>
+                    <li>
+                        <span>执行人：</span>
+                        <span id="executorUserNameck"></span>
+                    </li>
+                    <li>
+                        <span>涉及客户：</span>
+                        <span id="custIdck"></span>
+                    </li>
+                    <li>
+                        <span>完成时间：</span>
+                        <span id="finishTimeck"></span>
+                    </li>
+                    <li>
+                        <span>备注：</span>
+                        <span id="remarkck"></span>
+                    </li>
+                </ul>
+                <div class="btnGroup">
+
+                    <a href="javascript:;" class="save btn btn-primary completeoredit">完成任务</a>
+                    <a href="javascript:;" class="cancel btn btn-default cancelPropup" onclick="returnCustomer()">取消</a>
+                </div>
+            </div>
+        </div>
+        <!-- 查看任务end -->
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/chosen.jquery.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../libs/jedate/jquery.jedate.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/choosetime.js"></script>
+<script src="../js/task/viewTask.js"></script>

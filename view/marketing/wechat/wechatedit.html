@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .cover_edit{position: absolute;left: 0;top:55px;background:#fff;opacity: 0.1;width: 845px;height:300px;}
+    </style>
+</head>
+<body>
+<div id="weChateditpage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12">
+                <h2><i class="shu spc"></i><a href="/view/marketing/wechat/wechatgroup.html">微信群</a> / {{micropagetit}}</span></h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad">
+            <input type="hidden" id="newid"/>
+            <div class="wechatNewly row">
+                    <div class="emailPage pr">
+                        <div class="searchgroup clearfix">
+                            <div class="form-group">
+                                <label for="">信息名称<span style="color:red">*</span></label>
+                                <input type="text" class="form-control" v-model="modelName" placeholder="信息名称">
+                            </div>
+                            <div class="form-group" v-show="tagShow">
+                                <label>内容标签</label><!--v-model="smsSigns"-->
+                                <select class="tag-selectAdd form-control conTag" data-placeholder="选择标签" multiple>
+                                    <option v-for="ideaTaglist in ideaTaglists" :value="ideaTaglist.id">{{ideaTaglist.tagName}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-show="!tagShow">
+                                <label>内容标签</label><!--v-model="smsSigns"-->
+                                <select  class="tag-select form-control conTag" data-placeholder="选择标签" multiple>
+                                    <!--<option v-for="smsSignlist in smsSignlists" :value="smsSignlist.id">{{smsSignlist.tagName}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <textarea id="editor_email" name="content" v-model="content" style="width:845px;visibility:hidden;"></textarea>
+                        <textarea id="schtmlnr" name="schtmlnr" style="display:none;"></textarea>
+                        <input type="file" id="file" name="file" style="display:none" onchange="upDataface();">
+                        <div class="cover_edit"></div>
+                        <div class="mybtn-group">
+                            <a href="javascript:;" class="btn btn-primary save" @click="savepage()">保存</a>
+                            <a href="javascript:;" class="btn btn-default" @click="cancelpage()">取消</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../libs/kindeditor/kindeditor-all-min.js"></script>
+<script src="../../libs/kindeditor/lang/zh-CN.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<!--<script src="../../js/ajaxfileupload.js"></script>-->
+<script src="../../js/marketing/marketing.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/marketing/wechat/wechatedit.js"></script>
+</body>
+</html>

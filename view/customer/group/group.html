@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/filter.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/group.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .close{float:none;opacity: 1}
+        .close:hover{
+            opacity: 1
+        }
+        .xcConfirm .xc_layer {
+            z-index: 2147000001;
+        }
+        .xcConfirm .popBox {
+            margin-left: -200px;
+            margin-top: -135px;
+        }
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                   <a href="javascript:;"><i class="shu"></i>群组</a>
+                </h2>
+                <a href="javascript:;" class="btn fr rightAdd" module="group" permission-code="ADD" onclick="addIntelligentGroup()">+ 创建智能群组</a>
+            </div>
+        </div>
+        <div id="page-inner" class="content-inner ">
+            <!-- 表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable" id="groupList">
+                            <thead>
+                            <tr >
+                                <th>名称</th>
+                                <th>类型</th>
+                                <th>客户人数</th>
+                                <th>最后刷新时间</th>
+                                <th style='padding-left: 55px;'>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="groupListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑智能群组start -->
+        <div  class="popup-inner editIntelligentGroup hide" id="editIntelligentGroup">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i>编辑智能群组</h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup'>&times;</a>
+                </div>
+            </div>
+          <!-- 筛选start -->
+            <div class="customerForm ">
+                <div class="filterGroup">
+                    <div class="cell-right hide big-cell">且</div>
+                        <div class="term">
+                        <div class="cell-right hide"></div>
+                            <p class="qiehuo"><span>且</span><i></i></p>
+                            <div class="contains ">
+                               <select name="" id=""><option value="">请选择</option></select>
+                               <select name="" id=""><option value="">请选择</option></select>
+                               <select name="" id=""><option value="">请选择</option></select>
+                            <span class="delete"><a href="javascript:;">删除</a></span>
+                            </div>
+                            <div class="newItem"><a href='javascript:;'>+ 添加筛选条件</a></div>
+                        </div>
+                </div>
+                <div class="btnGroup">
+                    <a href="javascript:;" class="cancel zcBtn " onclick="yulan()">预览</a>
+                    <a href="javascript:;" class="save zcBtn ">保存</a>
+                </div>
+                <!-- 筛选end -->
+                <hr>
+                <!-- 表格区域 -->
+                <div class="tab-content innerTable">
+                    <div class="row tab-pane fade active in" id="shortmessage">
+                        <div class="col-md-12">
+                            <table class="table table-striped" id="">
+                                <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>手机号</th>
+                                    <th>销售阶段</th>
+                                    <th>客户标签</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td colspan='5'>暂无数据</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="groupListpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格区域end -->
+            </div>
+        </div>
+        <!-- 编辑智能群组end -->
+        <!-- 查看智能群组start -->
+        <div class="row topTitle ckTopTitle hide" id="viewIntelligentGroup">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                   <a href="javascript:;"><i class="shu"></i>智能群组详情</a>
+                </h2>
+                <div class="btnGroup fr rightBtn">
+                    <a href="javascript:;" class="btn">刷新</a>
+                    <a href="javascript:;" class="btn" onclick="editIntelligentGroup(1)">编辑</a>
+                    <a href="javascript:;" class="btn" onclick="delIntelligentGroup(1)">删除</a>
+                </div>
+            </div>
+        </div>
+        <div  class="popup-inner ckIntelligentGroup groupDetailPage hide">
+            <div class="groupDetail">
+                <h3>群组详情</h3>
+                <div class="col-md-12">
+                    <table class="table table-striped detailTable innerTable" id="">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>类型</th>
+                            <th>客户人数</th>
+                            <th>最后刷新时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>11111111</td>
+                            <td>222</td>
+                            <td>188</td>
+                            <td>2017.2.23</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="groupCondition">
+                <h3>群组条件</h3>
+                <div>
+                    <span class="qie">且</span>
+                    <span class="condition"><i>姓名</i> → <i>等于</i> → <i>张三</i></span>
+                    <em> / </em>
+                    <span class="condition"><i>姓名</i> → <i>等于</i> → <i>张三</i></span>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="groupAnalysis">
+                 <h2>
+                   <i class="shu spc"></i>人群分析</a>
+                </h2>
+                <div class="row">
+                <div class="col-sm-12 col-lg-6 col-md-6" >
+                    <div class="thumbnail" style="height: 350px;">
+                        <div id="sexChart" style="width:100%;height:100%;padding:10px;"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6 col-md-6" >
+                    <div class="thumbnail" style="height: 350px;">
+                        <div id="main" style="width:100%;height:100%;padding:10px;"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6 col-md-6" >
+                    <div class="thumbnail" style="height: 350px;">
+                        <div id="levelChart" style="width:100%;height:100%;padding:10px;"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6 col-md-6" >
+                    <div class="thumbnail" style="height: 350px;">
+                        <div id="originChart" style="width:100%;height:100%;padding:10px;"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- 查看智能群组end -->
+    </div>
+
+
+
+
+
+    <!--发短信 邮件 弹信-->
+    <div class="xcConfirm" id="SMSBox" style="display: none">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" onclick="noPop()"></a><span class="tt">批量发短信</span></div>
+            <div class="txtBox">
+                <dl class="clearfix">
+                    <dt>群组名：</dt>
+                    <dd id="GroupName"></dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>发送人数：</dt>
+                    <dd><span id="SMSnum"></span>人</dd>
+                    <input type="hidden" id="smsId">
+                </dl>
+                <dl class="clearfix">
+                    <dt id="SMSmb">短信模板：</dt>
+                    <dd>
+                        <select name="" id="SMSsel" class="form-control">
+
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt id="SMSnr">短信内容：</dt>
+                    <dd id="SMScont"></dd>
+                </dl>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" id="sendBtn">发送</a>
+                    <a class="sgBtn cancel" onclick="noPop()">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/filter2.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../libs/highcharts/highcharts.js"></script>
+<script src="../../libs/highcharts/map.js"></script>
+<script src="../../js/customer/group.js"></script>
+</body>
+</html>

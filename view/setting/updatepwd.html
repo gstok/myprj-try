@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link href='../css/setting/selfsetting.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><i class="shu spc"></i><a href="/view/index.html">首页</a> / 修改密码</h2>
+                </div>
+            </div>
+            <hr />
+
+            <!-- 设置列表start -->
+            <div id="updatePwd" class="clearfix">
+                <ul>
+                    <li><span>原密码</span><input type="password" id="oldPwd"></li>
+                    <li><span>新密码</span><input type="password" id="newPwd"></li>
+                    <li><span>确认新密码</span><input type="password" id="confirnPwd"></li>
+                    <li><p id="text-warn"></p></li>
+                </ul>
+
+                <div class="btnGroup">
+                    <a href="/view/index.html" class="cancel  cancelPropup borBtn">取消</a>
+                    <a href="javascript:;" class="save  sureBtn borBtn" id="sureBtn"><i class="icon icon-save"></i>保存</a>
+                </div>
+            </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.placeholder.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../libs/jedate/jquery.jedate.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/setting/updatepwd.js"></script>
+</body>
+</html>

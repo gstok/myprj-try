@@ -1,0 +1,115 @@
+
+.san{
+	position: relative;
+    left: -20px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid black;
+}
+.sanClick{
+	position: relative;
+    left: -20px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid black;
+}
+.wareSort {
+	position: absolute;
+
+}
+.contains{
+	margin-bottom: 10px;
+}
+.secondSort{
+	right: 325px;
+}
+.newItem{
+	position: relative;
+	left: -80px;
+	margin-top: 20px;
+}
+.newItem a{
+	color: #6a75c3;
+}
+.term{
+	margin-bottom:20px;
+	position: relative;
+	margin-left: 180px;
+}
+
+/*.line{
+	width: 50px;
+	margin: 10px 0 0 -50px;
+	border: 1px solid #000;
+	border-right: none;
+	position: absolute;
+}*/
+.filterGroup{
+	position: relative;
+}
+.bigLine{
+	width: 50px;
+	margin-top: 10px;
+	margin-left:150px;
+	border: 1px solid #000;
+	border-right: none;
+	position: absolute;
+}
+.cell-right{position: absolute;left: 0px;}
+.txtRight{
+	position: absolute;
+	right: 5px;
+}
+.txtLeft{
+	position: absolute;
+	left: 5px;
+	color: white;
+}
+.big-cell{
+	margin-top: 10px;
+	margin-left: 200px;
+}
+.switch-on{
+	border-color: rgb(100, 189, 99);
+	box-shadow: rgb(100, 189, 99) 0px 0px 0px 16px inset;
+	background-color: rgb(100, 189, 99)
+}
+.qiehuo{
+	position: absolute;
+    top: 1px;
+    width: 58px;
+    height: 28px;
+    border: 1px solid #96a0e3;
+    left: -80px;
+    border-radius: 5px;
+    line-height: 28px;
+    text-indent: 5px;
+    color: #96a0e3;
+    cursor: pointer;
+}
+
+.contains select{
+    width: 108px;
+    height: 28px;
+    border-radius: 5px;
+
+}
+.filterFirst,.filterSecond{
+	margin-right: 20px;
+}
+.delete {
+	display: inline-block;
+	width: 48px;
+	height: 28px;
+	border:1px solid #43548c;
+	line-height: 28px;
+	text-align: center;
+	border-radius: 5px;
+	margin-left: 20px;
+}

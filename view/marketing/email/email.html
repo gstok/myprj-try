@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="emailpage" v-cloak>
+        <!-- menu -->
+        <div class="menu"></div>
+        <!-- menu end  -->
+        <div id="page-wrapper">
+            <!-- top -->
+            <div id="top">
+                <my-top></my-top>
+            </div>
+            <!-- top end -->
+            <div class="row topTitle">
+                <div class="col-md-12 clearfix">
+                    <h2 class="fl">
+                        <a href="javascript:;"><i class="shu"></i>电子邮件</a>
+                    </h2>
+                    <a class="btn fr rightAdd" module="email" permission-code="ADD" @click=newlyData()>+创建新邮件</a>
+                </div>
+            </div>
+            <div id="page-inner" class="nopad page-inner">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#email" data-toggle="tab">全部邮件</a></li>
+                    <li><a class="indexList" href="#emsendrecord" data-toggle="tab" @click="emailsendLog(0,20)">发送记录</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="row nopm tab-pane fade active in" id="email">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                    <tr>
+                                        <th :style="{ width: 260 + 'px' }">邮件名</th>
+                                        <th :style="{ width: 260 + 'px' }">主题</th>
+                                        <th>发件人显示名</th>
+                                        <th>邮件状态</th>
+                                        <th>创建时间</th>
+                                        <th class="textcenter">操作</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr v-if="emailLists.length == 0">
+                                        <td colspan="6" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                <tr v-for="emailList in emailLists">
+                                    <td class="emailSubBox emailTitBox">
+                                        <div class="emailTit">
+                                            <a v-if='hasPermission("email", "UPDATE")' href="javascript:;" class="typeblue" data-container="body" data-toggle="popover" data-placement="top" :data-content="emailList.mailName" @click="editpage(emailList.id)">{{emailList.mailName}}</a>
+                                            <template v-else>
+                                                <a href="javascript:;" class="typeblue" data-container="body" data-toggle="popover" data-placement="top" :data-content="emailList.mailName">{{emailList.mailName}}</a>
+                                            </template>
+                        </div>
+                        </td>
+                        <td class="emailSubBox">
+                            <div class="emailSub"><span data-container="body" data-toggle="popover" data-placement="top" :data-content="emailList.subject">{{emailList.subject}}</span></div>
+                        </td>
+                        <td>{{emailList.senderName}}</td>
+                        <td class="green" v-if='emailList.displayStatus=="已发送"'>{{emailList.displayStatus}}</td>
+                        <template v-else><td class="gray">{{emailList.displayStatus}}</td></template>
+                        <td>{{emailList.displayCreateTime}}</td>
+                        <td class="textcenter">
+                            <span>
+                                            <a v-if='hasPermission("email", "SEND")' href="javascript:;" @click="testPopup(emailList.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="测试"><i class="icon icon-jianrongceshi" ></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-jianrongceshi disabled" ></i></a>
+                                            </template>
+                                        </span>
+                            <!-- 测试 -->
+                            <span class="tdline">▏</span>
+                            <span>
+                                            <a v-if='hasPermission("email", "SEND")' href="javascript:;" @click="sendData(emailList.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="发送"><i class="icon icon-send"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-send disabled"></i></a>
+                                            </template>
+                                        </span>
+                            <!-- 发送 -->
+                            <span class="tdline">▏</span>
+                            <span>
+                                            <a v-if='hasPermission("email", "UPDATE")' href="javascript:;" @click="copyPopup(emailList.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="复制"><i class="icon icon-fuzhi"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-fuzhi disabled"></i></a>
+                                            </template>
+                                        </span>
+                            <!-- 复制 -->
+                            <span class="tdline">▏</span>
+                            <span>
+                                            <a v-if='hasPermission("email", "DEL")' href="javascript:;" @click="deleteData(emailList.id,emailList.mailName)" data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><i class="icon icon-shanchu"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-shanchu disabled"></i></a>
+                                            </template>
+                                        </span>
+                            <!-- 删除 -->
+                        </td>
+                        </tr>
+                        </template>
+                        </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="emailListpage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row nopm tab-pane fade" id="emsendrecord">
+                    <div class="col-md-12">
+                        <table class="table table-striped innerTable">
+                            <thead>
+                                <tr>
+                                    <th :style="{ width: 260 + 'px' }">邮件名</th>
+                                    <th :style="{ width: 260 + 'px' }">主题</th>
+                                    <th>名义发件人</th>
+                                    <th>发送群体</th>
+                                    <th>发送时间</th>
+                                    <th>数据反馈</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="emailsendLists.length == 0">
+                                    <td colspan="6" class="textcenter">暂无数据</td>
+                                </tr>
+                                <template v-else>
+                            <tr v-for="emailsendList in emailsendLists">
+                                <td class="emailSubBox emailTitBox">
+                                    <div class="emailTit"><span class="recordColor" data-container="body" data-toggle="popover" data-placement="top" :data-content="emailsendList.mailName">{{emailsendList.mailName}}</span></div>
+                                </td>
+                                <td class="emailSubBox">
+                                    <div class="emailSub"><span data-container="body" data-toggle="popover" data-placement="top" :data-content="emailsendList.subject">{{emailsendList.subject}}</span></div>
+                                </td>
+                                <td class="sendlistTd">{{emailsendList.senderName}}</td>
+                                <td class="sendlistTd">{{emailsendList.groupName}}</td>
+                                <td class="sendlistTd">{{emailsendList.displayCreateTime}}</td>
+                                <td class="spctd">
+                                    <!-- <p>发送：{{emailsendList.targetSum}}人</p>
+                                    <p>收到：{{emailsendList.arriveUv}} 退订：{{emailsendList.unsubUv}}人</p>
+                                    <p v-if='hasPermission("emailAnaly", "GET")'>
+                                        <a :href="'emaildata.html?id='+emailsendList.id+'&isHasUrl='+emailsendList.isHasUrl">查看：{{emailsendList.openUv}}人>></a>
+                                    </p>
+                                    <template v-else></template>
+                                <p v-if="emailsendList.isHasUrl == 1 && (hasPermission('emailAnaly', 'GET'))"><a :href="'emaildata.html?id='+emailsendList.id+'&type=1'" class="powerbtn email" data-power="GET">页面访问>></a></p>
+                                <template v-else></template> -->
+                                <p><span data-container="body" data-toggle="popover" data-placement="top" :data-content="'发送：'+emailsendList.targetSum+'人,收到：'+emailsendList.arriveUv+'人'">到达率：
+                                        <template v-if="emailsendList.arriveUv == null||emailsendList.targetSum == 0">0%</template>
+                                        <template v-else>{{(100*(emailsendList.arriveUv/emailsendList.targetSum)).toFixed(1)}}%</template>
+                                    </span>
+                                    <span v-if="emailsendList.isHasUrl == 1" data-container="body" data-toggle="popover" data-placement="top" :data-content="'收到：'+emailsendList.arriveUv+'人,点击：'+emailsendList.viewUv+'人'">、访问率：
+                                        <template v-if="emailsendList.unsubUv == null||emailsendList.arriveUv == null||emailsendList.arriveUv == 0">0%</template>
+                                        <template v-else>{{(100*(emailsendList.unsubUv/emailsendList.arriveUv)).toFixed(1)}}%</template>
+                                    </span>
+                                    <template></template>
+                                </p>
+                                <!--<p>退订：{{emailsendList.unsubUv}}人</p>-->
+                                <p v-if='hasPermission("emailAnaly", "GET")'>
+                                    <a :href="'emaildata.html?id='+emailsendList.id+'&&isHasUrl='+emailsendList.isHasUrl" style="color:#7e8fe1">查看：{{emailsendList.openUv}}人>></a>
+                                </p>
+                                <template v-else></template>
+                                <p v-if="emailsendList.isHasUrl == 1 && (hasPermission('emailAnaly', 'GET'))"><a :href="'emaildata.html?id='+emailsendList.id+'&type=1'" class="powerbtn email" data-power="GET" style="color:#7e8fe1">页面访问>></a></p>
+                                <template v-else></template>
+                                </td>
+                                </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="sendrecordpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--复制 、测试  弹窗 -->
+    <div class="copyBox" v-show="copyShow">
+        <input type="hidden" v-model="micropageid" />
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox">
+                <a class="clsBtn" @click="closeData()"></a><span class="tt">输入</span></div>
+            <div class="txtBox">
+                <p v-show="testShow">邮件名<input class="inputBox" v-model="mailName"></p>
+                <!--复制-->
+                <p v-show="!testShow">邮箱名<input class="inputBox" v-model="toUser" style="border: 1px solid gray;"></p>
+                <!--测试-->
+                <!-- <div v-show="testShow">
+                    <div class="poupTitle">邮件名</div>
+                    <input class="inputBox" v-model="mailName"></div> -->
+                <!--复制-->
+                <!--  <div v-show="!testShow">
+                    <div class="poupTitle">邮箱名</div>
+                    <input class="inputBox" v-model="toUser"></div> -->
+                <!--测试-->
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup" v-show="testShow"><a class="sgBtn ok" @click="copyData()">确定</a></div>
+                <!--复制-->
+                <div class="btnGroup" v-show="!testShow"><a class="sgBtn ok" @click="testData()">确定</a></div>
+                <!--测试-->
+            </div>
+        </div>
+
+    </div>
+    <!--复制 、测试  弹窗 end-->
+    </div>
+    <script src="../../js/jquery-2.2.3.min.js"></script>
+    <script src="../../libs/bootstrap/bootstrap.min.js"></script>
+    <script src="../../libs/xcConfirm/xcConfirm.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/paging.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/marketing/email/email.js"></script>
+</body>
+
+</html>

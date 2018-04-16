@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../css/setting/setting.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper" class="asetting">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div id="page-inner ">
+            <!-- 触点设置start -->
+            <div id="contact" class="totalContent" smsctrl>
+                <h2 ><i class="shu spc"></i><span class="titleSpan">触点设置</span></h2>
+                <hr>
+                <ul>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-552cd536f34e4"></i>短信签名</span><a class="fr editBtn" module="smsSign" permission-code="UPDATE"  href="/view/setting/contact/message.html" >编辑</a>
+                    </li>
+               <!--      <li class="clearfix">
+                        <span class="fl"><i class="icon"></i>弾信</span><a href="/view/setting/contact/flashSmsSign.html" class="fr editBtn">编辑</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- 触点设置end -->
+            <!--客户画像start  -->
+            <div id="portrait" class="totalContent">
+                <h2 ><i class="shu spc"></i><span class="titleSpan">客户画像</span></h2>
+                <hr>
+                <h3>客户信息</h3>
+                <ul>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-ffan_lingdai attrbig"></i>客户属性</span><a class="fr editBtn" module="custAttr" permission-code="UPDATE"  href="/view/setting/portrait/customerattribute.html" >编辑</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-guanliankehu needbig"></i>客户来源</span><a class="fr editBtn" module="custSource" permission-code="UPDATE"  href="/view/setting/portrait/customerSource.html" >编辑</a>
+                    </li>
+                </ul>
+                <h3>标签设置</h3>
+                <ul>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-biaoqian"></i>内容标签</span><a class="fr editBtn" module="contentTag" permission-code="UPDATE" href="/view/setting/portrait/contentTag.html" >编辑</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-icondibubiaoqiankehuxiankuang"></i>客户标签</span><a class="fr editBtn" module="custTag" permission-code="UPDATE" href="/view/setting/portrait/customerTag.html" >编辑</a>
+                    </li>
+                </ul>
+                <h3>客户事件</h3>
+                <ul>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-EventNature"></i>客户事件</span><a class="fr editBtn" module="custEvent" permission-code="UPDATE" href="/view/setting/portrait/customerEvent.html" >编辑</a>
+                    </li>
+                </ul>
+                <h2 ><i class="shu spc"></i><span class="titleSpan">其他设置</span></h2>
+                <ul>
+                    <li class="clearfix">
+                        <span class="fl"><i class="icon icon-renwu1"></i>任务类型</span><a class="fr editBtn" module="taskType" permission-code="UPDATE" href="/view/setting/portrait/taskType.html" >编辑</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/setting/setting.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link href='../css/setting/selfsetting.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><i class="shu spc"></i><span class="tjorxg">添加新标签</span></h2>
+                </div>
+            </div>
+            <hr />
+
+            <!-- 设置列表start -->
+            <div id="setting" class="clearfix">
+                <ul class="content fl addusercon">
+                    <li><span>标签属性</span><select class="form-control " name="" id="tagContribute"></select></li>
+
+                    <li><span>标签名字</span><input class="form-control " id="tagName"></li>
+                    <li><span>查询方式</span>
+                    <select name="" id="searchType" class="form-control ">
+                        <option value="1">模糊查询</option>
+                        <option value="4">范围查询</option>
+                    </select>
+                    </li>
+                    <li><span>可用展现形式</span>
+                    <input type="checkbox" name="" id="" value="1"><label for="">柱状</label>
+                    <input type="checkbox" name="" id="" value="3"><label for="">折线状</label>
+                    <input type="checkbox" name="" id="" value="2"><label for="">饼状</label></li>
+                    <li><span>默认展现形式</span>
+                    <input type="radio" name="" id="" value="1"><label for="">柱状</label>
+                    <input type="radio" name="" id="" value="3"><label for="">折线状</label>
+                    <input type="radio" name="" id="" value="2"><label for="">饼状</label></li>
+                    <li class="textarea"><span>数字统计区间</span> <textarea class="form-control" name="" id="numCount" placeholder="例如：*-30,30-60,60-*。*-30表示无穷小到30，30-60表示大于等于30小于60，60-*表示60到无穷大"></textarea></li>
+                    <li class="textarea"><span>描述</span><textarea class="form-control" name="" id="describe" placeholder="不超过50个字符的描述"></textarea></li>
+                    <li>
+                        <div class="btnGroup">
+
+                        <a href="javascript:;" class="save btn btn-primary " onclick="addTags()">保存</a>
+                        <a href="javascript:;" class="cancel btn btn-default cancelPropup" onclick="returnManage()">取消</a>
+                    </li>
+                </div>
+                </ul>
+            </div>
+            <!-- 设置列表end -->
+
+        </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.placeholder.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../libs/jedate/jquery.jedate.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/choosetime.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/setting/addTag.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../css/task/task.css' rel='stylesheet' type='text/css' />
+    <link href='../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <a href="javascript:;"><i class="shu"></i>任务</a>
+                </h2>
+                <a href="javascript:;" class="btn fr rightAdd" module="task" permission-code="ADD">+创建任务</a>
+            </div>
+        </div>
+        <div id="page-inner" class="task-inner">
+            <ul class="nav nav-tabs">
+                <li class="active"><a class="alltask" onclick="allTask()">全部任务</a></li>
+                <li><a class="unallotTask" onclick="unallotTask()">未分配任务</a></li>
+                <li><a class="inhandTask"  onclick="inhandTask()">我处理中的任务</a></li>
+                <li><a class="allInhandTask" onclick="allInhandTask()">所有处理中的任务</a></li>
+                <li><a class="completedTask" onclick="completedTask()">完成的任务</a></li>
+            </ul>
+            <div class="tab-content">
+                <!-- 全部表格区域 -->
+                <div class="row tab-pane fade active in" id="alltask">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable taskList" id="unallottasklist">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div class="tasklistpage"></div>
+                            </div>
+                        </div>
+                </div>
+                <!-- 表格区域end -->
+            </div>
+        </div>
+        <!-- 新建任务页start -->
+        <div class="popup-inner hide content-inner addTask">
+            <div class="row title
+            ">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i><span class="titleSpan"></span></h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup'>&times;</a>
+                </div>
+            </div>
+        <hr>
+            <div class="customerForm taskForm">
+                <ul>
+                    <li>
+                        <span>标题：</span><input type="text" class="addTaskTitle needLeft" id="taskName">
+                    </li>
+                    <li>
+                        <span>任务类型：</span>
+                        <select name="" id="typeId">
+                            <option value="">请选择</option>
+                            <option value="0">营销</option>
+                            <option value="1">关怀</option>
+                            <option value="2">客服</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>优先级：</span>
+                        <select name="" id="level">
+                            <option value="">请选择</option>
+                            <option value="0">普通</option>
+                            <option value="1">紧急</option>
+                            <option value="2">非常紧急</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>执行人：</span>
+                        <select name="" id="executorUserId">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>涉及客户：</span>
+
+                        <select name="" id="custId">
+                            <option value="">请选择</option>
+                            <option value="1">小明</option>
+                            <option value="2">小张</option>
+                        </select>
+                    </li>
+
+                    <li>
+                        <span>完成时间：</span>
+                         <input type="text" class="wicon" id="completeTime" placeholder="选择日期" readonly >
+                    </li>
+                    <li>
+                        <span>备注：</span>
+                        <textarea name="" id="remark" cols="30" rows="10" class="remark"></textarea>
+                    </li>
+                </ul>
+                <div class="btnGroup">
+                    <a href="javascript:;" class="save btn btn-primary" onclick="addTaskSure()">保存</a>
+                    <a href="javascript:;" class="cancel btn btn-default cancelPropup">取消</a>
+                </div>
+            </div>
+        </div>
+        <!-- 新建任务页end -->
+
+    </div>
+
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/chosen.jquery.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../libs/jedate/jquery.jedate.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/choosetime.js"></script>
+<script src="../js/task/task.js"></script>
+<!-- 下拉多选调用 -->
+<script>
+    $(".chzn-select").chosen({
+         search_contains: true,//可以让chosen搜索选项的中间及末尾字符
+         disable_search_threshold: 10 //select的option选项大于等于此值，才会显示查询的文本框
+    });
+
+    $(".chzn-select").trigger("liszt:updated");//更新选项
+</script>
+</body>
+</html>

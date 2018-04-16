@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+
+    <link rel="stylesheet" type="text/css" href="/view/css/fenxi/swiper.css">
+    <link rel='stylesheet' type='text/css' href='/view/css/chosen.css' />
+    <link rel='stylesheet' type='text/css' href='/view/css/fenxi/page.css' />
+
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="selectpage">
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div id="page-inner" class="nopad page-inner clearfix">
+
+
+
+
+
+
+
+
+            <input type="hidden" name="default1" value="1" id="default1">
+            <input type="hidden" name="caidanid1" value="1" id="caidanid1">
+
+            <input type="hidden" name="caidanid2" value="0" id="caidanid2">
+            <input type="hidden" name="tagsinfo" value="[{&quot;tagName&quot;:&quot;用户编号&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;tag_hkdw_dbn&quot;},{&quot;tagName&quot;:&quot;性别&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;tag_user_sex&quot;},{&quot;tagName&quot;:&quot;人生阶段&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;tag_life_stage&quot;},{&quot;tagName&quot;:&quot;是否有房&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;,&quot;tag_column&quot;:&quot;tag_is_have_house_flg&quot;},{&quot;tagName&quot;:&quot;是否有车&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;,&quot;tag_column&quot;:&quot;tag_is_have_car_flg&quot;},{&quot;tagName&quot;:&quot;消费指数&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;tag_consume_index&quot;},{&quot;tagName&quot;:&quot;关注行业&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;,&quot;tag_column&quot;:&quot;tag_attent_indust&quot;},{&quot;tagName&quot;:&quot;预测文化水平&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;,&quot;tag_column&quot;:&quot;tag_cultural_level&quot;},{&quot;tagName&quot;:&quot;线上消费能力&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;,&quot;tag_column&quot;:&quot;tag_oline_spend_power&quot;},{&quot;tagName&quot;:&quot;浏览平均价格&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;msu_browse_avg_price&quot;},{&quot;tagName&quot;:&quot;消费频次&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;msu_consumer_freq&quot;},{&quot;tagName&quot;:&quot;消费性格&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;,&quot;tag_column&quot;:&quot;tag_consume_character&quot;},{&quot;tagName&quot;:&quot;旅游情况&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;,&quot;tag_column&quot;:&quot;tag_travel_state&quot;},{&quot;tagName&quot;:&quot;看电影(次/月)&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;msu_movie_cnt&quot;},{&quot;tagName&quot;:&quot;关注菜系&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;,&quot;tag_column&quot;:&quot;tag_attent_foods&quot;},{&quot;tagName&quot;:&quot;数据条件&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;,&quot;tag_column&quot;:&quot;tag_data_term&quot;}]" id="tagsinfo">
+            <input type="hidden" name="model" value="[{&quot;id&quot;:2,&quot;name&quot;:&quot;消费倾向分析&quot;},{&quot;id&quot;:1,&quot;name&quot;:&quot;兴趣偏好分析&quot;}]" id="modelinfo">
+
+
+            <input type="hidden" name="tags1" value="[]" id="1">
+
+            <input type="hidden" name="tags3" value="[]" id="3">
+
+            <input type="hidden" name="tags6" value="[{&quot;tagName&quot;:&quot;性别&quot;,&quot;tag_column&quot;:&quot;tag_user_sex&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;},{&quot;tagName&quot;:&quot;人生阶段&quot;,&quot;tag_column&quot;:&quot;tag_life_stage&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;},{&quot;tagName&quot;:&quot;是否有房&quot;,&quot;tag_column&quot;:&quot;tag_is_have_house_flg&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;},{&quot;tagName&quot;:&quot;是否有车&quot;,&quot;tag_column&quot;:&quot;tag_is_have_car_flg&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;},{&quot;tagName&quot;:&quot;消费指数&quot;,&quot;tag_column&quot;:&quot;tag_consume_index&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;3&quot;},{&quot;tagName&quot;:&quot;关注行业&quot;,&quot;tag_column&quot;:&quot;tag_attent_indust&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;},{&quot;tagName&quot;:&quot;预测文化水平&quot;,&quot;tag_column&quot;:&quot;tag_cultural_level&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;},{&quot;tagName&quot;:&quot;线上消费能力&quot;,&quot;tag_column&quot;:&quot;tag_oline_spend_power&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;},{&quot;tagName&quot;:&quot;浏览平均价格&quot;,&quot;tag_column&quot;:&quot;msu_browse_avg_price&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;3&quot;},{&quot;tagName&quot;:&quot;消费频次&quot;,&quot;tag_column&quot;:&quot;msu_consumer_freq&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;3&quot;},{&quot;tagName&quot;:&quot;消费性格&quot;,&quot;tag_column&quot;:&quot;tag_consume_character&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;},{&quot;tagName&quot;:&quot;旅游情况&quot;,&quot;tag_column&quot;:&quot;tag_travel_state&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;2&quot;},{&quot;tagName&quot;:&quot;看电影(次/月)&quot;,&quot;tag_column&quot;:&quot;msu_movie_cnt&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;3&quot;},{&quot;tagName&quot;:&quot;关注菜系&quot;,&quot;tag_column&quot;:&quot;tag_attent_foods&quot;,&quot;default_type&quot;:&quot;1&quot;,&quot;default_display&quot;:&quot;1&quot;},{&quot;tagName&quot;:&quot;消费访问频次&quot;,&quot;tag_column&quot;:&quot;msu_consume_vist_freq&quot;,&quot;default_type&quot;:&quot;4&quot;,&quot;default_display&quot;:&quot;1&quot;}]" id="6">
+
+
+
+            <!--right box-->
+            <div class="right_box box_s">
+
+                <input type="hidden" name="infoid" value="" id="infoid">
+
+                <div id="content">
+                    <div class="cha_page_select box_s">
+                        <div class="fl">
+                            <label class="cps_lab">横坐标：</label>
+                            <select id="hor_sel" class="cps_sel select_sa">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <div class="fl">
+                            <label class="cps_lab">纵坐标：</label>
+                            <select id="row_sel" multiple="" class="cps_sel select_mul" tabindex="-1" style="display: none">
+                            </select>
+                            <label>*可多选</label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="fl">
+                            <label class="cps_lab">横坐标筛选：</label>
+                            <input id="sel_txt_p" type="text" class="cps_sel select_sa cps_txt box_s form-control">
+                            <label>多个条件请用半角 "," 分割 (如："北京,天津,浙江....")</label>
+                        </div>
+
+                        <a id="sele_chartPic" class="menu_btn tpttm_btnbg01">聚合分析</a>
+
+                    </div>
+                    <form id="svgPDF" action="/apis/analysisexport/geekerPdf" method="post">
+                    </form>
+                    <div id="chart_mainbox" class="cha_page_chart pr box_s">
+
+                        <div class="cha_page_chtop box_s">
+                            <!-- <div class="cha_page_chttit">选择人群：地区 VS 年龄 VS 教育程度 VS 从事行业 VS 月收入</div> -->
+                            <a class="cha_page_chtbtn chap_btnbg01" href="javascript:void(0);" onclick="exportHighcharts();">生成分析报表</a>
+                            <a id="chart_nextbtn" class="cha_page_chtbtn chap_btnbg02">下一条</a>
+                            <a id="chart_prevbtn" class="cha_page_chtbtn chap_btnbg03">上一条</a>
+                        </div>
+
+                        <div id="chart_loadbox">
+                            <div class="logo_loadingbox box_center" style="margin-top:50px;">
+                                <div id="loading_img" class="logo_puls"></div>
+                                <div class="logo_ptit hide">数据装载中...<span id="loading_num">0</span>%</div>
+                            </div>
+                        </div>
+
+                        <div id="chart_showbox" style="left:-9999px; position:absolute;" class="chart_showbox">
+                            <div class="cha_page_chbody pr">
+                                <ul id="pic_tabtit" class="cha_page_chbleft">
+                                </ul>
+                                <div class="cha_page_chb swiper-container box_s">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                <!--right box-->
+            </div>
+            <div class="bg_shadow hide pf"></div>
+
+            <div class="top_box_user_Mwindow hide pf page_windows01">
+                <div class="top_box_user_MWtop box_s">
+                    导入数据 <a class="top_box_user_MWtexibtn">&nbsp;</a>
+                </div>
+
+                <div class="top_box_user_MWbody top_data_insbox">
+                    <form id="file-form" method="post" enctype="multipart/form-data">
+                        <div class="top_box_user_MWline">
+                            <label class="top_box_user_MWlab">文件名称：</label> <input type="text" class="top_box_user_MWtxt tdi_box box_s data_name" name="dataName" id="dataName">
+                            <span class="top_box_user_MWlab">*为了您方便查找数据，请输入文件名称。</span>
+                        </div>
+
+                        <div class="top_box_user_MWline">
+                            <label class="top_box_user_MWlab">上传文件：</label> <input type="file" class="top_box_user_MWbtn box_s file_input" name="file" value="选择文件"> <span class="top_box_user_MWlab green"></span>
+                        </div>
+
+                        <div class="top_box_user_MWline tdi_tit">
+                            <label class="top_box_user_MWlab ">注意：导入前请仔细查看文件格式、数据字段等是否符合范本要求，否则会造成导入不成功，点击下载<a class="a_blue">范本说明</a>。</label>
+                        </div>
+                    </form>
+                    <div class="top_box_user_MWline tdi_tit">
+                        <input type="button" class="top_box_user_MWbtn_red tdi_box sub_file" value="保存"> <input type="button" class="top_box_user_MWbtn_wit imp_cancel" value="取消">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="top_box_user_Mwindow hide pf page_windows02">
+
+                <div class="top_box_user_MWtop box_s">
+                    保存数据条件 <a class="top_box_user_MWtexibtn">&nbsp;</a>
+                </div>
+
+                <div class="top_box_user_MWbody top_data_insbox">
+
+                    <div class="top_box_user_MWline tdi_tit2">
+                        <label class="top_box_user_MWlab">条件名称：</label> <input type="text" id="saveCondition" class="top_box_user_MWtxt tdi_box box_s"> <span class="top_box_user_MWlab">*为了您方便查找数据，请输入条件名称。</span>
+                    </div>
+
+                    <div class="top_box_user_MWline tdi_tit">
+                        <input type="button" class="top_box_user_MWbtn_red tdi_box" id="save_condition" value="保存"> <input type="button" class="top_box_user_MWbtn_wit" id="cancel_condition" value="取消">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="top_box_user_Mwindow hide pf page_windows03">
+
+                <div class="top_box_user_MWtop box_s">
+                    管理已保存条件 <a class="top_box_user_MWtexibtn">&nbsp;</a>
+                </div>
+
+                <div class="tdi_tab">
+                    <table id="searchmgrtableid" class="tab_page_tbody" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                        <thead>
+                        <tr>
+                            <th style="min-width: auto;">序号</th>
+                            <th style="min-width: auto;">条件名称</th>
+                            <th style="min-width: auto;">保存时间</th>
+                            <th style="min-width: auto;">应用</th>
+                            <th style="min-width: auto;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="callPhone">
+            </div>
+
+
+            <div class="top_box_user_Mwindow pf page_windows05 z_index">
+
+                <div class="top_box_user_MWtop box_s page_windows05_title">
+                    <a class="empty" style="font-size:18px;"></a><a class="top_box_user_Closebtn">&nbsp;</a>
+                </div>
+
+                <div class="tdi_tab" id="searchmgrtableid2">
+                </div>
+            </div>
+
+            <div class="top_box_user_Mwindow hide pf page_windows04">
+
+                <div class="top_box_user_MWtop box_s">
+                    导入数据管理 <a class="top_box_user_MWtexibtn">&nbsp;</a>
+                </div>
+
+                <div class="tdi_tab">
+                    <table class="tab_page_tbody" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                        <thead>
+                        <tr>
+                            <th style="min-width: auto;">序号</th>
+                            <th style="min-width: auto;">数据名称</th>
+                            <th style="min-width: auto;">文件名</th>
+                            <th style="min-width: auto;">保存时间</th>
+                            <th style="min-width: auto;">状态</th>
+                        </tr>
+                        </thead>
+
+                        <tbody class="imptask_tab_table">
+
+                        </tbody>
+                    </table>
+                    <div class="tab_page_tpage">
+                        <span class="totalRecordCount_span"></span>条记录<input type="text" class="tpt_txt cur_page" value="1">/<span class="total_page"></span>
+                        <a class="tpt_Rbtn tra_rot180 next_page" page-data=""></a> <a class="tpt_Lbtn tpt_Lbtn_none pre_page" page-data=""></a>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div id="query_hint" class="query_hint">
+                <img src="/view/images/fenxi/loading_zhuan.gif">正在上传，请稍等．．．
+            </div>-->
+            <input type="hidden" name="curPage" value="" id="curPage">
+
+
+        </div>
+    </div>
+
+    </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="/view/js/chosen.jquery.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+
+
+    <script type="text/javascript" src="/view/js/fenxi/swiper.js"></script>
+    <script type="text/javascript" src="/view/js/fenxi/highcharts.js"></script>
+    <script type="text/javascript" src="/view/js/fenxi/exporting.js"></script>
+    <script type="text/javascript" src="/view/js/fenxi/custAnalysis.js"></script>
+
+<script>
+    $(function(){
+        $(".chosen-container").css({'min-width':'146px',width:''});
+        $(".chosen-container-multi .chosen-choices li.search-field").css({height:'32px','line-height':'32px'});
+        $(".chosen-container-multi .chosen-choices").css({padding:'1px 5px'}).addClass("clearfix");
+        $(".form-control").css({"width":''});
+    })
+</script>
+
+</body>
+</html>

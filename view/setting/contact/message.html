@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/setting.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+            <div class="row topTitle firstTopTitle">
+                <div class="col-md-12 clearfix">
+                    <h2 class="fl">
+                       <a href="javascript:;"><i class="shu"></i><a href="/view/setting/setting.html">系统设置</a> / 短信签名</a>
+                    </h2>
+                    <a href="javascript:;" class="btn fr rightAdd" module="smsSign" permission-code="ADD" onclick="addSign()">+新建签名</a>
+                </div>
+            </div>
+        <div id="page-inner">
+            <!-- 表格区域 -->
+
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable " id="messageList">
+                            <thead>
+                            <tr>
+                                <th>短信签名</th>
+                                <th>审核状态</th>
+                                <th>签名类型</th>
+                                <th>申请人</th>
+                                <th>申请日期</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="messageListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="bg"></div>
+<!-- 新建签名 -->
+<div class="modelContent" id="addSign">
+    <div class="MotalTit"><i >新建签名</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <ul class="addSignUl">
+                <li>审核结果将在3-5个工作日内以短信的方式通知联系人</li>
+                <li>
+                    <textarea name="" id="signature" cols="30" rows="10" placeholder="短信签名为 3-8 个字符，必须包含简体中文，不能为纯英文或包含特殊符号、阿拉伯数字;  申请多个标签时，用分号分开;">
+                    </textarea>
+                </li>
+                <li>
+                    <span>联系人手机号：</span>
+                    <input type="text" id="mobile">
+                </li>
+                <li>
+                    <span>短信类型：</span>
+                    <input type="radio" name="smstype" id="callsms"><label for="smstype">通知类</label>&emsp;
+                    <input type="radio" name="smstype" id="marketsms"><label for="smstype">营销类</label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addsure()">保存</div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/setting/setting.js"></script>
+<script src="../../js/setting/contact/message.js"></script>
+</body>
+</html>

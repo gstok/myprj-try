@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .flashSign{background: transparent;border: transparent}
+    </style>
+</head>
+<body>
+<div id="tanxineditpage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12">
+                <h2><i class="shu spc"></i><span><a href="/view/marketing/FlashSMS/list.html">手机弹信</a> / {{micropagetit}}</span></h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad">
+            <div class="row smsNewly">
+                <div class="smsPhone">
+                    <dl>
+                        <dt>收信预览</dt>
+
+                    </dl>
+                    <div class="txphonebox">
+                        <div class="smsCont">
+                            <!--{{smsSign}}-->{{content}}
+                        </div>
+                    </div>
+                </div>
+                <div class="smsEdit">
+                    <div class="searchgroup clearfix">
+
+                        <div class="form-group">
+                            <label class="flashSMStitle">弹信名称*</label>
+                            <input type="text" class="flashSign" v-model="flashName" placeholder="请输入弹信名称">
+                        </div>
+                        <div class="form-group">
+                            <label>弹信签名*</label>
+                            <input type="text" class="flashSign"  v-model="flashSign" placeholder="请输入弹信签名">
+                            <!--   <select class="form-control" v-model="smsSign">
+                                  <option value="">请选择</option>
+                                  <option v-for="getSignList in getSignLists" :value="getSignList.id">{{getSignList.signature}}</option>
+                              </select> -->
+                        </div>
+
+                    </div>
+                    <!--   <textarea class="editor_sms form-control"  v-model="content" style="height:300px;width:600px;visibility:hidden;"></textarea>
+                      <textarea id="schtmlnr" style="display:none;"></textarea> -->
+
+
+                    <textarea class="editor_sms"  v-model="content" style="height:240px;width:600px;" readonly></textarea>
+
+                    <div class="mybtn-group">
+                        <button type="button" class="btn btn-primary" @click="cancelpage()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/marketing/flashSMS/get.js"></script>
+</body>
+</html>

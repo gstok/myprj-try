@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../css/customer/workorder.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="workOrderpage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix" >
+                <h2 class="fl">
+                    <a href="javascript:;"><i class="shu"></i>{{orderTitle}}</a>
+                </h2>
+                <!-- <a class="btn fr rightAdd clue spcbtn" data-power="ADD" @click="addWorkOrder()" v-show="!orderDaealistShow">+ 新建需求</a>
+                 --><a class="btn fr rightAdd" module="clue" permission-code="ADD" @click="addWorkOrder()" v-show="!orderDaealistShow">+ 新建需求</a>
+                <a href="javascript:;" class='closeBtn fr closePropup' @click="cancelpage()" v-show="orderDaealistShow">&times;</a>
+                </div>
+<!--                 <div class="col-md-12" >
+                    <h2><i class="shu spc"></i><span>{{micropagetit}}</span></h2>
+                </div> -->
+                </div>
+        <div id="page-inner" class="content-inner" v-show="!orderDaealistShow">
+            <!-- 工单表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable" id="">
+                            <thead>
+                            <tr>
+                                <th>需求编号</th>
+                                <th>项目需求名称</th>
+                                <th>提交人</th>
+                                <th>提交时间</th>
+                                <th>返回时间</th>
+                                <th>返回数据条数</th>
+                                <th>需求状态</th>
+                                <th class="caozuo textcenter">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="workOrderLists.length == 0">
+                                <td colspan="8" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                            </tr>
+                            <template v-else>
+                                <tr v-for="workOrderList in workOrderLists">
+                                    <td>
+                                        <a v-if ='hasPermission("clue", "GET")' class="typeblue" href="javascript:;" @click="seepage(workOrderList.id)">{{workOrderList.id}}</a></span>
+                                        <template v-else>
+                                            <a class="typeblue" href="javascript:;">{{workOrderList.id}}</a>
+                                        </template>
+                                    </td>
+                                    <td class="maxWidth200" ><span data-container="body" data-toggle="popover" data-placement="top" :data-content="workOrderList.title">{{workOrderList.title}}</span></td>
+                                    <td >{{workOrderList.userName}}</td>
+                                    <td>{{workOrderList.showSubmitTime}}</td>
+                                    <td>{{workOrderList.showReturnTime}}</td>
+                                    <td v-if='workOrderList.dataNum!=0'>{{workOrderList.dataNum}}</td>
+                                    <template v-else>
+                                        <td></td>
+                                    </template>
+                                    <td>{{workOrderList.statusName}}
+                                        <span v-if='workOrderList.statusName=="未提交"' class="yellow spcspan">●</span>
+                                        <span v-if='workOrderList.statusName=="未返回"' class="gray spcspan">●</span>
+                                        <span v-if='workOrderList.statusName=="已提交"' class="green spcspan">●</span>
+                                    </td>
+                                    <td v-if='workOrderList.statusName=="未提交" || workOrderList.statusName=="未通过"||workOrderList.status=="8"' class="textcenter">
+                                        <span v-if ='hasPermission("clue", "UPDATE")'><a href="javascript:;" @click="addWorkOrder(workOrderList.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="编辑"><i class="icon icon-bianji"></i></a></span>
+                                        <template v-else>
+                                            <span><a href="javascript:;"><i class="icon icon-bianji disabled"></i></a></span>
+                                        </template>
+                                        <span class="tdline">▏</span>
+                                        <span v-if ='hasPermission("clue", "DEL")'><a href="javascript:;" @click="deleteData(workOrderList.id,workOrderList.mailName)" data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><i class="icon icon-shanchu"></i></a></span>
+                                        <template v-else>
+                                            <span><a href="javascript:;"><i class="icon icon-shanchu disabled"></i></a></span>
+                                        </template>
+                                    </td>
+                                    <template v-else>
+                                        <td v-if='workOrderList.status=="5"||workOrderList.status=="6"' class="textcenter">
+                                            <span v-if ='hasPermission("clue", "GET")' ><a href="javascript:;" @click="WorkOrderDatalist(workOrderList.id,0,20)" data-container="body" data-toggle="popover" data-placement="top" data-content="数据清单"><i class="icon icon-qingdan"></i></a></span>
+                                            <template v-else>
+                                                <span><a href="javascript:;"><i class="icon icon-qingdan disabled"></i></a></span>
+                                            </template>
+
+                                        </td>
+                                        <template v-else>
+                                            <td v-if='workOrderList.status=="1"' class="textcenter"><!-- 已提交-->
+                                                <span v-if = 'hasPermission("clue", "UPDATE")'><a href="javascript:;" @click="updatestatus(workOrderList.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="撤回"><i class="icon icon-chexiaofanhui"></i></a></span>
+                                                <template v-else>
+                                                    <span><a href="javascript:;"><i class="icon icon-chexiaofanhui disabled"></i></a></span>
+                                                </template>
+                                            </td>
+                                            <template v-else>
+                                                <td></td>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="workorderListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="pageNewly-box" v-show="orderDaealistShow">
+   <div class="pageNewly">
+       <div class="row orderNewly">
+            <table class="table table-striped outerTable" id="BackList">
+                <thead>
+                    <tr>
+                        <th v-for='column in columns'>{{column.label}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <div class="fr">
+                <div id="BackListpage"></div>
+            </div>
+       </div>
+   </div>
+</div>
+
+
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/customer/workOrder.js"></script>
+</body>
+</html>

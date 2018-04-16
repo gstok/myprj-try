@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .cover_edit{position: absolute;left: 0;top:210px;background:#fff;opacity: 0.1;width: 600px;height:285px;}
+    </style>
+</head>
+<body>
+<div id="smseditpage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12">
+                <h2><i class="shu spc"></i><span><a href="/view/marketing/sms/smspage.html">手机短信</a> / {{micropagetit}}</span></h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad">
+            <div class="row smsNewly">
+                        <div class="smsPhone">
+                            <dl>
+                                <dt>收信预览</dt>
+                                <!-- <dd>营销短信内容会自动添加短信签名和退订提示</dd> -->
+                            </dl>
+                            <div class="phonebox">
+                                <div class="smsCont">
+                                    【{{smsSignTxt}}】{{content}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="smsEdit pr">
+                            <div class="searchgroup clearfix">
+                                <div class="form-group">
+                                    <dl class="smsType">
+                                        <dt>短信类型<span style="color:red">*</span></dt>
+                                        <dd>
+                                            <!--<div class="radilBox" v-for="smsTypelist in smsTypelists">
+                                                <input type="radio" v-model="smsType" name="smsType" :value="smsTypelist.key">
+                                                <span>{{smsTypelist.value}}</span>
+                                            </div>-->
+                                            <div class="radilBox">
+                                                <input type="radio" id="callsms"  name="smsType" @change='selectType(1)'>
+                                                <span>通知短信</span>
+                                            </div>
+                                            <div class="radilBox">
+                                                <input type="radio" id="marketsms" name="smsType" @change='selectType(2)'>
+                                                <span>营销短信</span>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="form-group">
+                                    <label>短信名称<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" v-model="smsName" placeholder="短信名称">
+                                </div>
+                                <div class="form-group">
+                                    <label>短信签名<span style="color:red">*</span></label>
+                                    <select class="form-control" v-model="smsSign" id='smsSign'>
+                                        <option value="">请选择</option>
+                                        <option v-for="getSignList in getSignLists" :value="getSignList.id">{{getSignList.signature}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" v-show="tagShow">
+                                    <label>内容标签（可多选） <!--v-model="ideaTag"--></label>
+                                    <select class="tag-selectAdd form-control conTag" data-placeholder="选择标签" multiple>
+                                        <span>分组1</span>
+                                        <option v-for="ideaTaglist in ideaTaglists" :value="ideaTaglist.id">{{ideaTaglist.tagName}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group pr" v-show="!tagShow">
+                                    <label>内容标签（可多选） <!--v-model="ideaTag"--></label>
+                                    <select class="tag-select form-control conTag" data-placeholder="选择标签" multiple>
+                                        <!--<option v-for="ideaTaglist in ideaTaglists" :value="ideaTaglist.id">{{ideaTaglist.tagName}}</option>-->
+                                    </select>
+                                    <input type="text" class="tagDis"/>
+                                </div>
+                            </div>
+                            <!--<textarea class="editor_sms form-control"  v-model="content" style="height:300px;width:600px;visibility:hidden;"></textarea>
+                            <textarea id="schtmlnr" style="display:none;"></textarea>-->
+
+
+                            <div class="editorSelf">
+                                <span class="spanSelf Self-customerProperty" title="插入客户属性" @click="custProperty()"></span>
+                                <span class="spanSelf Self-myLink" title="插入短链接" @click="myLink()"></span>
+                            </div>
+                            <textarea class="editor_sms"  v-model="content" style="height:240px;width:600px;" placeholder="请输入短信内容"></textarea>
+
+                            <div class="cover_edit"></div>
+                            <div class="mybtn-group">
+                                <button type="button" class="btn btn-primary save" @click="savepage()">保存</button>
+                                <a href="javascript:;" class="btn btn-default" @click="cancelpage()">取消</a>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <!--客户属性弹窗 -->
+    <div class="selfBox" v-show="editShow">
+        <div class="editor-mask"></div>
+        <div class="editorBigbox">
+        <div class="editor-box">
+            <div class="editor-header">{{editorTit}}<span title="关闭" @click="closeEdit()">×</span></div>
+            <div class="editor-body">
+                <div class="searchgroup" v-show="selfShow">
+                    <div class="form-group">
+                        <label>属性名称</label>
+                        <select class="form-control" v-model="cusProperty">
+                            <option value="">请选择</option>
+                            <option v-for="cusProperty in cusPropertys" :value='cusProperty.attrKey' >{{cusProperty.attrName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>预计该属性最大字数为*</label>
+                        <input type="text" class="form-control" v-model="maxProperty" id="maxProperty" placeholder="请输入该属性最大值" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    <div class="form-group">
+                        <label>属性为空默认内容*</label>
+                        <input type="text" class="form-control" v-model="nullProperty" id="nullProperty" placeholder="请输入属性为空默认内容">
+                    </div>
+                </div>
+                <div class="searchgroup" v-show="!selfShow">
+                    <div class="form-group" style="line-height: 40px;padding-left: 32px;">注意: 短链接有效期为90天</div>
+                    <div id="slink">
+                        <div class="form-group">
+                            <input type="radio" class="slinkRadio" name="slink" id="microLink" checked="">
+                            <span>微页面</span>
+                            <label>
+                                <select class="form-control" v-model="microPage">
+                                    <option value="">请选择</option>
+                                    <option v-for="microPage in microPages" :value='microPage.ideaUrl'>{{microPage.title}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" class="slinkRadio" name="slink" id="otherLink">
+                            <span>其它页</span>
+                            <label>
+                                <input type="text" class="form-control" placeholder="请输入其它页短链接" v-model="otherPage">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="editor-footer">
+                <span class="editor-common editor-yes" title="确定" v-show="selfShow">
+                    <input class="editor-button" type="button" value="确定" @click="custPropertySure()">
+                </span>
+                <span class="editor-common editor-yes" title="确定" v-show="!selfShow">
+                    <input class="editor-button" type="button" value="确定" @click="myLinkSure()">
+                </span>
+                <span class="editor-common editor-no" title="取消">
+                    <input class="editor-button" type="button" value="取消" @click="closeEdit()">
+                </span>
+            </div>
+
+    </div>
+</div>
+    </div>
+    <!--客户属性弹窗-->
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/marketing/sms/smsedit.js"></script>
+</body>
+</html>

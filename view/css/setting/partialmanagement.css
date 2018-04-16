@@ -1,0 +1,73 @@
+/*.ztree li span.button.add{
+    margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle
+}
+.ztree li span.button.ico_open{
+	display: none;
+}
+.ztree li span.button.ico_close{
+	display: none;
+}
+.ztree li span.button.ico_docu{
+	display: none;
+}
+#treeDemo_1_remove{
+	display: none;
+}
+#ztree .ztree li{
+	line-height: 60px;
+}
+#treeDemo{
+	border: 1px solid #e6e6e6;
+	padding:0 20px;
+	border-radius: 4px;
+}
+
+.ztree *{
+	font-size: 14px!important;
+}
+.ztree li a{
+	height: 60px;
+}*/
+#sortable .caozuo a{
+	margin:0 10px;
+}
+.positionList li{
+	padding: 0 20px;
+	overflow: hidden;
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.positionList li:last-of-type{
+	border-bottom: none;
+}
+.positionList{
+	border-radius: 4px;
+}
+#positionName{
+	width: 180px;
+	height: 30px;
+	border-radius: 4px;
+	outline: none;
+	border:1px solid #e6e6e6;
+	margin-right: 10px;
+}
+
+
+
+
+#page-inner.positionmanagement{
+	padding:0;
+}
+.positionList .firstLi{
+	height: 70px;
+	line-height: 70px;
+	margin-top: -10px;
+}
+.top{
+    padding: 0;
+}
+#treeDemo_1_remove{
+	display: none;
+}
+

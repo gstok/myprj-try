@@ -1,0 +1,197 @@
+
+#page-inner{
+    width: 100%;
+    margin: 10px 20px 10px 0;
+    background: none;
+    padding: 0px;
+    height: auto;
+    box-shadow: none;
+
+}
+.indextop{
+    border-color: #eee;
+}
+/*充值消费一栏*/
+.payList .thumbnail{
+    border-radius: 0;
+    border: 1px solid #eee;
+    border-right: 0px;
+    cursor: pointer;
+}
+.payList h3,.payList p{
+    text-align: center;
+}
+.payList strong{
+    font-size: 28px;
+    color: #999;
+}
+.payList .thumbnail.last{
+    border-right: 1px solid #eee;
+}
+.createInput.wicon {
+    margin-left: 5px;
+    width: 180px;
+    height: 34px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 18px;
+}
+.indextop h3{
+  text-align: center;
+}
+.indextop p{
+   text-align: center;
+}
+.indextop strong{
+    font-size: 28px;
+
+}
+/*.indextop strong.allcomNum {
+    font-family:myFirstFont;
+}*/
+.companytitle{
+    font-weight: bold;
+}
+.select2-container{
+	margin-top: 0px;
+    margin-left: 0px;
+}
+.select2-container--open .select2-dropdown{
+    left: 0;
+}
+.select2-container .select2-selection--multiple{
+	min-height: 34px;
+    border: 1px solid #e6e6e6;
+}
+.oftenblue{
+    color: #606cbf!important;
+}
+.oftengreen{
+    color: #51b9a0!important;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+	background-color: #f3f3f3;
+    border-radius: 3px;
+    cursor: default;
+    float: left;
+    margin: 6px 6px 0px 0;
+    padding: 1px 5px 1px 3px;
+    font-size: 16px;
+    color: #666;
+}
+/*具体消费一栏*/
+.pay{
+    display: flex;
+        box-shadow: 0 0 18px #e7e7e7;
+}
+.pay div{
+    flex: 1;
+    border:1px solid #eee;
+    background: white;
+    margin-left: -1px;
+    cursor: pointer;
+}
+.pay p{
+    text-align: center;
+    margin-top: 25px;
+}
+.pay strong{
+    display: block;
+    text-align: center;
+    font-size: 28px;
+    color: #999;
+}
+.table{
+    background: white;
+    border: 1px solid #e6e6e6;
+        box-shadow: 0 0 18px #e7e7e7;
+}
+#chart{
+    background: white;
+    border-radius: 4px;
+}
+.companyList {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+#zxt{
+    background: white;
+    margin:12px 0;
+        box-shadow: 0 0 18px #e7e7e7;
+}
+.col-lg-3,.col-md-3,.col-sm-3{
+    padding: 0;
+}
+.companyUser{
+        box-shadow: 0 0 18px #e7e7e7;
+    width: 23%;
+}
+.payList{
+    width: 76.2%;
+        box-shadow: 0 0 18px #e7e7e7;
+}
+/*折线图*/
+.zxttitle{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 20px;
+}
+.zxttitle li{
+    float: left;
+    width: 110px;
+    border-right: 1px solid #e6e6e6;
+    text-align: center;
+    line-height: 16px;
+    font-weight: bold;
+    color: #d1d1d1;
+    cursor: pointer;
+}
+.zxttitle li:last-of-type{
+    border-right: none;
+}
+.zxttitle li.active{
+    color: #333;
+}
+.table.tableCenter thead>tr>th:first-child{
+    color: #333;
+}
+.table.tableCenter tbody>tr>td:first-child{
+    color: #666;
+    font-weight: normal;
+    font-size: 12px;
+}
+.emailpay{
+    position: relative;
+}
+.triangle-up {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -8px;
+    z-index: 22;
+    top: -5px;
+    width: 16px;
+    height: 5px;
+    background: url(../../images/sanjiao.png);
+    background-color: white;
+}
+.chaxunBtn{
+    display: inline-block;
+}
+.filterList .select2-container{
+        font-size: 12px;
+    line-height: 20px;
+}
+#paydetailList td{font-size: 18px;}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #999;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: 20px;
+    float: right;
+    font-size: 24px;
+    margin-top: 0px;
+}

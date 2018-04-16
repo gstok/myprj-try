@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>数聚客</title>
+    <link rel="stylesheet" type="text/css" href="view/libs/fonts/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="view/css/login-background.css" >
+    <link rel="stylesheet" type="text/css" href="view/css/main.css" >
+    <link rel="stylesheet" type="text/css" href="view/libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="stylesheet" type="text/css" href="view/css/login.css" >
+
+    <link rel='icon' href='favicon.ico' type='image/x-icon' />
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
+    <link rel="bookmark" href="favicon.ico" type="image/x-icon" />
+    <style>
+        .login-btn {
+            width: 150px;
+        }
+        .login-btn a {
+            width: 150px;
+        }
+        .login-btn.return {
+            background-color: transparent;border: 1px solid #5762b0;margin-left:50px;
+        }
+        .login-btn.return:hover {
+            background-color: transparent;border: 1px solid #606cbf;
+        }
+        .prompt{line-height: 30px;color: #fff;text-align: center;}
+    </style>
+</head>
+
+<body>
+<canvas id="canv"></canvas>
+<script src="view/js/login-background.js"></script>
+<div>
+    <div class="D-cont fl index-box" style="margin-top: -275px">
+        <div class="login-bigbox" id="login">
+            <div class="loginbox">
+                <img src="view/images/login-logo.png" style="margin-bottom: 15px"/>
+                <b id="logo"></b>
+                <div class="prompt">密码超过30天未修改，已过期，请修改密码后登陆！</div>
+                <div class="login-form">
+                    <div class="login-form-bg" style="height:330px"></div>
+                    <ul>
+                        <li class="login-user iconGroup">
+                            <label for="username" class="user-label" >用户名</label>
+                            <input  id="username" autocomplete="off" placeholder="请输入用户名"/><i class="loginIcon icon icon-kehu"></i>
+                        </li>
+                        <li class="login-user iconGroup">
+                            <label for="oldPwd" class="user-label" >原密码</label>
+                            <input type="password" id="oldPwd" autocomplete="off" placeholder="请输入原密码" /><i class="loginIcon icon icon-mima"></i>
+                        </li>
+                        <li class="iconGroup">
+                            <label for="newPwd" class="user-label" >新密码</label>
+                            <input type="password" id="newPwd" autocomplete="off"  placeholder="请输入新密码" /><i class="loginIcon icon icon-mima"></i>
+                        </li>
+                        <li class="iconGroup">
+                            <label for="confirnPwd" class="user-label" >确认新密码</label>
+                            <input type="password" id="confirnPwd" autocomplete="off"  placeholder="请确认新密码" /><i class="loginIcon icon icon-mima"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="b_btn">
+                    <div class="login-btn fl">
+                        <a href="javascript:;" id="sureBtn">确定</a>
+                    </div>
+                    <div class="login-btn fl return">
+                        <a href="login.html">取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="footer">
+        <div class="footer-line"></div>
+        <p class="footer-last"> Copyright© 2016 worken.cn Inc. All Rights Reserved</p>
+        <p class="footer-last">浙江华坤道威数据科技有限公司</p>
+    </div>
+</div>
+</body>
+<script src="view/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="view/js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="view/libs/xcConfirm/xcConfirm.js"></script>
+<script type="text/javascript" src="view/js/common.js"></script>
+<script type="text/javascript" src="view/js/modifypwd.js"></script>
+</html>

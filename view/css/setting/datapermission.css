@@ -1,0 +1,64 @@
+.groupBtn{
+	text-align: center;
+}
+.caozuo label{
+	margin-right: 10px;
+	font-weight: normal;
+}
+.caozuo input{
+	width: 15px;
+	height: 15px;
+	position: relative;
+    top: 3px;
+    right: 5px;
+}
+.chosen-container-multi .chosen-choices{
+	width: 244px;
+}
+.chosen-container .chosen-drop{
+	width: 244px;
+}
+#setDate{
+	height: 300px;
+}
+.chosen-container-multi .chosen-choices li.search-choice{
+	margin: 7px 6px 6px 0;
+}
+table td .seticon{
+	margin-right: 6px;
+	font-size: 19px;
+}
+.caozuo .encrypt{
+	margin-left: 23px;
+}
+
+
+.PopupCont dl {
+	margin-left: 40px;
+}
+.PopupCont dl dt {
+	width: 140px;
+}
+.PopupCont dd select {
+	width: 370px;
+}
+.provinceDiv{margin-bottom: 20px;}
+table .val span{
+	display: block;
+    overflow: hidden;
+    width: 500px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/*下拉多选样式*/
+.ui-multiselect-header ul li{
+	padding: 0;
+}
+#dataVal_ms {
+	height: 32px;
+    line-height: 23px;
+    overflow:hidden;
+    width:150px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}

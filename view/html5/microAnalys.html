@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title></title>
+    <style>
+        *{padding:0;margin:0}
+        body{background-color: #fff;font-family: "Microsoft YaHei","微软雅黑","SimSun","宋体";color: #6a778f;max-width: 640px;margin: auto;}
+    	table{width: 100%;border: 1px solid #ddd;border-collapse: collapse;border-spacing: 0;display: table;text-align: center;margin: 20px 0}
+    	table th, table td{line-height: 35px;}
+    	table th{background: #ddd}
+    	.table-striped>tbody>tr:nth-child(even)>td,.table-striped>tbody>tr:nth-child(even)>th{background-color:#f9f9f9}
+
+    </style>
+</head>
+<body>
+
+	<!-- <div id="chart-mapjs" style="display: none"></div> -->
+    <iframe id='mapIframe' frameborder="0" scrolling="no" width='100%' height="800px"></iframe>
+    <!-- <div id="chart-map" style="height:330px"></div>
+        <table class="table-striped">
+        <thead>
+        <tr>
+            <th id='pTH'>省份</th>
+            <th id='pUV'>访问人数</th>
+            <th id='pPV'>访问次数</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table> -->
+	<div id="chart_box1" style="height:330px"></div>
+	<div id="chart_box2" style="height:330px"></div>
+
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="/view/html5/js/microAnalys.js"></script>
+</body>
+</html>

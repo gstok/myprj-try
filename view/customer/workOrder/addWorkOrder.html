@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+     <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../css/jquery.multiselect.css" type="text/css"/>
+    <link rel="stylesheet" href="../../libs/multiselect/bootstrap-select.min.css">
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css'/>
+    <link href='../../css/customer/workorder.css' rel='stylesheet' type='text/css'/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="workOrderpage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+    <!--     <div class="row topTitle">
+
+        </div> -->
+        <div id="page-inner" class="content-inner" >
+            <div class="row title">
+                <div class="col-md-12">
+                    <h2 class="fl addTitle"><i class="shu spc"></i><a href="/view/customer/workOrder/workOrder.html">线索需求</a> / {{allTitle}}</h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' @click="cancelpage()">&times;</a>
+                </div>
+            </div>
+            <hr>
+            <!-- 新建工单start -->
+            <div class="customerForm addOrderForm">
+                <div class="orderTit clearfix">
+                    <label for="">项目需求名称</label>
+                    <input type="text" placeholder="项目需求名称" class="orderTitle" v-model='title'>
+                </div>
+                <div class="orderTit clearfix">
+                    <label for="">数据需求量</label>
+                    <input type="text" placeholder="数据需求量" class="orderTitle" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="dataNumLimit"/>
+                </div>
+                <div class="orderTit clearfix">
+                    <label for="">需求单开始时间</label>
+                    <input id="startTime" type="text" placeholder="YYYY-MM-DD" readonly="readonly" class="datainp wicon">
+                </div>
+                <div class="orderTit clearfix">
+                    <label for="">需求单有效天数</label>
+                    <input type="text" placeholder="需求单有效天数" class="orderTitle" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="dayNum"/>
+
+                </div>
+                <div class="orderTit clearfix">
+                    <label for="">数据需求频次</label>
+                    <input type="text" placeholder="数据需求频次" class="orderTitle" v-model="dateRange"/>
+
+                </div>
+                <div class="orderTit clearfix">
+                    <label for="">说明</label>
+                    <textarea placeholder="说明" class="Explain" v-model='remark'></textarea>
+                </div>
+                <div class="contentLine"><i class="shu"></i><span>数据需求条件</span></div>
+                <div class="demandBox pr">
+                    <ul class='demandUl clearfix' id='demandUl'>
+
+                    <!-- 分割线 -->
+                    <!-- <li class="clearfix hide targetTop">
+                        <span >省份</span>
+                        <select name="" id="province" multiple class="spcSelect">
+                        </select>
+                    </li>
+                    <li class="clearfix hide targetTop">
+                        <span >城市</span>
+                        <select name="" id="city" multiple class="spcSelect">
+                        </select>
+                    </li> -->
+                    </ul>
+                    <div @click='demandmore()' class='morearrow'><i class="icon icon-jiantou" ></i></div>
+                    <div class="clearfix"></div>
+                    <ul class='demandUl clearfix' style='display: none' id='demandmore'>
+                    </ul>
+                </div>
+
+
+                    <!-- 分割线 -->
+                <div class="contentLine"><i class="shu"></i><span>输出的标签</span></div>
+
+                <ul class='outListUl clearfix'>
+
+                </ul>
+
+
+                <div class="contentLine"></div>
+                <div class="btnGroup">
+                    <a href="javascript:;" class="btn btn-default" @click="cancelpage()">取消</a>
+                    <a href="javascript:;" class="btn btn-primary" @click="savepage(0)">暂存</a>
+                    <a href="javascript:;" class="btn btn-primary" @click="savepage(1)">提交</a>
+                </div>
+            </div>
+            <!-- 新建工单end -->
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/jquery.multiselect.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../libs/multiselect/bootstrap-select.min.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<!-- <script src="../../js/customer/addWorkOrder.js"></script> -->
+<script src="../../js/customer/addOrder.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/switch/honeySwitch.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl ">
+                   <a href="javascript:;"><i class="shu "></i><a href="/view/setting/setting.html">系统设置</a> / 内容标签</a>
+                </h2>
+                <a href="javascript:;" class="btn fr rightAdd" module="contentTag" permission-code="ADD" onclick="addContentTag()" module="contentTag" permission-code="ADD">+新建标签</a>
+            </div>
+        </div>
+        <div id="page-inner">
+
+
+            <!-- 表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable" id="contentTagList">
+                            <thead>
+                            <tr>
+                                <th class="firsttTh">标签名称</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="contentTagListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="bg"></div>
+<!-- 新建内容标签 -->
+<div class="modelContent" id="addContentTag">
+    <div class="MotalTit"><i >新建内容标签</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <dl>
+                <dt>名称:</dt>
+                <dd><input type="text" id="tagNameAdd"></dd>
+            </dl>
+
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" module="contentTag" permission-code="ADD">取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addsure()" module="contentTag" permission-code="ADD">保存</div>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑内容标签 -->
+<div class="modelContent" id="editContentTag">
+    <div class="MotalTit"><i >编辑内容标签</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <dl>
+                <dt>名称:</dt>
+                <dd><input type="text" id="tagNameEdit"></dd>
+            </dl>
+
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" module="contentTag" permission-code="UPDATE">取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn editSure" module="contentTag" permission-code="UPDATE">保存</div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script type="text/javascript" src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/setting/setting.js"></script>
+<script src="../../js/setting/portrait/contentTag.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数聚客</title>
+<link rel="stylesheet" type="text/css" href="view/libs/fonts/iconfont.css"/>
+<link rel="stylesheet" type="text/css" href="view/css/login-background.css" >
+<link rel="stylesheet" type="text/css" href="view/css/main.css" >
+<link rel="stylesheet" type="text/css" href="view/libs/xcConfirm/css/xcConfirm.css"/>
+<link rel="stylesheet" type="text/css" href="view/css/login.css" >
+
+<link rel='icon' href='favicon.ico' type='image/x-icon' />
+<link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
+<link rel="bookmark" href="favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<canvas id="canv"></canvas>
+<script src="view/js/login-background.js"></script>
+<div>
+		<div class="D-cont fl index-box">
+		<div class="login-bigbox" id="login">
+			<div class="loginbox">
+				<img src="view/images/login-logo.png">
+				<b id="logo"></b>
+			    <div class="login-form">
+			    	<div class="login-form-bg"></div>
+			    	<ul>
+			    		<li class="login-user iconGroup">
+			    			<label for="username" class="user-label" >用户名</label>
+			    			<input  id="username" autocomplete="off" placeholder="请输入用户名" onkeydown=KeyDown(event) /><i class="loginIcon icon icon-kehu"></i>
+			    		</li>
+			    		<li class="iconGroup">
+			    			<label for="password" class="user-label" >密码</label>
+			    			<input type="password" id="password" autocomplete="off"  placeholder="请输入密码" onkeydown=KeyDown(event) /><i class="loginIcon icon icon-mima"></i>
+			    		</li>
+			    	</ul>
+			    </div>
+			    <div class="free-30days">
+			      <input type="checkbox"  id="free-30days"/>记住密码
+			     <!--  <div class="regnow"><a href="pass.html">忘记密码</a></div> -->
+			    </div>
+			    <div class="b_btn">
+			       <div class="login-btn fl"><a href="javascript:;">登录</a></div>
+			    </div>
+				<input type="hidden" id="url"/>
+		    </div>
+		</div>
+
+		</div>
+		<div id="footer">
+				<div class="footer-line"></div>
+				<p class="footer-last"> Copyright© 2016 worken.cn Inc. All Rights Reserved</p>
+				<p class="footer-last">浙江华坤道威数据科技有限公司</p>
+		</div>
+		<!--协议弹窗-->
+	<div class="xcConfirm" id="AgreementBox" style='display: none'>
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><span class="tt"></span></div>
+            <div class="txtBox">
+                <p>
+				在使用数聚客各项服务之前，请仔细阅读<a href="javascript:;" onclick='showAgreement()'>《数聚客平台服务协议》</a>全部条款。
+				</p>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" id='agreenBtn'>同意服务协议并登陆</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--协议弹窗 end-->
+<!--协议内容-->
+	<div class="xcConfirm" id="AgreementDet" style='display: none'>
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="txtBox">
+				<h2>数聚客平台服务协议</h2>
+				<div class="agreebox">
+				<dl>
+					<dd>欢迎您使用数聚客平台的服务，数聚客是浙江华坤道威数据科技有限公司（以下简称“本公司”）
+					基于大数据技术，自主研发企业数字营销平台。数聚客的产品定位是：以企业客户为中心，挖掘企
+					业数据价值，提升数字营销能力，提供一站式营销服务的数字平台。核心业务模块包含企业数据管
+					理、客户关系管理、营销内容管理、客户体验管理、社交媒体管理等。产品适用于零售、家装、教
+					育、金融、房地产、家电、快消等行业。数聚客平台用户服务协议（下称“本协议”）由本公司与所
+					有使用数聚客服务的个人及企业等（以下简称用户）协商签订。</dd>
+				</dl>
+				<dl>
+					<dt>一、声明与承诺</dt>
+					<dd>（一）在接受本协议及使用数聚客各项服务之前，请仔细阅读本协议全部条款。如果您
+					对本协议中内容和条款理解有偏差和质疑，请不要进行后续操作，一旦使用数聚客服务即被
+					视为接受本协议的全部条款。
+					</dd>
+					<dd>（二）如果本协议在您使用过程中有变更及修改，须通过管理平台予以公布、并公示具
+					体生效日期，在生效日期后即时生效；若您在变更及修改后继续使用数聚客服务，表示您已
+					阅读、理解并接受变更后的协议内容；若有疑义或不同意条款，您应在变更生效前停止使用
+					数聚客服务。</dd>
+					<dd>（三）您承诺：您为自然人或合法设立并开展经营活动及业务的法人、其他组织；您将
+					本着合法、合理、善意的目的使用本服务，不利用数聚客服务进行侵害他人合法利益的恶意
+					行为。</dd>
+				</dl>
+				<dl>
+					<dt>二、数聚客账户</dt>
+					<dd>您须在本网站注册并取得本公司提供的数聚客账户。您需要使用数聚客注册时的本人手
+					机号码，方可登录，您应当为账户设置密码，并妥善保管密码，不随意向第三人泄露。您确
+					认并同意如下条款：</dd>
+					<dd>1、按照本公司要求准确提供个人姓名、手机号码、电子邮箱等信息等相关资料。若本公
+					司有合理理由怀疑您所提供的信息和资料有错误、不实、过时及不完整的情况，本公司有权
+					暂停、终止向您提供部分或全部数聚客的服务。</dd>
+					<dd>2、您在注册获得数聚客账户后，即可开始使用本服务，您在数聚客平台上发布相关内容
+					（包括但微页面、短信模板、邮件模板等）时，内容须遵守数聚客平台内容的如下规定：不利
+					用本服务生产、查阅、传播违法信息（包括但不限于违反法律规定、政策、道德及公序良
+					俗）、淫秽色情内容及信息；如果您在任何第三方平台（非数聚客平台，包括但不限于微信公
+					众平台）同步发表内容，您须保证内容本身遵守该第三方平台相关规定。如您所创建的内容中
+					包含该第三方平台禁止发布的内容（包括但不限于诱导分享、诱导关注等），导致潜在风险及
+					对数聚客平台、用户及品牌造成损害。上述情况一经发现，本公司有权直接封禁您的账户及删
+					除相关内容，且不会返还已支付未发生部分的套餐费用。</dd>
+					<dd>3、本公司保证按照《全国人民代表大会常务委员会关于加强网络信息保护的决定》、《电
+					信和互联网用户个人信息保护规定》（工业和信息化部令第24号）的规定对您提供给本公司的
+					信息（包括但不限于个人信息、公司信息、企业微信公众平台授权信息）进行保护，不对外公
+					开或向其他第三方提供您的注册资料及其他存储在数聚客平台的非公开内容，除以下情况：</dd>
+					<dd>3.1、获得您的授权；</dd>
+					<dd>3.2、只有在透露相关资料的前提下，才能提供您所要求的产品及服务；</dd>
+					<dd>3.3、根据有关法律法规的要求；</dd>
+					<dd>3.4、根据相关政府主管部门的要求。</dd>
+					<dd>4、本公司不对您通过数聚客平台获得的第三方发布的内容负责（包括但不限于：真实
+					性、合法性等）。</dd>
+				</dl>
+				<dl>
+					<dt>三、套餐计费及发票条款</dt>
+					<dd>1、	数聚客平台采用先付费再使用的计费规则，一旦选择付费套餐、并按照数聚客平台提供
+					流程完成付款，即享有付费套餐专享的功能；</dd>
+					<dd>2、	您所选择的套餐收费标准以数聚客的套餐价格为准；</dd>
+					<dd>3、	数聚客平台提供免费试用期限供您选择，试用期结束后，须在付费之后方可使用服务；</dd>
+					<dd>4、本公司可提供发票类型如数聚客管理后台公示信息，发票会按照您的要求进行寄送。您可
+					能需要承担寄送发票产生的物流费用。</dd>
+				</dl>
+				<dl>
+					<dt>四、产品服务条款</dt>
+					<dd>1、本协议自您使用数聚客之日起立即生效。</dd>
+					<dd>2、对于因不可抗力造成的服务中断、链接受阻、数据丢失或其他缺陷（包括但不限于自然灾
+					害、社会事件以及因网站所具有的特殊性质而产生的包括但不限于黑客攻击、电信部门技术调整导
+					致的影响、政府管制而造成的暂时性关闭及非甲方原因造成的系统崩溃在内的任何影响网络正常运
+					营的因素），数聚客平台不承担任何责任，但会尽力减少因此而给用户造成的损失和影响；</dd>
+					<dd>3、本公司保留不断修改调整数聚客平台服务内容的权利，而无需事先通知您；</dd>
+					<dd>4、	本公司会以最大努力提供高质量的产品和服务，但在客观上无法避免或排除包括错误和令
+					人误导的服务和信息，并不保证：</dd>
+					<dd>1）产品及服务满足您的所有需求或期待；</dd>
+					<dd>2）产品和服务没有任何失误及缺陷；</dd>
+					<dd>3）产品和服务中的所有错误都会被修正。本公司也无须对任何第三方提供的产品和服务负责，亦
+					不对第三方产品或服务提供任何保证。</dd>
+					<dd>5、	使用数聚客平台的用户在完善“客户信息”时，必须保证数据来源的合理合法性，由于用户自
+					身导致的客户信息安全问题，由用户自身承担责任。</dd>
+				</dl>
+				<dl>
+					<dt>五、服务终止</dt>
+					<dd>1、	您的账户一旦被终止，数聚客仅（非义务）对该账户的数据保留30天，系统管理员可以对数
+					据进行查询、备份等相关操作，之后数据会从数据服务器彻底删除，且无法恢复；</dd>
+					<dd>2、	在套餐有效期内终止服务，本公司将不提供任何费用的退还；</dd>
+					<dd>3、您的账户一旦被终止，账户下的所有功能及服务都将无法使用。</dd>
+				</dl>
+				<dl>
+					<dt>六、最终解释权</dt>
+					<dd>本公司保留对本协议条款、产品和服务以及数聚客平台提供的产品和服务的相关官方网站的最终解释权。</dd>
+				</dl>
+				</div>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" onclick="closeAgree()">我知道了！</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--协议内容 end-->
+<!--判断浏览器-->
+	<div class="xcConfirm" id="isChrome" style='display: none'>
+		<div class="xc_layer"></div>
+		<div class="popBox">
+			<div class="ttBox"><span class="tt"></span></div>
+			<div class="txtBox">
+				<p>
+					请使用<a href="javascript:;">谷歌浏览器</a></br>
+					谷歌浏览器下载地址：<a href="http://rj.baidu.com/soft/detail/14744.html?ald" target="_blank" style="color:#7381c6">http://rj.baidu.com/soft/detail/14744.html?ald</a>
+				</p>
+			</div>
+			<!--<div class="btnArea">
+				<div class="btnGroup">
+					<a class="sgBtn ok" href="http://rj.baidu.com/soft/detail/14744.html?ald" target="_blank">下载谷歌浏览器</a>
+				</div>
+			</div>-->
+		</div>
+	</div>
+<!--判断浏览器 end-->
+</div>
+</body>
+<script src="view/js/jquery-2.2.3.min.js"></script>
+<script src="view/libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="view/js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="view/libs/xcConfirm/xcConfirm.js"></script>
+<script type="text/javascript" src="view/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="view/js/jquery.base64.js"></script>
+<script type="text/javascript" src="view/js/common.js"></script>
+<script type="text/javascript" src="view/js/login.js"></script>
+</html>

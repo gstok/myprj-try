@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+<!--     <link href="../../css/select2.css" rel="stylesheet" /> -->
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customerDetail.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+
+        .close{float:none;opacity:1.0}
+        .close:hover{opacity:1.0}
+
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+    <!-- 编辑客户end -->
+    <!-- 查看客户start -->
+        <div class="row topTitle ckTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                  <i class="shu"></i> <a href="/view/customer/customer/customer.html">客户</a> / 客户详情
+                </h2>
+                <div class="btnGroup fr rightBtn">
+                    <a href="javascript:;" class="zcBtn hxBtn" module="custPortrait" permission-code="GET" onclick="profile(companyId)">客户画像</a>
+                    <a href="javascript:;" class="zcBtn updateCustBtn" module="cust" permission-code="UPDATE" onclick="addCustomer('编辑客户',event)">信息补全</a>
+                    <a href="javascript:;" class="zcBtn delCustomerBtn" module="cust" permission-code="DEL" onclick="delCustomer(event)">删除</a>
+                </div>
+            </div>
+        </div>
+        <div class="popup-inner form-inner ckCustomer detailPage">
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3 box">
+                    <div class="thumbnail blue " style="height: 146px;">
+                       <div class="personPic"></div>
+                        <div class="mainCustomer">
+                           <p class="weixinurl"></p>
+                           <p><span class="customerName"></span><span class="customerType"></span></p>
+                           <p><span class="weixinnickname"></span></p>
+                           <p class="customerSource">来自<span class="customerSource1"></span></p>
+                           <select name="" class="customerStage" module="cust" permission-code="UPDATE">
+                               <option value="">初次接触</option>
+                               <option value="">初次线索</option>
+                               <option value="">意向线索</option>
+                               <option value="">确定线索</option>
+                               <option value="">成交客户</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="thumbnail" >
+                        <div class="theTag khtag">
+                            <h3 class="noborder custaglist"><i class="shu"></i><span>客户标签</span></h3>
+                            <span class="custitle">华坤道威标签</span>
+                            <div class="hkTag">
+                              <!-- <span >申请试用</span><span >免费认领</span> -->
+                            </div>
+
+                           <span class="custitle">自定义标签</span>
+                            <select data-placeholder="选择标签" id="tag-select" class="tag-select" multiple style="width:244px;height: 38px;" tabindex="4" module="cust" permission-code="UPDATE">
+                            </select>
+                          <!--   <select data-placeholder="选择标签"  id="tag-select" class="tag-select" multiple="multiple" style="width: 244px;height: 38px">
+                                <optgroup label="自定义" class="zdy">
+                                    <option value="kakaxi" selected>卡卡西</option>
+                                    <option value="mingren">鸣人</option>
+                                    <option value="zuozhu">佐助</option>
+                                    <option value="xiaoying">小樱</option>
+                                </optgroup>
+                                <optgroup label="来自华坤道威" class="hkdw">
+                                    <option selected value="bofengshuimen">波风水门</option>
+                                    <option value="dashewan">大蛇丸</option>
+                                    <option value="gangshou">纲手</option>
+                                    <option value="自来也">自来也</option>
+                                </optgroup>
+                            </select> -->
+                        </div>
+
+
+
+                        <div class="theTag nrtag">
+                            <h3 class="noborder"><i class="shu"></i><span>内容标签</span></h3>
+                            <div class="contTag">
+                              <!-- <span >申请试用</span><span >免费认领</span> -->
+                            </div>
+                        </div>
+
+                        <div class="theGroup">
+                            <h3 class="noborder"><i class="shu"></i><span>所在智能群组</span></h3>
+                            <select data-placeholder="选择智能群组" class="group-select" multiple style="width:244px; height: 38px;" tabindex="4" id="customergroup" module="cust" permission-code="UPDATE">
+                                <option value=""></option>
+                            </select>
+                        </div>
+
+                        <div class="details">
+                            <h3><i class="shu"></i><span>信息</span></h3>
+                            <div id="commonAttrList">
+                            </div>
+                            <div id="unCommonAttrList" class="hide"></div>
+                            <div style='color: #c4c4c4;line-height: 20px;margin-left: 15px;'>以上信息来自用户输入</div>
+                            <p class="commonAttrmore textcenter"><a href="javascript:;" >查看更多</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9 box minWidth887">
+                    <div class="thumbnail displayFlex" style="height: 165px;">
+                        <div class="topContent">
+                            <ul>
+                                <li><span>手机号：</span><span class="customerMobile"></span></li>
+                                <li><span>微信号：</span><span class="customerWeixin"></span></li>
+                                <!-- <li><span>微信昵称：</span><span class="customerWeixinName"></span></li> -->
+                                <li><span>qq：</span><span class="customerQq"></span></li>
+                                <li><span>邮箱：</span><span class="customerEmail"></span></li>
+                                <li>以上信息来自用户输入</li>
+                            </ul>
+                        </div>
+                        <div class="topContent twotopContent">
+                            <ul>
+                                <li><span>首次接触：</span><span class="firstEventTime"></span><span class="event color999"></span>
+                                  <i class="icon icon-xiangxineirong firstEventName" title="事件发生" data-container="body" data-html="true" data-toggle="popover" data-placement="top" data-content=""></i>
+                                </li>
+                                <li><span>上次接触：</span><span class="lastTwoEventTime"></span><span class="event color999"></span>
+                                    <i class="icon icon-xiangxineirong lastTwoEventName" title="事件发生" data-container="body" data-toggle="popover" data-html="true" data-placement="top" data-content=""></i>
+                                </li>
+                                <li><span>最近接触：</span><span class="lastEventTime"></span><span class="event color999"></span>
+                                    <i class="icon icon-xiangxineirong lastEventName" title="事件发生" data-container="body" data-toggle="popover" data-html="true" data-placement="top" data-content=""></i>
+                                </li>
+                                <li class="contactTime"><span><i class="icon icon-jinjitixing marginRight10"></i></span>您<span class="day">0</span>天没有和客户接触</li>
+
+                            </ul>
+                        </div>
+                        <div class="topContent vitality">
+                            <p class="title">活跃度</p>
+                            <div class="vitawrap">
+                                <div><strong class="thirtyLiveness" >0</strong><p >最近30天</p></div>
+                                <i class="centerLine"></i>
+                                <div class="last"><strong class="liveness">0</strong><p >累计</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thumbnail" style="min-height: 145px;">
+                        <h3 class="taskTitle"><i class="shu"></i><span>任务</span><div class="fr btn-addTask" module="task" permission-code="ADD"><a href="javascript:;" onclick="addTask(event)">创建任务</a><i class="moreTaski hide">&nbsp;&nbsp;|&nbsp;&nbsp;</i><a href="javascript:;"  class="moreTask hide">更多</a></div></h3>
+                        <div class="col-md-12">
+                        <table class="table table-striped detailTable innerTable" id="customerTaskList">
+                            <thead>
+                            <tr>
+                                <th class="textLeft">名称</th>
+                                <th>优先级</th>
+                                <th>执行者</th>
+                                <th>状态</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="thumbnail eventthumbnail" style="min-height: 245px;">
+                        <h3><i class="shu"></i><span>事件</span><a href="javascript:;" class="fr addEventId" module="cust" permission-code="UPDATE" onclick="addEvent(event)">关联事件</a>
+                            <select name="" id="selectEvent" class="fr" module="cust" permission-code="GET">
+                                <option value="">全部</option>
+                                <option value="微页面与表单">微页面与表单</option>
+                                <option value="电子邮件">电子邮件</option>
+                                <option value="短信">短信</option>
+                                <option value="外呼">外呼</option>
+                                <option value="微信群">微信群</option>
+                                <option value="自有渠道事件">自有渠道事件</option>
+                                <option value="客户生命周期">客户生命周期</option>
+                            </select>
+                        </h3>
+                        <hr>
+                        <!-- 时间轴start -->
+                        <div class="content" id="timeContent">
+                            <div class="wrapper">
+                                <div class="main clearfix">
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 时间轴end -->
+                    </div>
+                    <div class="thumbnail" style="min-height: 145px;">
+                        <h3><i class="shu"></i><span>订单</span><a href="javascript:;" class="fr moreOrder hide" >更多</a></h3>
+                        <div class="col-md-12">
+                            <table class="table table-striped detailTable innerTable" id="customerOrderList">
+                                <thead>
+                                <tr>
+                                    <th>订单编号</th>
+                                    <th>产品</th>
+                                    <th>单价(元)</th>
+                                    <th>购买数量</th>
+                                    <th>总金额(元)</th>
+                                    <th>购买渠道</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 查看客户end -->
+        <!-- 新建客户start -->
+        <div  class="popup-inner hide addCustomer">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="fl addTitle"><i class="shu spc"></i>创建客户</h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup'>&times;</a>
+                </div>
+            </div>
+            <hr>
+            <div class="customerForm taskForm" >
+                <div class="clearfix ulList">
+                <ul class="oftenUl">
+
+
+                    </ul>
+                    <p class="ckmore"><a href="javascript:;">更多<i>∨</i></a></p>
+                    <ul class="moreList hide">
+
+                    </ul>
+                </div>
+                <div class="btnGroup">
+                    <a href="javascript:;" class="cancel btn cancelPropup">取消</a>
+                    <a href="javascript:;" class="save btn" onclick="addSure()">保存</a>
+                </div>
+            </div>
+        </div>
+        <!-- 新建客户end -->
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<!-- <script src="../../js/select2.js"></script> -->
+<script src="../../js/customer/customerDetail.js"></script>
+
+<script>
+$(function (){
+//弹出窗
+     setTimeout(function(){
+           $("[data-toggle='popover']").popover({trigger:"hover"});
+        },500)
+});
+
+</script>
+</body>
+</html
+
+

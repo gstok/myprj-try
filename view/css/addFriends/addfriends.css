@@ -1,0 +1,107 @@
+/***************定位加好友****************/
+#addfriendsPage .search label{font-style: normal;font-size: 12px;line-height: 34px;float: left;}
+#addfriendsPage .search .zcBtn {height: 32px;margin-left:20px;}
+
+.nickName span{text-align:center;display: block;width: 150px;line-height: 27px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; }
+.nickName img{width: 30px;height: 30px}
+.nickName img.seximg{margin-left:0;margin-right:0}
+.headimgBox{width:150px;text-align:center;}
+
+
+
+    /* html,body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 14px;
+    } */
+
+#addfriendsmappage .menu,#addfriendsmappage .top,#addfriendsmappage .head{display: none}
+#addfriendsmappage #page-wrapper {
+    margin:0;padding:0;
+    min-height: 100%;
+    background: #f0f0f5;
+}
+#addfriendsmappage #page-inner {
+    width: 100%;
+    margin:0;
+    background-color: #fff;
+    padding:0;
+    border-radius: 0;
+    height: 100%;
+    box-shadow:none;
+}
+
+
+
+    .map {
+        height: 100%;
+        width: 80%;
+        float: left;
+    }
+
+    #right {
+        color: #444;
+        background-color: #f8f8f8;
+        width:20%;position: absolute;right:0;top: 0;
+        height: 100%;border-left: 1px solid #ddd;padding:20px;box-sizing: border-box;
+    }
+
+    #start,
+    #stop,
+    #right .mapinp {
+        margin: 4px 0 20px 0;
+    }
+
+    .title {
+        width: 100%;
+        line-height: 20px;font-weight: bold;
+    }
+
+    button {
+        border: solid 1px;
+        margin-left: 15px;
+        background-color: #dadafa;
+    }
+
+    .c {
+        font-weight: 600;
+        padding-top: 4px;
+    }
+
+    /* #lnglat,
+    #address,
+    #nearestJunction,
+    #nearestRoad,
+    #nearestPOI,
+    .title {
+        padding-left: 15px;
+    } */
+
+
+
+.slierbar {
+    float: left;
+    width: 60%;
+    margin: 4px 0 0 0;
+}
+.slierNum {
+    float: left;
+    width: 20%;
+    margin: 4px 0 0 0;
+}
+.slierNum.slierNum2 {
+    margin: 4px 0 0 0;text-align: right
+}
+.handleNum{width:50px;text-align: center;margin-top: 15px;margin-left:-16px;color: #666}
+.addrTd{display: inline-block;width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
+
+
+.datagrid-mask {
+    z-index: 214700009;
+}
+.datagrid-mask-msg {
+    z-index: 214700008;margin-top:-70px;
+}

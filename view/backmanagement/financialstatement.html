@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link href='../css/select2.css' rel='stylesheet' type='text/css' />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/backmanagement/financialstatement.css" type="text/css"/>
+
+</head>
+<body>
+<div id="financialstatement">
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+    <div class="row topTitle firstTopTitle">
+        <div class="col-md-12 clearfix">
+            <h2 class="fl">
+               <a href="javascript:;"><i class="shu"></i>财务报表</a>
+            </h2>
+        </div>
+    </div>
+    <div id="page-inner" >
+        <div class="filterList">
+            <select id="allCompanyUser" class="selectpicker show-tick " data-live-search="true" multiple>
+            </select>
+            <input type="text" class="createInput wicon margin10" id="inpstart" placeholder="选择日期" readonly><em>-</em>
+            <input type="text" class="createInput wicon margin10" id="inpend" placeholder="选择日期" readonly>
+            <div class="groupBtn  chaxunBtn">
+              <a href="javascript:;" class="cancel tbBtn zcBtn" onclick="reset()">重置</a>
+              <a href="javascript:;" class="save btn-primary btn" onclick="getTotalFin()">查询</a>
+            </div>
+        </div>
+        <!-- 公司状况预览 -->
+        <div class="clearfix companyList">
+            <div class="companyUser fl">
+              <div class="thumbnail indextop " style="height: 120px;">
+
+                <h3 class="oftenblue companytitle">公司用户（个）</h3>
+                <p><strong class="allcomNum oftenblue">0</strong></p>
+              </div>
+            </div>
+           <div class="fr payList">
+                <div class="col-sm-3 col-md-3 col-lg-3 ">
+                  <div class="thumbnail" style="height: 120px;" onclick="rechargeMoney()">
+                    <h3><img src="/view/images/wfp.png" alt="" class="rw">充值（元）</h3>
+                    <p><strong id="rechargeMoney" class="">0</strong></p>
+                  </div>
+                </div>
+
+                <div class="col-sm-3 col-md-3 col-lg-3 ">
+                  <div class="thumbnail" style="height: 120px;" onclick="totalPayMoney()">
+                  <h3><img src="/view/images/wfp.png" alt="" class="rw">消费（元）</h3>
+                    <p><strong id="totalPayMoney" class="oftenblue">0</strong></p>
+                  </div>
+                </div>
+
+                <div class="col-sm-3 col-md-3 col-lg-3 ">
+                  <div class="thumbnail" style="height: 120px;" onclick="payOrderMoney()">
+                  <h3><img src="/view/images/wfp.png" alt="" class="rw">套餐订购（元）</h3>
+                    <p><strong id="payOrderMoney" class=" oftengreen">0</strong></p>
+                  </div>
+                </div>
+
+                <div class="col-sm-3 col-md-3 col-lg-3 ">
+                  <div class="thumbnail last" style="height: 120px;" onclick="outPayMoney()">
+                  <h3><img src="/view/images/wfp.png" alt="" class="rw">套餐消费（元）</h3>
+                    <p><strong id="outPayMoney"  class="oftengreen">0</strong></p>
+                  </div>
+                </div>
+            </div>
+        </div>
+         <!-- 消费明细一栏 -->
+         <div class="pay clearfix" style="height: 120px;">
+             <div class="datapay" onclick="datapay()"><p>数据消费（元）</p><strong class="datapaystrong">0</strong>
+             </div>
+
+             <div class="callpay" onclick="callpay()"><p>外呼消费（元）</p><strong class="callpaystrong">0</strong></div>
+
+             <div class="smspay" onclick="smspay()"><p>短信消费（元）</p><strong class="smspaystrong">0</strong></div>
+
+             <div class="flashpay" onclick="flashpay()"><p>弹信消费（元）</p><strong class="flashpaystrong">0</strong></div>
+
+             <div class="emailpay" onclick="emailpay()"><span class="triangle-up"></span><p>邮件消费（元）</p><strong class="emailpaystrong">0</strong></div>
+         </div>
+        <!-- 折线图 -->
+        <div id="zxt">
+            <div class="zxttitle">
+                <ul class="clearfix">
+                    <li class="active rechargeMoney" onclick="rechargeMoney()">充值</li>
+                    <li class="totalPayMoney" onclick="totalPayMoney()">消费</li>
+                    <li class="payOrderMoney" onclick="payOrderMoney()">套餐订购</li>
+                    <li class="outPayMoney" onclick="outPayMoney()">套餐消费</li>
+                    <li class="datapay" onclick="datapay()">数据消费</li>
+                    <li class="callpay" onclick="callpay()">外呼消费</li>
+                    <li class="smspay" onclick="smspay()">短信消费</li>
+                    <li class="flashpay" onclick="flashpay()">弹信消费</li>
+                    <li class="emailpay" onclick="emailpay()">邮件消费</li>
+                </ul>
+            </div>
+            <div id="chart" class="myCharts" style="height:400px"></div>
+        </div>
+        <table class="table table-bordered tableCenter" id="paydetailList">
+            <thead>
+                <tr>
+                    <th>公司名称</th>
+                    <th>月份</th>
+              <!--       <th>消费</th>
+                    <th>套餐订购</th> -->
+                   <!--  <th>套餐消费</th> -->
+                    <th>数据量（条）</th>
+                    <th>外呼（分钟）</th>
+                    <th>短信（条）</th>
+                    <th>弹信（条）</th>
+                    <th>邮件消费（封）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+                <div class="fr">
+                    <div id="paydetailListpage"></div>
+                </div>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../js/select2.js"></script>
+<script src="../libs/jedate/jquery.jedate.js"></script>
+<script src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/choosetime.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/backmanagement/financialstatement.js"></script>
+
+<!-- 下拉多选调用 -->
+<script>
+// var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+var data=[];
+var $ddd = $(".selectpicker ").select2({
+    data:data,
+    width:'256px'
+});
+</script>
+
+</body>
+</html>

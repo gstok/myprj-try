@@ -1,0 +1,53 @@
+.totalContent li{
+	width: 100%;
+    height: 48px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    line-height: 48px;
+    text-indent: 20px;
+}
+.totalContent li.colorspc{
+	background: #fff;
+}
+.totalContent .fr{
+	margin-right: 20px;
+}
+
+.totalContent h3{
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+.tips{
+	margin-bottom: 10px;
+}
+.addSignUl{
+	width: 500px;
+    margin: 0 auto;
+}
+.addSignUl li{
+	margin-bottom: 20px;
+}
+.addSignUl li textarea{
+	width: 500px;
+	resize: none;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+}
+.addSignUl li input:not([type="radio"]){
+	width: 397px;
+	height: 40px;
+	background-color: #fafbfc;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+/*input[type="radio"], input[type="checkbox"]{
+
+}*/
+span.fl i{
+	margin-left: -25px;
+    margin-right: 10px;
+}
+.customerTag .nav-tabs,.tanxin .nav-tabs{
+    margin-top: -10px;
+}

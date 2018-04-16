@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+    <!-- 查看日志start -->
+        <div class="popup-inner content-inner ">
+            <div class="row title">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i><span class="titleSpan"><a href="/view/setting/usermanagement/usermanagement.html">用户管理</a><em> / 查看操作日志</em> </span></h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnback()">&times;</a>
+                </div>
+            </div>
+        <hr>
+           <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable " id="logList">
+                            <thead>
+                            <tr>
+                                <th>登录名</th>
+                                <th>登录ip</th>
+                                <th>登录终端</th>
+                                <th>登录日期</th>
+                                <th>登录状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="logListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 查看任务end -->
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script type="text/javascript" src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/setting/usermanagement/viewlog.js"></script>

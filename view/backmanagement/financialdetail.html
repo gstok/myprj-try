@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/backmanagement/financialdetail.css" type="text/css"/>
+
+</head>
+<body>
+<div id="financialstatement" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                   <a href="javascript:;"><i class="shu"></i>财务详情</a>
+                </h2>
+            </div>
+        </div>
+        <div id="page-inner" >
+            <div class="ypEducate">
+
+                <table class="table table-hover tableLeft">
+                <thead >
+                    <tr>
+                        <th colspan="4" id="spvtit">{{companyName}}账户总览</th>
+
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr v-for='item in ypeduation'>
+                        <td><span class="des">账户id：</span>{{item.id}}</td>
+                        <td ><span class="des">账户余额：</span><span class="red">{{item.money.toFixed(2)}}</span></td>
+                        <td><span class="des">充值：</span>{{item.rechargeMoney.toFixed(2)}}</td>
+                        <td ><span class="des">消费：</span><span class="spcblue">{{item.payMoney.toFixed(2)}}</span></td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            </div>
+            <div class="tcdgxq">套餐订购详情</div>
+            <div id="tcdetail">
+                <!-- tab选项卡 -->
+                <div class="clearfix">
+
+                <ul class="nav nav-tabs fl tctabs" >
+
+                </ul>
+                </div>
+                <!-- 现行套餐和历史套餐切换 -->
+                <div id="tcclassify">
+                    <ul class="clearfix">
+                        <li :class="{ 'active': isactive}" @click='yesactive()'>现行套餐</li>
+                        <li :class="{ 'active': !isactive}" @click='noactive()'>历史套餐</li>
+                    </ul>
+                    <div @click="changetabRight('3')" class="hide">></div>
+                    <div @click="changetabLeft('3')" class="hide"><</div>
+                </div>
+                <!-- 套餐订购详情列表 -->
+                <div class="tab-content">
+                    <table class="table table-hover innerTable table-striped tableCenter" id="tcdetailtable">
+                        <thead>
+                            <tr>
+                                <th>订购时间</th>
+                                <th>套餐</th>
+                                <th>数量</th>
+                                <th>支付金额</th>
+                                <th>服务时间</th>
+                                <th>服务状态</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <!-- 现行套餐列表 -->
+                            <tr v-if = "setmeal.length==0"><td colspan="6">暂无数据</td></tr>
+                            <tr v-else
+                              v-for="item in setmeal">
+                                <td>{{item.displayCreateTime}}</td>
+                                <td class="tcspc"><span>
+
+                                <span  data-container="body" data-toggle="popover" data-placement="top" :data-content="item.productDesc" data-html=true>
+                                <p><span class="">套餐名：</span><em>{{item.productName}}</em></p>
+                                <p><span class="">服务天数：</span><em>{{item.serviceDay}}</em>天</p>
+                                <p><span class="">套餐单价：</span><em>{{item.price}}</em>元</p>
+                                </span>
+                                </td>
+                                <td>{{item.nums}}</td>
+                                <td>{{item.payMoney.toFixed(2)}}</td>
+                                <td>{{item.displayStartTime}}~{{item.displayEndTime}}</td>
+                                <td class="green">{{item.displayStatus}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 套餐消费情况列表 -->
+                <div class="tcxfdetail">套餐消费情况：<span class="tcname">{{tcname}}</span><span class="tcxfstatus" v-if="tcname!=''">（使用中）</span></div>
+                <table class="table table-hover innerTable tableCenter" id="tcdetailtable">
+                    <thead>
+                        <tr>
+                            <th>科目</th>
+                            <th>服务用量</th>
+                            <th>消费条数</th>
+                            <th>单价</th>
+                            <th>消费金额（元）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-if ="tcList.length==0" ><td colspan="5">暂无数据</td></tr>
+                        <tr v-else v-for='item in tcList'>
+                            <td>{{item.serviceName}}</td>
+                            <!-- 如果使用量为0，则进度条为100% -->
+                            <td class="serviceNum" v-if='item.useQuantity==0'><div class="div" w="100%"></div><span class=""><em class="green">{{item.quantity==null?0:item.quantity}}</em> / {{item.quantity==null?0:item.quantity}}</span></td>
+
+                            <template v-else>
+                               <!-- 如果使用量大于等于总量，则为0% -->
+                                <td class="serviceNum" v-if='item.useQuantity>=item.quantity'><div class="div" w="0%"></div><span class=""><em>{{item.quantity==null?0:item.quantity}}</em> / {{item.quantity==null?0:item.quantity}}</span></td>
+
+                                <td class="serviceNum" v-else><div class="div" :w="(item.quantity-item.useQuantity)*100/item.quantity"></div><span class=""><em class="colorblue">{{item.useQuantity}}</em> / {{item.quantity==null?0:item.quantity}}</span></td>
+                            </template>
+
+                            <td>{{item.outSum}}</td>
+                            <td>{{item.servicePrice}}</td>
+                            <td class="red bold">{{item.outMoney}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="totalPay">总计消费：<span class="totalNum">{{totalpay.toFixed(2)}}</span>元</div>
+            </div>
+            <!-- 账单统计列表 -->
+            <div id="billStatistics">
+                <div class="clearfix">
+                    <div class="recordtitle fl">账单统计查询</div>
+                    <div class="groupBtn  chaxunBtn fr">
+                      <a href="javascript:;" class="cancel tbBtn zcBtn" @click="resetBill()">重置</a>
+                      <a href="javascript:;" class="save btn-primary btn" @click="getBill()">查询</a>
+                    </div>
+                    <div class=" billselect fr">
+                        <a href="javascript:;" :class="{ 'on': ison}" @click='ison=true'>按日</a><a href="javascript:;" :class="{ 'on': !ison}" @click='ison=false'>按月</a>
+                        <select name="" id="selectTime"  v-model='selectTime' @change='changeval()'>
+                            <option value="">自定义</option>
+                            <option value="60">过去60天</option>
+                            <option value="30">过去30天</option>
+                            <option value="7">过去7天</option>
+                        </select>
+                        <input :disabled="selectTime!=''" type="text" class="createInput wicon margin10" id="inpstart" placeholder="选择日期" readonly ><em>-</em>
+                        <input :disabled="selectTime!=''" type="text" class="createInput wicon margin10" id="inpend" placeholder="选择日期" readonly >
+                    </div>
+
+                </div>
+                <table class="table table-hover table-striped innerTable tableCenter" id="billtable">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">账单日期</th>
+                     <!--        <th rowspan="2">套餐订购（元）</th>
+                            <th rowspan="2">套餐消费（元）</th> -->
+                            <th colspan="5">套餐消费明细</th>
+                        </tr>
+                        <tr>
+                         <!--    <th>账单日期</th>
+                            <th>套餐订购（元）</th>
+                            <th>套餐消费（元）</th> -->
+                            <th>数据（元）</th>
+                            <th>外呼（元）</th>
+                            <th>短信（元）</th>
+                            <th>弹信（元）</th>
+                            <th>邮件（元）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr >
+                            <td colspan="6">暂无数据</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 充值记录列表 -->
+            <div id="czrecord">
+                <div class="clearfix">
+                    <div class="recordtitle fl">充值记录</div>
+                    <div class="groupBtn  chaxunBtn fr">
+                      <a href="javascript:;" class="cancel tbBtn zcBtn" @click="resetCz()">重置</a>
+                      <a href="javascript:;" class="save btn-primary btn" @click="getrecharge()">查询</a>
+                    </div>
+                    <div class="fr">
+                        <input type="text" class="createInput wicon margin10" id="czstart" placeholder="选择日期" readonly><em>-</em>
+                        <input type="text" class="createInput wicon margin10" id="czend" placeholder="选择日期" readonly>
+                    </div>
+                </div>
+
+                <table class="table table-hover innerTable  tableCenter table-striped" id="cztable">
+                    <thead>
+                        <tr>
+                            <th>充值时间</th>
+                            <th>充值（元）</th>
+                            <th>充值人</th>
+                            <th>账户余额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-if ="czList.length==0" ><td colspan="5">暂无数据</td></tr>
+                        <tr v-else v-for="item in czList">
+                            <td>{{item.displayCreateTime}}</td>
+                            <td>{{item.rechargeMoney.toFixed(2)}}</td>
+                            <td>{{item.userName}}</td>
+                            <td>{{item.accountMoney.toFixed(2)}}</td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot v-if ="czList.length==0" >
+                    </tfoot>
+                    <tfoot v-else >
+                        <tr >
+                            <td>总计</td>
+                            <td>{{totalrechargeMoney.toFixed(2)}}</td>
+                            <td>——</td>
+                            <td>{{czList[0].accountMoney.toFixed(2)}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../libs/jedate/jquery.jedate.js"></script>
+<script src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+<!-- <script src="../js/choosetime.js"></script> -->
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/backmanagement/financialdetail.js"></script>
+</body>
+<script>
+    $("[data-toggle='popover']").popover({trigger:"hover"});
+
+    //百分比
+    function progress(){
+        setTimeout(function(){
+            //b 底色，a 加载色 , w 展示宽度，h 展示高度
+            var a="#7e8fe1";
+            var b="#f4f4f4";
+            var w="100%";
+            var h="4px";
+            var div=$(".div");//进度条要插入的地方
+            var barb=function(){
+                $('.barbox').remove();
+                div.each(function(){
+                    var width=$(this).attr('w');
+                    var barbox='<dl class="barbox"><dd class="barline"><div w="'+width+'" class="charts" style="width:0px"><d></d></div></dd></dl>';
+                    $(this).append(barbox);
+
+
+                    if(width=='100%'){
+                        a='#80c269'
+                        barbCss($(this),a,b)
+                    }else{
+                        a="#7e8fe1"
+                        barbCss($(this),a,b)
+                    }
+                })
+            }
+
+            function amimeat(){
+                $(".charts").each(function(i,item){
+                    var wi=parseInt($(this).attr("w"));
+                    $(item).animate({width: wi+"%"},1000,function(){//一天内走完
+                        $(this).children('d').html(wi+"%");
+                    });
+                });
+            }
+            function barbCss(e,a,b){
+                e.find(".barbox").css({
+                    "height":h,
+                    "line-height":h,
+                    "text-align":"center",
+                    "color":"#fff",
+                })
+                e.find(".barbox>dd").css({
+                    "float":"left"
+                })
+                e.find(".barline").css({
+                    "width":w,
+                    "background":b,
+                    "height":h,
+                    "overflow":"hidden",
+                    "display":"inline",
+                    "position":"relative",
+                    "border-radius":"8px",
+                })
+                e.find(".barline>d").css({
+                    "position":"absolute",
+                    "top":"0px",
+                })
+                e.find(".charts").css({
+                    "background":a,
+                    "height":h,
+                    "width":"0px",
+                    "overflow":"hidden",
+                    "border-radius":"8px"
+                })
+            }
+            barb();
+            amimeat();
+            // barbCss(a,b);
+        },500)
+    }
+
+
+
+var start1 = {
+    format: 'YYYY-MM-DD',
+    maxDate: $.nowDate({DD:0}),
+    choosefun: function(elem,datas){
+        end1.minDate = datas;
+        endDates1();
+    },
+    okfun:function (elem,datas) {
+        //alert(datas);
+    }
+};
+var end1 = {
+    format: 'YYYY-MM-DD',
+    maxDate: '2099-06-16',
+    choosefun: function(elem,datas){
+        start1.maxDate = datas;
+    }
+};
+function endDates1() {
+    end1.trigger = false;
+$("#inpend").jeDate(end1);
+}
+
+var start2 = {
+    format: 'YYYY-MM-DD',
+    maxDate: $.nowDate({DD:0}),
+    choosefun: function(elem,datas){
+        end2.minDate = datas;
+        endDates2();
+    },
+    okfun:function (elem,datas) {
+        //alert(datas);
+    }
+};
+var end2 = {
+    format: 'YYYY-MM-DD',
+    maxDate: '2099-06-16',
+    choosefun: function(elem,datas){
+        start2.maxDate = datas;
+    }
+};
+function endDates2() {
+    end2.trigger = false;
+$("#czend").jeDate(end2);
+}
+
+$("#inpstart").jeDate(start1);
+$("#inpend").jeDate(end1);
+
+$("#czstart").jeDate(start2);
+$("#czend").jeDate(end2);
+</script>
+</html>

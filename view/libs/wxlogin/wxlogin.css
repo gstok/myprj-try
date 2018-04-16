@@ -1,0 +1,63 @@
+.xcConfirm .popBox {
+	margin-left: -200px;
+}
+#addBox.xcConfirm .xc_layer,
+#loginBox.xcConfirm .xc_layer,
+#codeBox.xcConfirm .xc_layer,
+#SMSBox.xcConfirm .xc_layer,
+#FPBox.xcConfirm .xc_layer{
+	z-index: 214700000;
+}
+#addBox.xcConfirm .popBox,
+#loginBox.xcConfirm .popBox,
+#codeBox.xcConfirm .popBox,
+#SMSBox.xcConfirm .popBox,
+#FPBox.xcConfirm .popBox{
+	z-index: 214700001;
+}
+.xcConfirm .popBox .txtBox p {height: 77px;}
+#loginBox.xcConfirm .popBox .btnArea {border-top: transparent;}
+/*#addBox.xcConfirm .popBox {
+	width: 600px;
+	height: 500px;
+	margin-left: -300px;
+	margin-top: -250px;
+}
+#addBox.xcConfirm .popBox .txtBox {
+	height: 380px;
+}*/
+#addBox.xcConfirm .popBox .ttBox .tt,
+#SMSBox.xcConfirm .popBox .ttBox .tt,
+#FPBox.xcConfirm .popBox .ttBox .tt,
+#loginBox.xcConfirm .popBox .ttBox .tt,
+#loginEwmBox.xcConfirm .popBox .ttBox .tt{
+	display: block;
+}
+#addBox.xcConfirm .popBox .ttBox,
+#SMSBox.xcConfirm .popBox .ttBox,
+#FPBox.xcConfirm .popBox .ttBox,
+#loginBox.xcConfirm .popBox .ttBox,
+#loginEwmBox.xcConfirm .popBox .ttBox{
+	border-bottom: solid 1px #eef0f1;}
+#addBox.xcConfirm .popBox .ttBox .clsBtn,
+#SMSBox.xcConfirm .popBox .ttBox .clsBtn,
+#FPBox.xcConfirm .popBox .ttBox .clsBtn,
+#loginBox.xcConfirm .popBox .ttBox .clsBtn,
+#loginEwmBox.xcConfirm .popBox .ttBox .clsBtn
+{top: 10px;}
+
+#loginEwmBox.xcConfirm .popBox .btnArea {
+    border-top: none;
+}
+
+
+
+#loginBox.xcConfirm .popBox {
+    height: 380px;
+    margin-top: -190px;
+}
+#addfriendsPage #loginBox.xcConfirm .popBox,
+#addfriendsmappage #loginBox.xcConfirm .popBox{
+    height: 270px;
+    margin-top: -150px;
+}

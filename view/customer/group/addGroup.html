@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+
+    <link href='../../css/filter.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../css/jquery.multiselect.css" type="text/css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/group.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <!-- 新建智能群组start -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl" id="atitle">
+                  <i class="shu"></i><a href="/view/customer/group/group.html">群组</a><em>/ 创建智能群组</em>
+                </h2>
+            </div>
+        </div>
+        <div  class="popup-inner addIntelligentGroup" id="addIntelligentGroup">
+
+          <!-- 筛选start -->
+          <div id="groupName"><span>群组名称</span><input type="text" ></div>
+          <hr>
+            <div class="">
+                <div class="filterGroup">
+                    <div class="cell-right hide big-cell">且</div>
+                        <div class="term">
+                        <div class="cell-right hide"></div>
+                            <p class="qiehuo"><span>且</span><i class="icon icon-qiehuan"></i></p>
+                            <div class="contains ">
+                               <select name="" class="filterFirst">
+                                 <option value="">请选择</option>
+                                 <option value="attr">属性</option>
+                                 <option value="source">来源</option>
+                                 <option value="kpi">指标</option>
+                                 <option value="event">事件</option>
+                                 <option value="area">所在地区</option>
+                                 <option value="stage">销售阶段</option>
+                                 <option value="cust_tag">客户标签</option>
+                               </select>
+                               <div class="filterSecond spcSecond">
+                                   <select name="" class="moren">
+                                        <option value="">请选择</option>
+                                   </select>
+                               </div>
+                               <div class="filterThird">
+                                    <select name="" class="moren">
+                                        <option value="">请选择</option>
+                                    </select>
+                               </div>
+                               <div class="filterFourth hide">
+                                    <input type="text"  class="wicon fourthstart"  placeholder="选择日期" readonly >-<input type="text"  class="wicon fourthend"  placeholder="选择日期" readonly >
+                               </div>
+                            <span class="delete"><a href="javascript:;">删除</a></span>
+                            </div>
+                            <div class="newItem"><a href='javascript:;'>+ 添加筛选条件</a></div>
+                        </div>
+                </div>
+                <div class="btnGroup">
+                    <a href="javascript:;" class="cancel btn btn-primary" onclick="addGroup(0)">预览</a>
+                    <a href="javascript:;" class="save btn btn-primary" onclick="addGroup(1)">保存</a>
+                </div>
+                <!-- 筛选end -->
+                <hr>
+                <!-- 表格区域 -->
+                <div class="tab-content innerTable">
+                    <div class="row tab-pane fade active in" id="shortmessage">
+                        <div class="col-md-12">
+                            <table class="table table-striped" id="cusList">
+                                <thead>
+                                  <tr>
+                                        <th class="textLeft">姓名</th>
+                                        <th>客户标签</th>
+                                        <th class="text">手机号</th>
+                                        <th>销售阶段</th>
+                                        <th>客户来源</th>
+                                        <th>客户负责人</th>
+                                        <th class="textcenter">创建时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td colspan='8' class="textcenter">暂无数据</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="customerListpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格区域end -->
+            </div>
+        </div>
+        <!-- 新建智能群组end -->
+
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/jquery.multiselect.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap-typeahead.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/filter2.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../libs/highcharts/highcharts.js"></script>
+<script src="../../libs/highcharts/map.js"></script>
+<script src="../../js/customer/filterEvent.js"></script>
+<script src="../../js/customer/addGroup.js"></script>
+</body>
+</html>

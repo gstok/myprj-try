@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/switch/honeySwitch.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                    <h2 class="fl">
+                       <a href="javascript:;"><i class="shu"></i><a href="/view/setting/setting.html">系统设置</a> / 客户属性</a>
+                    </h2>
+                    <a href="javascript:;" class="btn fr rightAdd" module="custAttr" permission-code="ADD" onclick="addcusAttribute()">+ 新建属性</a>
+                </div>
+            </div>
+        <div id="page-inner">
+            <!-- 表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable" id="cusAttributeList">
+                            <thead>
+                            <tr>
+                                <th>属性名称</th>
+                                <th>属性值</th>
+                                <th class="textcenter">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="cusAttributeListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="bg"></div>
+<!-- 新建客户属性 -->
+<div class="modelContent" id="addcusAttribute">
+    <div class="MotalTit"><i >新建属性</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <dl>
+                <dt>名称:</dt>
+                <dd><input type="text" id="attrNameAdd"></dd>
+            </dl>
+            <dl>
+                <dt>类型:</dt>
+                <dd>
+                    <select name="" id="attrTypeAdd">
+                        <option value="">请选择</option>
+                        <option value="digit">数字</option>
+                        <option value="text">文本</option>
+                        <option value="date">日期</option>
+                        <option value="bool">是否</option>
+                        <option value="select">选项</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dt>属性标识</dt>
+                <dd><input type="text" id="attrKeyAdd" placeholder="请输入唯一属性标识，只能输英文"></dd>
+            </dl>
+            <dl>
+                <dt>选项值:</dt>
+                <dd><div type="text" id="arrtValAdd"><input type="text" placeholder="不可填写" readonly></div>
+            </dl>
+
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" module="custAttr" permission-code="ADD">取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addsure()" module="custAttr" permission-code="ADD">保存</div>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑内容标签 -->
+<div class="modelContent" id="editAttribute">
+    <div class="MotalTit"><i >编辑属性</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <dl>
+                <dt>名称:</dt>
+                <dd><input type="text" id="attrNameEdit">
+            </dl>
+            <dl>
+                <dt>类型:</dt>
+                <dd>
+                    <select name="" id="attrTypeEdit">
+                        <option value="">请选择</option>
+                        <option value="digit">数字</option>
+                        <option value="text">文本</option>
+                        <option value="date">日期</option>
+                        <option value="bool">是否</option>
+                        <option value="select">选项</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dt>属性标识</dt>
+                <dd><input type="text" id="attrKeyEdit" placeholder="请输入唯一属性标识，只能输英文"></dd>
+            </dl>
+            <dl>
+                <dt>选项值:</dt>
+                <dd><div id="attrValEdit"><input type="text"></div></dd>
+            </dl>
+
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" module="custAttr" permission-code="UPDATE">取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn editSure"  module="custAttr" permission-code="UPDATE">保存</div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/highlight.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/setting/setting.js"></script>
+<script src="../../js/setting/portrait/customerattribute.js"></script>
+</body>
+
+</html>

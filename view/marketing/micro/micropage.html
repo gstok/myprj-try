@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href="../../css/jquery-ui.min.css" rel="stylesheet" type='text/css'/>
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/jcrop/jquery.Jcrop.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="micropage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <a href="/view/marketing/micro/micropage.html"><i class="shu"></i>微页面</a>
+                </h2>
+                <a class="btn fr rightAdd btn-addpage" module="page" permission-code="ADD" v-show='!forwardShow' @click='newlyData()'>+创建微页面</a>
+                <a class="btn fr rightAdd btn-addforward" v-show='forwardShow' @click='newlyforward()'>+创建新转发</a>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad page-inner">
+            <ul class="nav nav-tabs">
+                <li class="active microindexpage"><a href="#microindexpage" data-toggle="tab">微页面</a></li>
+                <!-- <li class='forwardpage'><a href="#forwardpage" data-toggle="tab" @click="forwardlist(0,20)">微转发</a></li> -->
+                <!--<li class='forwardpage'><a href="#forwardpage" data-toggle="tab">微转发</a></li>-->
+            </ul>
+            <div class="tab-content">
+                <div class="row nopm tab-pane fade active in" id="microindexpage">
+                    <div class="col-md-12" >
+                        <table class="table table-striped innerTable">
+                            <thead>
+                            <tr>
+                                <th style="width: 260px;">页面标题</th>
+                                <th>二维码</th>
+                                <th>创建时间</th>
+                                <th>数据反馈</th>
+                                <th class="textcenter">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="wechatLists.length == 0">
+                                <td colspan="5" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                            </tr>
+                            <template v-else>
+                                <tr v-for="wechatList in wechatLists">
+                                    <td class="microTit"><a v-if='hasPermission("page", "GET")' class="typeblue" href="javascript:;" @click="editpage(wechatList.id)">{{wechatList.title}}</a>
+                                                        <template v-else>
+                                                            <a class="typeblue">{{wechatList.title}}</a>
+                                                        </template>
+                                    </td>
+                                    <td class="erweimabox">
+                                        <div v-if='hasPermission("page", "GET")' class="icon icon-erweima" @click="showwechat(wechatList.id)">
+                                            <div class="popover right" :data-id="wechatList.id">
+                                                <div class="arrow"></div>
+                                                <div class="popover-title micopagetit">
+                                                    <h3>微页面地址</h3>
+                                                    <a :href="wechatList.ideaUrl" target="_blank">{{wechatList.ideaUrl}}</a>
+                                                    <!--<a :href="'/view/marketing/micro/previewpage/index.html?id='+wechatList.id+'&is_outside=0&idea_type=email&idea_page_id=9&channel=email&idea_log_id=null&cust_id=null&#sk=JZfM7z'" target="_blank">{{wechatList.ideaUrl}}</a>-->
+                                                </div>
+                                                <div class="popover-content">
+                                                    <p>微页面二维码</p>
+                                                    <div class="thumbnail">
+                                                        <!-- <img :src="wechatList.qrCodeUrl" alt="微页面二维码"> -->
+                                                        <div :id='creatId(wechatList.id)'></div>
+                                                        <div class="caption">
+                                                            <p>用户微信扫一扫二维码，可在手机上预览该页面</p>
+                                                            <button type="button" class="btn btn-primary" @click.stop="hidewechat()">关闭</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <template v-else>
+                                            <div class="icon icon-erweima disabled"></div>
+                                        </template>
+                                    </td>
+                                    <td class="microHandle">{{wechatList.displayCreateTime}}</td>
+                                    <td class="spctd">
+                                        <a v-if='hasPermission("pageAnaly", "GET")' :href="'microdata.html?id='+wechatList.id">
+                                            <p class="typeblue">访问：<template v-if="wechatList.viewUv == null">0</template>
+                                                <template v-else>{{wechatList.viewUv}}</template>人、
+                                                <template v-if="wechatList.viewNum == null">0</template>
+                                                <template v-else>{{wechatList.viewNum}}</template>次</p>
+                                        </a>
+                                        <template v-else>
+                                            <p class="typeblue">访问：<template v-if="wechatList.viewUv == null">0</template>
+                                                <template v-else>{{wechatList.viewUv}}</template>人、
+                                                <template v-if="wechatList.viewNum == null">0</template>
+                                                <template v-else>{{wechatList.viewNum}}</template>次
+                                            </p>
+                                        </template>
+                                        <a v-if='hasPermission("pageAnaly", "GET")' :href="'microdata.html?id='+wechatList.id+'&share=true'">
+                                            <p class="typeblue">分享：<template v-if="wechatList.shareUv == null">0</template>
+                                                <template v-else>{{wechatList.shareUv}}</template>人、
+                                                <template v-if="wechatList.shareNum == null">0</template>
+                                                <template v-else>{{wechatList.shareNum}}</template>次</p>
+                                        </a>
+                                        <template v-else>
+                                            <p class="typeblue">分享：<template v-if="wechatList.shareUv == null">0</template>
+                                                <template v-else>{{wechatList.shareUv}}</template>人、
+                                                <template v-if="wechatList.shareNum == null">0</template>
+                                                <template v-else>{{wechatList.shareNum}}</template>次
+                                            </p>
+                                        </template>
+                                        <a v-if='hasPermission("pageAnaly", "GET")' :href="'microdata.html?id='+wechatList.id+'&submit=true'">
+                                            <p class="typeblue" v-if="wechatList.isCludeForm == 1">表单提交：
+                                                <template v-if="wechatList.submitNum == null">0</template>
+                                                <template v-else>{{wechatList.submitNum}}</template>人</p>
+                                            <template v-else></template>
+                                        </a>
+                                        <template v-else>
+                                            <p class="typeblue" v-if="wechatList.isCludeForm == 1">表单提交：
+                                                <template v-if="wechatList.submitNum == null">0</template>
+                                                <template v-else>{{wechatList.submitNum}}</template>人</p>
+                                            <template v-else></template>
+                                        </template>
+                                    </td>
+                                    <td class="microHandle textcenter">
+                                        <!--<span><a href="javascript:;" @click="copyPopup(wechatList.id)">复制</a></span>
+                                        <span class="tdline">▏</span>-->
+                                        <span v-if='hasPermission("page", "SEND")' data-container="body" data-toggle="popover" data-placement="top" data-content="发送"><a href="javascript:;" @click="sendPopup(wechatList.id)"><i class="icon icon-send"></i></a></span>
+                                        <template v-else>
+                                            <span><a><i class="icon icon-send disabled"></i></a></span>
+                                        </template>
+                                        <span class="tdline">▏</span>
+                                        <span v-if='hasPermission("page", "DEL")' data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><a href="javascript:;" @click="deleteData(wechatList.id,wechatList.title)"><i class="icon icon-shanchu"></i></a></span>
+                                        <template v-else>
+                                            <span><a><i class="icon icon-shanchu disabled"></i></a></span>
+                                        </template>
+                                    </td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="wechatListpage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row nopm tab-pane fade" id="forwardpage">
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-striped innerTable">
+                            <thead>
+                            <tr>
+                                <th>链接标题</th>
+                                <th>来源</th>
+                                <th>链接</th>
+                                <th>创建时间</th>
+                                <th class="textcenter">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="forwardlists.length == 0">
+                                <td colspan="5" class="textcenter">暂无数据</td>
+                            </tr>
+                            <template v-else>
+                                <tr v-for="forwardlist in forwardlists">
+                                    <td class="emailSubBox">
+                                        <div class="emailSub" data-container="body" data-toggle="popover" data-placement="top" :data-content="forwardlist.title">{{forwardlist.title}}</div>
+                                    </td>
+                                    <td><img :src="forwardlist.adImageUrl" alt="" width="36" height="36"></td>
+
+                                    <td class="emailSubBox">
+                                        <div class="emailSub" data-container="body" data-toggle="popover" data-placement="top" :data-content="forwardlist.url">{{forwardlist.url}}</div>
+                                    </td>
+                                    <td>{{forwardlist.displayCreateTime}}</td>
+                                    <td class="microHandle textcenter">
+                                        <span class="powerbtn pageAnaly" data-container="body" data-toggle="popover" data-placement="top" data-content="分享"><a href="javascript:;" @click="sendPopup(forwardlist.id)"><i class="icon icon-send"></i></a></span>
+                                        <span class="tdline">▏</span>
+                                        <span class="powerbtn pageAnaly" data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><a href="javascript:;" @click="deleteData(forwardlist.id,forwardlist.title)"><i class="icon icon-shanchu"></i></a></span>
+                                    </td>
+
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="forwardlistpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--复制  弹窗 -->
+    <div class="copyBox" v-show="copyShow">
+        <input type="hidden" v-model = "micropageid"/>
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeData()"></a><span class="tt">输入</span></div>
+            <div class="txtBox">
+                <p>页面标题<input class="inputBox" v-model="title"></p>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup"><a class="sgBtn ok" @click="copyData()">确定</a></div>
+            </div>
+        </div>
+
+    </div>
+    <!--复制  弹窗 end-->
+    <!--发送弹窗-->
+<div class="sendWeChartBox sendWeChart" v-show="sendShow">
+    <input type="hidden" v-model = "micropageid"/>
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox">
+            <a class="clsBtn" @click="closeSend()"></a>
+            <span class="tt">{{sendWeChartTit}}</span>
+        </div>
+        <ul class="nav nav-tabs" v-show='wwwShow'>
+            <li class="active"><a href="#groupTeam" data-toggle="tab" id='hrefTogroupTeam'>通过微信群组发送</a>
+            </li>
+            <li><a href="#group" data-toggle="tab" id='hrefToGroup'>通过微信群/好友发送</a>
+            </li>
+            <li style='display: none'><a href="#Edit" data-toggle="tab" id='hrefToEdit'>编辑</a>
+            </li>
+        </ul>
+        <div class="txtBox">
+            <!--微信未登录-->
+            <div id="qrcode"></div>
+            <div v-if="status_ == 1||status_ == 401" class="weChartCode">
+                <!-- <img :src="weChartCodeimgUrl"> -->
+            </div>
+            <!--微信未登录  end-->
+            <!--微信已登录  测试-->
+            <div v-if="status_ == 200" class="testBox">
+                <img :src="WeChatimgUrl+'/'+imgId+'/'+weChatGroupId"/>
+            </div>
+            <!--微信已登录  测试  end-->
+            <!--微信已登录  群发送-->
+                    <div class='groupBox' v-else>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="groupTeam">
+                                <table class="table innerTable">
+                                    <tbody>
+                                        <tr v-for='groupTeamlist in groupTeamlists'>
+                                            <td class="checkname">
+                                                <input type='checkbox' class='checkbox_t' v-model="weChatTeamGroup" :value='groupTeamlist.filterExpr'>
+                                            </td>
+                                            <td>群组名称</td>
+                                            <td>{{groupTeamlist.groupName}}</td>
+                                            <td @click='updatePoup(groupTeamlist.id,groupTeamlist.groupName,groupTeamlist.custNum,groupTeamlist.filterExpr)'>编辑</td>
+                                            <td @click='delTeamGroup(groupTeamlist.id)'>删除</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="group">
+                                <dl class="clearfix">
+                                    <dt>群组名称：    </dt>
+                                    <dd><input type="text" v-model='weChatGroupName'/></dd>
+                                    <dd><input type="checkbox" class='saveGroup'>保存为群组</dd>
+                                    <dd class="last"><button class="btn">刷新</button></dd>
+                                </dl>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#WGroups" data-toggle="tab" class="WGroups">微信群</a>
+                                    </li>
+                                    <li>
+                                        <a href="#Wfridens" data-toggle="tab" class="Wfridens">微信好友</a>
+                                    </li>
+                                    <li>
+                                        <a href="#Wall" data-toggle="tab" class="Wall">全部</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="WGroups">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatGrouplist in WeChatGrouplists">
+                                                <input type='checkbox' class='weChatGroupCheck' v-model="weChatGroup" :value="WeChatGrouplist.groupName" @click="WWWchange('group')">
+                                                <input type='checkbox' class='weGroupCheck' v-model="weGroup" :value="WeChatGrouplist.nickName" @click="WWWchange('group')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatGrouplist.groupName"/>
+                                                <p :title="WeChatGrouplist.nickName">{{WeChatGrouplist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="Wfridens">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatFriendlist in WeChatFriendlists">
+                                                <input type='checkbox' class='WeChatFriendCheck' v-model="WeChatFriend" :value="WeChatFriendlist.groupName" @click="WWWchange('user')">
+                                                <input type='checkbox' class='WeFriendCheck' v-model="WeFriend" :value="WeChatFriendlist.nickName" @click="WWWchange('user')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatFriendlist.groupName"/>
+                                                <p :title="WeChatFriendlist.nickName">{{WeChatFriendlist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="Wall">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatAlllist in WeChatAlllists">
+                                                <input type='checkbox' class='WeChatAllCheck' v-model="WeChatAll" :value="WeChatAlllist.groupName" @click="WWWchange('all')">
+                                                <input type='checkbox' class='WeAllCheck' v-model="WeAll" :value="WeChatAlllist.nickName" @click="WWWchange('all')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatAlllist.groupName"/>
+                                                <p :title="WeChatAlllist.nickName">{{WeChatAlllist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="Edit">
+
+                                <dl class="clearfix">
+                                    <dt>群组名称：    </dt>
+                                    <dd><input type="text" v-model='weChatGroupName'/></dd>
+                                    <dd style='display: none'><input type="checkbox" class='saveGroup'>保存为群组</dd>
+                                    <dd class="last"><button class="btn">刷新</button></dd>
+                                </dl>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#WWGroups" data-toggle="tab" class="WWGroups">微信群</a>
+                                    </li>
+                                    <li>
+                                        <a href="#WWfridens" data-toggle="tab" class="WWfridens">微信好友</a>
+                                    </li>
+                                    <li>
+                                        <a href="#WWall" data-toggle="tab" class="WWall">全部</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="WWGroups">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatGrouplist in WeChatGrouplists">
+                                                <input type='checkbox' class='weChatGroupCheck' v-model="weChatGroup" :value="WeChatGrouplist.groupName" @click="changeWWW('group')">
+                                                <input type='checkbox' class='weGroupCheck' v-model="weGroup" :value="WeChatGrouplist.nickName" @click="changeWWW('group')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatGrouplist.groupName"/>
+                                                <p :title="WeChatGrouplist.nickName">{{WeChatGrouplist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="WWfridens">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatFriendlist in WeChatFriendlists">
+                                                <input type='checkbox' class='WeChatFriendCheck' v-model="WeChatFriend" :value="WeChatFriendlist.groupName" @click="changeWWW('user')">
+                                                <input type='checkbox' class='WeFriendCheck' v-model="WeFriend" :value="WeChatFriendlist.nickName" @click="changeWWW('user')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatFriendlist.groupName"/>
+                                                <p :title="WeChatFriendlist.nickName">{{WeChatFriendlist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="WWall">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatAlllist in WeChatAlllists">
+                                                <input type='checkbox' class='WeChatAllCheck' v-model="WeChatAll" :value="WeChatAlllist.groupName" @click="changeWWW('all')">
+                                                <input type='checkbox' class='WeAllCheck' v-model="WeAll" :value="WeChatAlllist.nickName" @click="changeWWW('all')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatAlllist.groupName"/>
+                                                <p :title="WeChatAlllist.nickName">{{WeChatAlllist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+            <!--微信已登录  群发送 end-->
+        </div>
+        <div v-if="status_ == 1||status_ == 401" class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" @click="closeSend()">确定</a></div>
+        </div>
+        <template v-else>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a v-if="status_ == 200" class="sgBtn ok" @click="testSend()">确定</a><!--测试发送-->
+                    <template v-else>
+                        <a class="sgBtn ok" @click="updateWeChatGroups()" v-show='!wwwShow'>确定</a>
+                        <a class="sgBtn ok" @click="sendData(type)" v-show='wwwShow'>确定</a>
+                    </template><!--正式发送-->
+                    <a class="sgBtn cancel" @click="closeSend()">取消</a>
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+<!--发送弹窗 end-->
+<!--新建微转发-->
+<div class="xcConfirm" id="linkBox" v-show="linkShow">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeSend()"></a><span class="tt">新建链接</span></div>
+            <div class="txtBox">
+                <div class="form-group">
+                    <label>链接地址：</label>
+                    <input type="text" v-model="adurl" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>标题</label>
+                    <input type="text" v-model="adverttitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>内容摘要</label>
+                    <textarea class="form-control" v-model="summary"></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="width: 100%">内容标签（可多选）</label>
+                    <select class="form-control conTag" data-placeholder="选择标签" multiple>
+                        <option v-for="ideaTaglist in ideaTaglists" :value="ideaTaglist.id">{{ideaTaglist.tagName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="width: 100%">选择广告</label>
+                    <div class="uploadimg pr">
+                        <img src="/view/images/head.png" id="link_img"/>
+                        <div class='linkviewbox'>
+                            <img src="/view/images/head.png" id="linkview" />
+                        </div>
+                        <!-- <div class="btnBG"></div> -->
+                        <div class="btn cancleBtn" id="up_head" @click="up_head();">上传头像</div>
+                        <form  method="post" >
+                           <input type="file" id="file" name="file"   style="display:none" @change="upData();"/>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" @click="saveForward()">保存</a>
+                    <a class="sgBtn cancel" @click="closeSend()">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--新建微转发 end-->
+<!--链接页面预览-->
+<div class="xcConfirm" id="linkpageBox" v-show="linkpageShow">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeSend()"></a><span class="tt">预览</span></div>
+            <div class="txtBox">
+                <div class="linkpage">
+                    <iframe src="https://mbd.baidu.com/newspage/data/landingshare?p_from=7&n_type=-1&context=%7B%22nid%22%3A%22news_15408927163968197987%22%7D"
+                    frameborder="0" width="400" height="450"></iframe>
+                <div class="setadvert" @click='advertPop()'>+设置广告</div>
+                </div>
+                <div class="linkEwm">
+                    <h2>分享链接</h2>
+                    <img src="data:image/png;base64,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" alt="">
+                    <p>用户微信二维码扫一扫，可在手机上预览并分享该链接</p>
+                </div>
+
+
+
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn cancel" @click="closeSend()">关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--链接页面预览 end-->
+<!--广告列表-->
+<div class="xcConfirm" id="advertBox" v-show="advertShow">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeSend()"></a><span class="tt">广告列表</span></div>
+            <div class="txtBox">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#myadvert" data-toggle="tab" class="myadvert">我的</a>
+                    </li>
+                    <li>
+                        <a href="#alladvert" data-toggle="tab" class="alladvert">全部</a>
+                    </li>
+                    <li class='addadvertBtn'><button class="btn btn-primary" @click='addadvertPop()'>+广告</button></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="myadvert">
+                        <table class="table table-striped innerTable">
+                            <thead>
+                                <tr>
+                                    <th>缩略图</th>
+                                    <th>广告链接</th>
+                                    <th>最近编辑时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="myadvertLists.length == 0">
+                                    <td colspan="4" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                </tr>
+                                <template v-else>
+                                    <tr v-for="List in myadvertLists"></tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="myadvertpage"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="alladvert">
+                        <table class="table table-striped innerTable">
+                            <thead>
+                                <tr>
+                                    <th>缩略图</th>
+                                    <th>广告链接</th>
+                                    <th>最近编辑时间</th>
+                                    <th>提交人</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="alladvertLists.length == 0">
+                                    <td colspan="5" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                </tr>
+                                <template v-else>
+                                    <tr v-for="List in alladvertLists"></tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="alladvertpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn cancel" @click="closeSend()">关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--广告列表 end-->
+<!--添加广告弹窗-->
+<div class="xcConfirm" id="addadvertBox" v-show="addadvertShow">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeaddadvert()"></a><span class="tt">添加广告</span></div>
+            <div class="txtBox">
+                <div class="form-group">
+                    <label style="width: 100%">上传图片</label>
+                    <div class="uploadimg pr">
+                        <img src="/view/images/head.png" id="addadvert_img"/>
+                        <div class="btnBG"></div>
+                        <div class="btn cancleBtn" @click="addadvertup_head();">上传图片</div>
+                        <form  method="post" >
+                           <input type="file" id="addadvertfile" name="addadvertfile"   style="display:none" @change="addadvertupData();"/>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>添加链接</label>
+                    <input type="text" id="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>广告展示</label>
+                    <input type="checkbox" checked="checked">
+                </div>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" @click="saveadvert()">保存</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--添加广告弹窗 end-->
+</div>
+<!--微页面 end-->
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="../../libs/jcrop/jquery.Jcrop.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/ajaxfileupload.js"></script>
+<script src="../../js/qrcode.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/marketing/micro/micropage.js"></script>
+</body>
+</html>

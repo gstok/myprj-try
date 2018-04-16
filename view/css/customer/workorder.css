@@ -1,0 +1,196 @@
+.shu.spc{
+	left: -10px;
+}
+.topLine{
+	width: 100%;
+    position: relative;
+    height: 1px;
+    background: #cdd6db;
+    top: 108px;
+}
+.workOrderForm{
+	margin: 40px;
+}
+.workOrderForm li{
+	margin-bottom: 25px;
+}
+.workOrderForm input,.workOrderForm select{
+	border-radius: 5px;
+	border: 1px solid #cdd6db;
+	outline: none;
+}
+.workOrderForm input[type="checkbox"]{
+	margin-right: 10px;
+}
+.workOrderForm label{
+	width: 120px;
+	font-weight: normal;
+}
+
+.workOrderForm li>span{
+	margin-right: 25px;
+}
+
+.ageInput{
+	width: 60px;
+}
+.sexSpan{
+	margin-left: 40px;
+}
+.sexSelect{
+	width: 95px;
+}
+.hyType{
+	width: 175px;
+	height: 30px;
+	margin-right: 40px;
+}
+.btnGroup{
+	text-align: center;
+}
+
+.addCity{
+	display: inline-block;
+	margin-right: 48px;
+	border: 1px solid #606cbf;
+    padding: 5px;
+    border-radius: 4px;
+    color: #606cbf;
+}
+
+
+
+
+.orderNewly .row{padding:0;margin:0}
+.orderNewly .orderTit label{float: left;line-height: 34px;}
+.orderNewly .orderTit .form-control{width:410px;float: left}
+.orderLine{
+	position: relative;
+	border-bottom: 1px solid #cdd6db;
+	padding-bottom: 10px;
+	margin-bottom: 25px;
+}
+.workTitle{float: left;line-height: 34px;}
+.baseInfoBox{width:700px;}
+.baseInfoBox li{width:350px;float: left}
+.baseInfoBox li>span:first-of-type {
+	width: 115px;
+	display: inline-block;
+	color: #999;
+}
+
+
+/*.customerForm span {
+   margin-right: 0px;
+   margin-left: 20px;
+}*/
+.customerForm .orderTitle{
+	margin-left: 13px;
+}
+.customerForm .orderTit input{
+	margin-left: 0;width: 400px
+}
+.shh span:first-of-type{
+	margin-left: 45px;
+}
+.addOrderForm li>span:first-of-type{
+	text-align: left;
+	color: #666;
+}
+.vieOrder span{
+	margin-right: 0;
+}
+#targetTop span,.hangye span{
+	margin-left: 0;
+}
+.customInput{
+	width: 280px;
+}
+
+.demandUl{width: 700px;margin-bottom: 0}
+.demandUl li{float: left;width: 348px;}
+.demandUl li span{float: left;margin:0;line-height: 30px;}
+.demandUl li input,
+.demandUl li select{float: left;}
+.demandUl .wicon {margin-left: 0}
+.demandUl .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    float: left;width: 177px;}
+.demandUl .btn{padding:0 8px;}
+.demandUl .btn-default:hover,
+.demandUl .btn-default:focus,
+.demandUl .btn-default:active,
+.demandUl .btn-default.active,
+.demandUl .open .dropdown-toggle.btn-default {
+    color: #666;
+    background-color: #fff;
+    border-color: #cdd6db;
+}
+.demandUl li .bootstrap-select li{
+    float: left;
+    width: 177px;
+}
+.dropdown-menu .open{margin-left: 0}
+.dropdown-menu {
+    left: 20px;
+}
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333;
+    white-space: nowrap;
+    height: 30px;
+}
+.bootstrap-select.btn-group .dropdown-menu {
+    min-width: 100px;width: 177px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.Explain{width: 400px;height:60px;}
+.outListUl li{float: left;margin-right: 20px;}
+.demandBox{width: 675px;position: relative;}
+.morearrow{position: absolute;right:0;bottom:30px;text-align: left;margin-left:660px;width:30px;}
+.viewOrder{width: 800px}
+#workOrderpage .contentList{width: 800px;}
+#workOrderpage .contentList li {
+    float: left;
+    width:400px;
+    line-height: 30px;
+    margin-bottom: 8px;
+}
+.contentList li>span:first-of-type {
+    margin-bottom: 8px;
+}
+.contentList li>span:first-of-type {
+    width: 115px;
+}
+h3{line-height: 50px;}
+#workOrderpage dl {
+	height: 38px;
+	float: left;
+    width: 325px;
+    margin-left: 50px;
+    margin-bottom: 8px;
+}
+#workOrderpage dt {font-weight: normal;
+	float: left;
+    width: 90px;
+}
+#workOrderpage dd {
+	float: left;
+    width: 200px;
+}
+.outputField {
+    width: 100px;
+    padding-left: 30px;
+    margin-bottom: 8px;
+    line-height: 30px;
+    color: rgb(106, 119, 143);
+    float: left;
+}
+
+

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/jedate/jedate.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/Finance/Finance.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="financePage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <a href="javascript:;"><i class="shu"></i>财务中心>财务概览</a>
+                </h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad page-inner">
+            <ul class="nav nav-tabs">
+                <li class="active wechatgroup"><a href="#list" class="list" data-toggle="tab" @click="listJump()">财务概览</a>
+                <li><a class="package" href="#package" data-toggle="tab" @click="packageJump()">套餐订购</a>
+                <li><a class="recharge" href="#recharge" data-toggle="tab" @click="rechargeJump()">充值中心</a>
+                <li><a class="record" href="#record" data-toggle="tab" @click="recordJump()">消费记录</a>
+            </ul>
+
+            <div class="tab-content">
+                <!--财务概览  -->
+                <div class="tab-pane fade active in" id="list">
+                    <div class="balanceBigBox">
+                        <div class="balanceBox clearfix">
+                            <div class="rechargeAmount">充值金额：<span>{{totalRechargeMoney}}</span>元</div>
+                            <div class="clearfix">
+                                <div class="balance">消费金额：<span>{{totalConsumMoney}}</span>元</div>
+                                <!--<div class="balance">账户余额：<span>{{money}}</span>元</div>-->
+                                <div class="rechargeBtn fr">
+                                    <a href="javascript:;" @click="rechargeJump()">充值</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="balanceDet clearfix">
+                            <dl>
+                                <dt>当前使用套餐：</dt>
+                                <dd>{{usingPName}}</dd>
+                            </dl>
+                            <dl style="padding-left:25px">
+                                <dt>开始时间：</dt>
+                                <dd>{{usingPStartTime}}</dd>
+                            </dl>
+                            <dl style="padding-left:50px">
+                                <dt>结束时间：</dt>
+                                <dd>{{usingPEndTime}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pr">
+                        <hr/>
+                        <div class="tcTit">套餐配额</div>
+                        <div class="allowanceBox">
+                            <div class="yuBox" v-for="usingPVoList in usingPVoLists" :class=" 100*(usingPVoList.quantity - usingPVoList.useQuantity)/usingPVoList.quantity  == 100 ? 'greenYu' : '' ">
+                                <dl>
+                                    <dt>{{usingPVoList.serviceName}}
+                                        <span v-if="usingPVoList.quantity - usingPVoList.useQuantity > 0">{{ (100*(usingPVoList.quantity - usingPVoList.useQuantity)/usingPVoList.quantity).toFixed(1) }}%</span>
+                                        <template v-else>
+                                            <span>0</span>
+                                        </template>
+                                    </dt>
+                                    <dd>
+                                        <div>剩余<span v-if="usingPVoList.quantity - usingPVoList.useQuantity > 0">{{ usingPVoList.quantity - usingPVoList.useQuantity}}</span>
+                                        <template v-else>
+                                            <span>0</span>
+                                        </template>
+                                        {{usingPVoList.unit}}</div>
+                                        <div>/总量<span>{{usingPVoList.quantity}}</span>{{usingPVoList.unit}}</div>
+                                    </dd>
+                                </dl>
+                                <div class="allowanceBar"><span>&nbsp;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pr">
+                        <hr/ style="margin-top: 75px;">
+                        <div class="tcTit">套餐消费</div>
+                        <div class="allowanceBox">
+                            <h3 style="text-align: right;">套餐消费<span class="red">{{totalP.toFixed(2)}}</span>元</h3>
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                <tr>
+                                    <th>类型</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>计费</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="outDatas.length == 0">
+                                    <td colspan="4" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                                </tr>
+                                <template v-else>
+                                    <tr v-for="outData in outDatas">
+                                        <td>{{outData.serviceName}}</td>
+                                        <td class="red">￥{{outData.servicePrice}}/{{outData.unit}}</td>
+                                        <td v-if="outData.useQuantity - outData.quantity > 0">{{outData.outSum}}</td>
+                                        <template v-else>
+                                           <td>0</td>
+                                        </template>
+                                        <td class="red" v-if="outData.useQuantity - outData.quantity > 0">￥{{((outData.outSum)*outData.servicePrice).toFixed(2)}}</td>
+                                        <template v-else>
+                                           <td class="red">￥0.00</td>
+                                        </template>
+                                    </tr>
+                                </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- 套餐订购 -->
+                <div class="row nopm tab-pane fade" id="package">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#POrder" class="POrder" data-toggle="tab" @click="PorderJump()">已购套餐</a>
+                            <li><a href="#AllOrder" class="AllOrder" data-toggle="tab" @click="AllorderJump()">订购详情</a>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="POrder">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h1>已购套餐：</h1>
+                                            <div class="ProductOrder">
+                                            <ul>
+                                                <li v-for="POrderList in POrderLists" class="clearfix">
+
+                                                    <div class="productName" v-if="POrderList.status == '1'">{{POrderList.productName}}<span id="UsingNow">&nbsp;</span></div>
+                                                    <template v-else>
+                                                        <div class="productName">{{POrderList.productName}}<span>&nbsp;</span></div>
+                                                    </template>
+                                                    <div class="displayStartTime">开始时间：{{POrderList.displayStartTime}}</div>
+                                                    <div class="displayEndTime">结束时间：{{POrderList.displayEndTime}}</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h1>可选套餐：</h1>
+                                        <table class="table table-striped innerTable">
+                                            <thead>
+                                            <tr>
+                                                <th>套餐名称</th>
+                                                <th :style="{ width: 290 + 'px' }">套餐详情</th>
+                                                <th>套餐期限</th>
+                                                <th>原价</th>
+                                                <th>套餐价格</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-if="ForBuyLists.length == 0">
+                                                <td colspan="6" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                                            </tr>
+                                            <tr v-else v-for="ForBuyList in ForBuyLists">
+                                                    <td>{{ForBuyList.productName}}</td>
+                                                    <!-- <td class="productDesc" v-html="delHtmlTag(ForBuyList.productDesc)"></td> -->
+                                                    <td class="productDesc"><span data-container="body" data-toggle="popover" data-placement="right">{{ForBuyList.productDesc}}</span></td>
+                                                    <td v-if="ForBuyList.productName != '基础套餐'">{{ForBuyList.serviceDay}}天</td>
+                                                    <template v-else>
+                                                        <td>无</td>
+                                                    </template>
+                                                    <td v-if="ForBuyList.productName != '基础套餐'" class="huaD">￥{{ForBuyList.showPrice}}</td>
+                                                    <template v-else>
+                                                        <td>无</td>
+                                                    </template>
+                                                    <td v-if="ForBuyList.productName != '基础套餐'" class="red">{{ForBuyList.price}}<br/><span>优惠￥{{ForBuyList.showPrice - ForBuyList.price}}</span></td>
+                                                    <template v-else>
+                                                        <td class="red">无</td>
+                                                    </template>
+                                                    <td v-if="ForBuyList.productName != '基础套餐'">
+                                                        <!-- <button type="button" class="btn btn-primary" @click="buyProduct(ForBuyList.id)">订购</button> -->
+                                                        <button type="button" class="btn btn-primary" @click="beforeBuy(ForBuyList.id)">订购</button>
+                                                    </td>
+                                                    <template v-else>
+                                                        <td>默认使用</td>
+                                                    </template>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="AllOrder">
+                                <div class="searchBox">
+                                    <div class="selectbox fl">
+                                        <select class="form-control" v-model="payStatus1">
+                                            <option value="">全部订单</option>
+                                            <option value="1">已支付</option>
+                                            <option value="0">未支付</option>
+                                            <option value="2">已取消</option>
+                                        </select>
+                                    </div>
+                                    <div class="datep">
+                                        <input class="datainp wicon" id="inpstart1" type="text" placeholder="开始日期" v-model="allOrderStartTime" readonly="">
+                                        <span>-</span>
+                                        <input class="datainp wicon" id="inpend1" type="text" placeholder="结束日期" v-model="allOrderEndTime" readonly="">
+                                    </div>
+                                    <div class="selectbox fl">
+                                        <select class="form-control" v-model="chooseTime1" @change="chooseTime(1)">
+                                            <option value="0">请选择</option>
+                                            <option value="1">最近三天</option>
+                                            <option value="2">最近一个月</option>
+                                            <option value="3">最近三个月</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" @click="searchOrder()">查询</button>
+                                </div>
+                                <table class="table table-striped innerTable" id="queryAllOrderTable">
+                                    <thead>
+                                    <tr>
+                                        <th>订单号</th>
+                                        <th>用户</th>
+                                        <th>订购套餐</th>
+                                        <!-- <th :style="{ width: 200 + 'px' }">套餐详情</th> -->
+                                        <th>数量</th>
+                                        <th>订单金额</th>
+                                        <th>套餐开始时间</th>
+                                        <th>套餐结束时间</th>
+                                        <th>订单创建时间</th>
+                                        <th>支付状态</th>
+                                        <th>使用状态</th>
+                                        <th :style="{ width: 40 + 'px' }">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-if="AllOrderLists.length == 0">
+                                        <td colspan="14" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                    <tr v-for="AllOrderList in AllOrderLists">
+                                        <td>{{AllOrderList.id}}</td>
+                                        <td>{{AllOrderList.createUserName}}</td>
+                                        <td data-container="body" data-html="true" data-toggle="popover" data-placement="right">
+                                            {{AllOrderList.productName}}
+                                            <br/>套餐期限：{{AllOrderList.serviceDay}}天
+                                            <br/>单价：￥{{AllOrderList.price}}
+                                        </td>
+                                        <!-- <td class="productDesc">{{(AllOrderList.productDesc).split('(')[0]}}<br/>
+                                            <span class="red">({{((AllOrderList.productDesc).split('(')[1]).split(')')[0]}})</span>
+                                        </td> -->
+                                        <td>{{AllOrderList.nums}}</td>
+                                        <td>￥{{AllOrderList.payMoney * AllOrderList.nums}}</td>
+                                        <td>{{AllOrderList.displayStartTime}}</td>
+                                        <td>{{AllOrderList.displayEndTime}}</td>
+                                        <td>{{AllOrderList.displayCreateTime}}</td>
+                                        <td :data-id="AllOrderList.id">{{AllOrderList.displayPayStatus}}</td>
+                                        <td v-if="AllOrderList.displayPayStatus == '已支付'">{{AllOrderList.displayStatus}}</td>
+                                        <template v-else>
+                                            <td></td>
+                                        </template>
+
+                                        <td v-if="AllOrderList.displayPayStatus == '未支付'">
+                                            <button type="button" class="btn btn-primary" :data-id="AllOrderList.id" @click="payOrder(AllOrderList.id)">支付</button>
+                                            <button type="button" class="btn" :data-id="AllOrderList.id" @click="cancelOrder(AllOrderList.id,AllOrderList.productName)">取消</button>
+                                        </td>
+                                        <template v-else>
+                                            <td></td>
+                                        </template>
+                                    </tr>
+                                    </template>
+                                    </tbody>
+                                </table>
+                            <div class="fr">
+                                <div id="queryAllOrderBoxpage"></div>
+                            </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <!-- 充值中心 -->
+                <div class="row nopm tab-pane fade" id="recharge">
+                    <div class="balanceBox clearfix">
+                        <div class="rechargeAmount">充值金额：<span>{{totalRechargeMoney}}</span>元</div>
+                        <div class="clearfix">
+                            <div class="balance">消费金额：<span>{{totalConsumMoney}}</span>元</div>
+                            <!--<div class="balance">账户余额：<span>{{money}}</span>元</div>-->
+                            <div class="rechargeLi fr">
+                                <a href="javascript:;" @click="rechargeList()">充值记录>></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="payBox">
+                            <dl>
+                                <dt>支付方式：</dt>
+                                <dd>
+                                    <div class="payWay zhifubao active"></div>
+                                    <div class="payWay weixinzhifu"></div>
+                                </dd>
+                            </dl>
+                            <dl class="payNum">
+                                <dt>充值金额：</dt>
+                                <dd>
+                                    <span>
+                                        <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="7" v-model="rechargeMoney"/>
+                                    </span> 元
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="payBtn">
+                            <button type="button" class="btn btn-primary" @click="rechargeNow()">立即充值</button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 消费记录 -->
+                <div class="row nopm tab-pane fade" id="record">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#bill" class="bill" data-toggle="tab" @click="billJump()">消费账单</a>
+                            <li><a href="#specifications" class="specifications" data-toggle="tab" @click="specificationsJump()">消费详单</a>
+                        </ul>
+                        <div class="tab-content">
+                        <!--消费账单  -->
+                        <div class="tab-pane fade active in" id="bill">
+                            <div class="searchBox">
+                                <div class="datep">
+                                    <input class="datainp wicon" id="inpstart3" type="text" placeholder="开始日期" v-model="useStartDate" readonly="">
+                                    <span>-</span>
+                                    <input class="datainp wicon" id="inpend3" type="text" placeholder="结束日期" v-model="useEndDate" readonly="">
+                                </div>
+                                <div class="selectbox fl">
+                                    <select class="form-control" v-model="chooseTime3" @change="chooseTime(3)">
+                                        <option value="0">请选择</option>
+                                        <option value="1">最近三天</option>
+                                        <option value="2">最近一个月</option>
+                                        <option value="3">最近三个月</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary" @click="searchFinBill()">查询</button>
+                            </div>
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>业务类型</th>
+                                    <th>使用数量</th>
+                                    <th>费用</th>
+                                    <th>支付费用</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="queryFinBillLists.length == 0">
+                                    <td colspan="6" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                                </tr>
+                                <template v-else>
+                                    <tr v-for="queryFinBillList in queryFinBillLists">
+                                        <td>{{queryFinBillList.billDateCd}}</td>
+                                        <td>{{queryFinBillList.serviceName}}</td>
+                                        <td>{{queryFinBillList.useNum}}</td>
+                                        <td>{{(queryFinBillList.totalMoney).toFixed(2)}}</td>
+                                        <td>{{(queryFinBillList.payMoney).toFixed(2)}}</td>
+                                        <td><button class="btn btn-primary" @click="getServiceDetail(queryFinBillList.billDateCd,queryFinBillList.serviceCd)">查看详情</button></td>
+                                    </tr>
+                                </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="queryFinBillPage"></div>
+                            </div>
+                        </div>
+                        <!--消费详单  -->
+                        <div class="tab-pane fade" id="specifications">
+                            <div class="searchBox">
+                                <div class="datep">
+                                    <input class="datainp wicon" id="inpstart4" type="text" placeholder="开始日期" v-model="useStartDates" readonly="">
+                                    <span>-</span>
+                                    <input class="datainp wicon" id="inpend4" type="text" placeholder="结束日期" v-model="useEndDates" readonly="">
+                                </div>
+                                <div class="selectbox fl">
+                                    <select class="form-control" v-model="chooseTime4" @change="chooseTime(4)">
+                                        <option value="0">请选择</option>
+                                        <option value="1">最近三天</option>
+                                        <option value="2">最近一个月</option>
+                                        <option value="3">最近三个月</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary" @click="searchServiceDetail()">查询</button>
+                            </div>
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                <tr>
+                                    <th>使用时间</th>
+                                    <th>用户</th>
+                                    <th>业务类型</th>
+                                    <th>数量</th>
+                                    <th>计价数量</th>
+                                    <th>费用</th>
+                                    <th>支付费用</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="queryServiceDetailLists.length == 0">
+                                    <td colspan="7" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                                </tr>
+                                <template v-else>
+                                    <tr v-for="queryServiceDetailList in queryServiceDetailLists">
+                                        <td>{{queryServiceDetailList.displayUseTime}}</td>
+                                        <td>{{queryServiceDetailList.userName}}</td>
+                                        <td>{{queryServiceDetailList.serviceName}}</td>
+                                        <td>{{queryServiceDetailList.useNum}}</td>
+                                        <td>{{queryServiceDetailList.rateNum}}</td>
+                                        <td>{{(queryServiceDetailList.totalMoney).toFixed(2)}}</td>
+                                        <td>{{(queryServiceDetailList.payMoney).toFixed(2)}}</td>
+                                    </tr>
+                                </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="queryServiceDetailPage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--充值弹窗-->
+    <div class="xcConfirm" v-show="RShow" id="rechargeBox">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeR()"></a><span class="tt">确认充值</span></div>
+            <div class="txtBox">
+                <div class="pay_tc">充值方式：<span class="payChannel">&nbsp;</span></div>
+                <div class="pay_tc">充值金额：<span>{{rechargeMoney}}</span>元</div>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" @click="recharge()">确定</a>
+                    <a class="sgBtn cancel" @click="closeR()">取消</a>
+                    <a href="javascript:;" target="_blank" class="jumpAlipay sgBtn ok" @click="Alipay()">确定</a>
+                </div>
+            </div>
+            <!-- <div id="recharge_sureBox"></div> -->
+            </div>
+
+    </div>
+    <!--充值弹窗 end-->
+    <!--充值确认信息弹窗-->
+    <div class="xcConfirm" v-show="RsureShow" id="resureBox">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeR()"></a><span class="tt">充值详情</span></div>
+            <div class="txtBox">
+                <div class="pay_tc">充值方式：<span class="payChannel">&nbsp;</span></div>
+                <div class="pay_tc">充值金额：<span>{{rechargeMoney}}</span>元</div>
+                <div class="paySure">
+                    <button class="btn btn-primary" @click="RechargeL()">充值完成</button>
+                    <button class="btn" @click="closeR()">充值失败，重试</button>
+                </div>
+                <dl>
+                    <dt>支付遇到问题？</dt>
+                    <dd>请先确认第三方支付网站是否交易完成。</dd>
+                    <dd>建议使用第三方网站支持的浏览器进行支付。</dd>
+                    <dd>第三方支付网站显示交易成功，但账户中没有充值流水，请拨打电话0571-56073906联系我们。</dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+    <!--充值确认信息弹窗 end-->
+    <!--微信付款弹窗-->
+    <div class="xcConfirm" v-show="wxShow" id="wxPayBox">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="closeWX()"></a><span class="tt">请扫下方二维码完成微信支付</span></div>
+            <div class="txtBox">
+                <div id="qrcode" style="width:300px;margin: auto"></div>
+                <div class="count" v-show="countShow">二维码在<span class="red">{{count}}</span>s后失效，请及时支付！</div>
+            </div>
+        </div>
+
+    </div>
+    <!--微信付款弹窗 end-->
+
+    <div class="bg"></div>
+    <!--订购弹窗-->
+    <div class="modelContent" id="buyproductBox">
+        <div class="MotalTit"><i>购买套餐</i><span class="close">×</span></div>
+        <div class="contentInfo">
+            <div class="PopupCont clearfix">
+                <div class="buyPName">确认购买：{{buyPName}}</div>
+                <dl>
+                    <dt>套餐详情：</dt>
+                    <dd>{{buyPDel}}<br/></dd>
+                </dl>
+                <dl>
+                    <dt>套餐期限：</dt>
+                    <dd>{{buyPDay}}天</dd>
+                </dl>
+                <dl>
+                    <dt>套餐数量：</dt>
+                    <dd>
+                        <button @click="reduceCartNum()" class="reduceCartBtn">-</button>
+                        <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" @keyup="dadechange()" v-model="buyNum" id='buyNum'/>
+                        <button @click="addCartNum()" class="reduceCartBtn">+</button>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>开始时间：</dt>
+                    <dd>{{buyPStartTime}}</dd>
+                </dl>
+                <dl>
+                    <dt>结束时间：</dt>
+                    <dd>{{buyPEndTime}}</dd>
+                </dl>
+                <dl>
+                    <dt>订单原价：</dt>
+                    <dd>￥{{buyNum * buyPShowPrice}}</dd>
+                </dl>
+                <dl>
+                    <dt>订单优惠：</dt>
+                    <dd>￥{{buyNum *(buyPShowPrice - buyPPrice)}}</dd>
+                </dl>
+                <dl>
+                    <dt>实际支付：</dt>
+                    <dd>￥{{buyNum * buyPPrice}}</dd>
+                </dl>
+                <dl class="muchMoney clearfix">
+                    <!--<dt>账户余额：</dt>-->
+                    <!--<dd class="havaMoney">￥{{money}}</dd>-->
+                    <dd class="Nomoney" v-show="nomoneyShow">余额不足，请</dd>
+                    <dd class="Nomoney" v-show="nomoneyShow"><button class="btn btn-primary" @click="rechargeJump()">充值</button></dd>
+                </dl>
+            </div>
+
+            <div class="footerBtn">
+                <button type="button" class="btn fr cancelBtn modalBtn">取消</button>
+                <button type="button" class="btn fr saveBtn addPartialSure" @click="purchasingOrder()">确认购买</button>
+            </div>
+        </div>
+    </div>
+    <!--订购弹窗 end-->
+
+    <!--充值记录-->
+    <div class="modelContent" id="rechargeListBox">
+        <div class="MotalTit"><i>充值记录</i><span class="close">×</span></div>
+        <div class="contentInfo">
+            <div class="PopupCont clearfix">
+                <div class="col-md-12">
+                    <div class="searchBox">
+                        <div class="datep">
+                            <input class="datainp wicon" id="inpstart2" type="text" placeholder="开始日期" v-model="createStartTime" readonly="">
+                            <span>-</span>
+                            <input class="datainp wicon" id="inpend2" type="text" placeholder="结束日期" v-model="createEndTime" readonly="">
+                        </div>
+                        <div class="selectbox fl">
+                            <select class="form-control" v-model="chooseTime2" @change="chooseTime(2)">
+                                <option value="0">请选择</option>
+                                <option value="1">最近三天</option>
+                                <option value="2">最近一个月</option>
+                                <option value="3">最近三个月</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" @click="searchRechargeLog()">查询</button>
+                    </div>
+                    <table class="table table-striped innerTable">
+                        <thead>
+                        <tr>
+                            <th>金额</th>
+                            <th>方式</th>
+                            <th>用户</th>
+                            <th>时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-if="RechargeLogLists.length == 0">
+                            <td colspan="4" class="textcenter"><i class='icon icon-icon'></i>暂无数据</td>
+                        </tr>
+                        <template v-else>
+                            <tr v-for="RechargeLogList in RechargeLogLists">
+                                <td>￥{{RechargeLogList.rechargeMoney}}</td>
+                                <td v-if="RechargeLogList.payChannel == 1">微信</td>
+                                <template v-else>
+                                    <td>支付宝</td>
+                                </template>
+                                <td>{{RechargeLogList.userName}}</td>
+                                <td>{{RechargeLogList.displayCreateTime}}</td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+                    <!--<div class="fr" v-if="RechargeLogLists.length != 0">-->
+                    <div class="fr">
+                        <div id="queryRechargeLogpage"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footerBtn">
+                <div class="btn fr btn-primary cancelBtn">关闭</div>
+            </div>
+        </div>
+    </div>
+    <!--充值记录 end-->
+    <!--购买前校验-->
+    <div class="xcConfirm" v-show="beforeBuyShow" id="beforeBuyBox">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" @click="noBuy()"></a><span class="tt">提示</span></div>
+            <div class="txtBox">
+                {{beforeBuyMsg}}
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" @click="buyProduct()">继续订购</a>
+                    <a class="sgBtn cancel" @click="noBuy()">取消订购</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 购买前校验 end-->
+
+
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/qrcode.js"></script>
+<script src="../../js/Finance/Finance/list.js"></script>
+<script>
+
+    //实现日期选择联动
+    var start1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end1.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start1.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates() {
+        end1.trigger = false;
+        $("#inpend1").jeDate(end1);
+    }
+    $("#inpstart1").jeDate(start1);
+    $("#inpend1").jeDate(end1);
+
+
+
+    //充值记录
+    var start2 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end2.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates2();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end2 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start2.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates2() {
+        end2.trigger = false;
+        $("#inpend2").jeDate(end2);
+    }
+    $("#inpstart2").jeDate(start2);
+    $("#inpend2").jeDate(end2);
+
+    //消费账单
+    var start3 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end3.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates3();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end3 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start3.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates3() {
+        end3.trigger = false;
+        $("#inpend3").jeDate(end3);
+    }
+    $("#inpstart3").jeDate(start3);
+    $("#inpend3").jeDate(end3);
+
+    //消费详单
+    var start4 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end4.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates4();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end4 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start4.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates4() {
+        end4.trigger = false;
+        $("#inpend4").jeDate(end4);
+    }
+    $("#inpstart4").jeDate(start4);
+    $("#inpend4").jeDate(end4);
+</script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../libs/jedate/jedate.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .tableBox{height: 400px;overflow-y:scroll; }
+/***********滚动条***********/
+.tableBox::-webkit-scrollbar,
+.tabletongji::-webkit-scrollbar {width: 14px;height: 14px;}
+.tableBox::-webkit-scrollbar-track,
+.tableBox::-webkit-scrollbar-thumb,
+.tabletongji::-webkit-scrollbar-track,
+.tabletongji::-webkit-scrollbar-thumb {border-radius: 999px;border: 5px solid transparent;}
+.tableBox::-webkit-scrollbar-track,
+.tabletongji::-webkit-scrollbar-track {box-shadow: 1px 1px 5px rgba(130,149,206,1.0) inset;  }
+.tableBox::-webkit-scrollbar-thumb,
+.tabletongji::-webkit-scrollbar-thumb {min-height: 20px;background-clip: content-box;box-shadow: 0 0 0 5px rgba(130,149,206,1.0) inset;}
+.tableBox::-webkit-scrollbar-corner,
+.tabletongji::-webkit-scrollbar-corner {background: transparent;}
+/***********滚动条  end***********/
+.dataDL dl{margin:0 20px 0 10px;text-align: center;}
+.table.tableCenter thead>tr>th:first-child, .table.tableCenter tbody>tr>th:first-child, .table.tableCenter tfoot>tr>th:first-child, .table.tableCenter thead>tr>td:first-child, .table.tableCenter tbody>tr>td:first-child, .table.tableCenter tfoot>tr>td:first-child {
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+}
+.table tbody tr {
+    height: 45px;
+}
+.chart_box_box{position: absolute;left: 0;top:0;height: 350px;width: 100%;line-height: 300px;text-align: center;display: none}
+    </style>
+</head>
+<body>
+<div id="microdatapage" v-cloak>
+<!-- <div id="chart-mapjs" style="display: none"></div> -->
+<!-- menu -->
+    <div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix">
+                <h2>
+                    <a href="javascript:;" style="line-height: 34px;"><i class="shu"></i>微页面数据</a>
+                    <div class="clearfix fr" v-show="isShow">
+                        <div class="selectBox">
+                            <select class="form-control" v-model="wechatTit" @change="change()">
+                                <option value="">请选择微页面模板名</option>
+                                <option v-for="wechatList in wechatLists" :value="wechatList.id">{{wechatList.title}}</option>
+                            </select>
+                        </div>
+                        <span class="selectBoxSpan">请选择微页面模板</span>
+                    </div>
+                </h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad viewInner" style='padding-bottom: 45px'>
+            <ul class="nav nav-tabs">
+                <li class="active"><a class="see" href="#" data-toggle="tab" @click="see()">访问</a></li>
+                <li><a href="#" class="share" data-toggle="tab" @click="share()">分享</a></li>
+                <li v-show="submitShow"><a class="submit" href="#" data-toggle="tab" @click="submits()">提交</a></li>
+            </ul>
+            <div class="explainBox">
+                <div class="fl"><span id="dayorhour">时</span>访问人数</div>
+                <div class="explain fl">
+                    <i class="icon icon-wenhao"></i>
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <dl>
+                            <dt><span>按时访问人数：</span>当前1小时内访问该页面的客户数。</dt>
+                            <dd>同一客户在当前1小时内多次访问该页面的算1人；</dd>
+                            <dd>不管该客户之前有没访问过该页面，在当前1小时内有访问该页面的都算作1人；</dd>
+                        </dl>
+                        <dl>
+                            <dt><span>按日访问人数：</span>当天访问该页面的客户数。</dt>
+                            <dd>同一客户在当天多次访问该页面的算1人；</dd>
+                            <dd>不管该客户之前有没访问过该页面，在当天有访问该页面的都算作1人；</dd>
+                        </dl>
+                        <dl>
+                            <dt><span>注：</span>按时累加的某一天总的客户访问人数，理论上会大于按天统计的该天客户访问人数</dt>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row nopm">
+                <div class="col-md-12">
+                    <div class="datas-group">
+                        <div class="btn-groupbox clearfix">
+                            <div class='timeGroup'>
+                                <span>时间：</span>
+                                <input type="text" class="form-control wicon margin10" id="inpstart1" placeholder="选择日期" readonly="">
+                                <em>-</em>
+                                <input type="text" class="form-control wicon margin10" id="inpend1" placeholder="选择日期" readonly="">
+                            </div>
+                            <div class="btn-group fl">
+                                <button type="button" class="btn btn-default active" @click="nowday()">&nbsp;&nbsp;&nbsp;当天&nbsp;&nbsp;&nbsp; </button>
+                                <button type="button" class="btn btn-default" @click="week()">最近7天</button>
+                                <button type="button" class="btn btn-default" @click="month()">最近30天</button>
+                            </div>
+                            <button class='btn btn-primary' style='margin-left: 20px;' @click='search()'>搜索</button>
+                        </div>
+                        <div class="clearfix dataDL">
+                            <dl class="fl" v-show = 'subShow'>
+                                <dt>{{datapv}}(pv)</dt>
+                                <dd>{{visitpv}}</dd>
+                            </dl>
+                            <dl class="fl">
+                                <dt>{{datauv}}(uv)</dt>
+                                <dd>{{visituv}}</dd>
+                            </dl>
+                            <dl class="fl" v-show = 'subShow'>
+                                <dt>{{dataTitle}}</dt>
+                                <dd v-if='visituv == 0'>0</dd>
+                                <template v-else>
+                                    <dd>{{(visitpv/visituv).toFixed(1)}}</dd>
+                                </template>
+                            </dl>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 pr">
+                    <div id="chart-p" style="height:350px"></div>
+                    <div class="chart_box_box" id='chart-p_box'>暂无数据</div>
+                    <button id='chart-p_box_btn' class='btn btn-primary fr' @click='pieChange()' v-show='subShow' style='position: absolute;right:97px;top:62px;'>{{pieBtn}}</button>
+                </div>
+                <div class="col-sm-6">
+                    <div id="viewchart" style="height:350px" v-show='subShow'></div>
+                    <div id="viewchartsub" style="height:350px" v-show='!subShow'></div>
+                </div>
+            </div>
+            <hr>
+            <div class='titleP' id='titleP1'>微页面访问流量地域分布</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <iframe id='mapIframe' frameborder="0" scrolling="no" width='100%' height="400px"></iframe>
+                </div>
+            </div>
+            <div v-show='itleP2show'>
+                <hr>
+                <div class='titleP' id='titleP2'>员工传播访问次数/人数</div>
+                <!-- 访问图表 -->
+                <div class="clearfix viewDataBox">
+                   <div class="row">
+                   <div class="col-md-12">
+                       <div class="col-md-6 pr"><!-- 样式加上thumbnail有边框 -->
+                          <div id="chart_box1" style="width:100%;height:350px;"></div>
+                          <div class="chart_box_box" id='chart_box1_box'>暂无数据</div>
+                       </div>
+                       <div class="col-md-6 pr">
+                          <div id="chart_box2" style="width:100%;height:350px;"></div>
+                          <div class="chart_box_box" id='chart_box2_box'>暂无数据</div>
+                       </div>
+                   </div>
+
+                   </div>
+                </div>
+            </div>
+            <hr>
+            <div class='titleP' v-show = 'subShow'>统计报表</div>
+            <div class="row tablespc" v-show = 'subShow'>
+            <div class="col-sm-12">
+                    <table class="table table-striped table-bordered tableCenter" style='margin-bottom: 0;border-bottom: 0;'>
+                            <thead>
+                            <tr>
+                                <th width="25%">时段</th>
+                                <th width="25%" class='pUV'>访问人数（uv）</th>
+                                <th width="25%" class='pPV'>访问次数（pv）</th>
+                                <th width="25%" id='tableTitunit' v-show='tableTitunitshow'>人均访问次数</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        </div>
+                        <div class="col-sm-12 tabletongji" style='height: 500px;overflow-y: scroll;'>
+                        <table class="table table-striped table-bordered tableCenter">
+                            <tbody>
+                            <tr v-for='report in reports'>
+                                <td width="25%" v-if='startTime == endTime'>{{report.hourCd}}</td>
+                                <td width="25%" v-else>{{report.dateCd}}</td>
+                                <td width="25%" >{{report.uv}}</td>
+                                <td width="25%" >{{report.pv}}</td>
+                                <td width="25%" v-if = 'tableTitunitshow && report.uv == 0 '>{{(report.pv).toFixed(1)}}</td>
+                                <template v-if='tableTitunitshow && report.uv'>
+                                    <td width="25%">{{(report.pv/report.uv).toFixed(1)}}</td>
+                                </template>
+                            </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div v-show = '!subShow' class="fenxitab">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#report" data-toggle="tab">统计报表</a></li>
+                    <li><a href="#submitCust" data-toggle="tab">提交表单的客户</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="report">
+                        <div class="row">
+                    <div class="col-sm-12">
+                    <table class="table table-striped table-bordered tableCenter" style='margin-bottom: 0;border-bottom: 0;'>
+                            <thead>
+                            <tr>
+                                <th width="50%">时段</th>
+                                <th width="50%" class='pUV'>访问人数</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        </div>
+                        <div class="col-sm-12 tabletongji" style='height: 500px;overflow-y: scroll;'>
+                        <table class="table table-striped table-bordered tableCenter">
+                            <tbody>
+                            <tr v-if='reports.length == 0'>
+                                <td colspan="2">暂无数据</td>
+                            </tr>
+                            <template v-else>
+                                <tr v-for='report in reports'>
+                                    <td width="50%" v-if='startTime == endTime'>{{report.hourCd}}</td>
+                                    <td width="50%" v-else>{{report.dateCd}}</td>
+                                    <td width="50%">{{report.uv}}</td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+                    </div>
+                    <div class="tab-pane fade" id="submitCust">
+                    <table class="table table-striped table-bordered tableCenter">
+                        <thead>
+                            <tr>
+                                <th>提交时间</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>推广人</th>
+                                <th>客户手机号</th>
+                                <th>所在省份/城市</th>
+                                <th>提交渠道</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if='sublists.length == 0'>
+                                <td colspan="7">暂无数据</td>
+                            </tr>
+
+                            <tr v-else v-for='sublist in sublists'>
+                                <td>{{sublist.displayCreateTime}}</td>
+                                <td>{{sublist.name}}</td>
+                                <td>{{sublist.sex}}</td>
+                                <td>{{sublist.userName}}</td>
+                                <td>{{sublist.mobile}}</td>
+                                <td>{{sublist.province}}/{{sublist.city}}</td>
+                                <td>{{sublist.channel}}</td>
+                            </tr>
+
+                            </tbody>
+                            </table>
+                    <div class="fr">
+                        <div id="submitCustPage"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="../../js/require.js"></script> -->
+<!-- <script src="../../js/marketing/micro/microdataMap.js"></script> -->
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/echarts-all.js"></script>
+<!-- <script src="../../js/china.js"></script> -->
+<!-- <script src="../../js/require.js"></script> -->
+<!-- <script src="/view/marketing/micro/map/js/chart/map.js"></script> -->
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/marketing/micro/microdata.js"></script>
+</body>
+<script>
+
+    //实现日期选择联动
+    var start1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end1.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start1.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates() {
+        end1.trigger = false;
+        $("#inpend1").jeDate(end1);
+    }
+    $("#inpstart1").jeDate(start1);
+    $("#inpend1").jeDate(end1);
+
+</script>
+</html>

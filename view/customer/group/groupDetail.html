@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/group.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <style>
+        .close{float:none;opacity: 1}
+        .close:hover{
+            opacity: 1
+        }
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle">
+        <div class="col-md-12 clearfix">
+            <h2 class="fl">
+               <a href="javascript:;"><i class="shu"></i>智能群组详情</a>
+            </h2>
+                <div class="btnGroup fr rightBtn">
+                    <a href="javascript:;" class="zcBtn" onclick="reloadGroup()">刷新</a>
+                    <a href="javascript:;" class="zcBtn btn-edit" module="group" permission-code="UPDATE" onclick="editGroup()">编辑</a>
+                    <a href="javascript:;" class="zcBtn btn-del" module="group" permission-code="DEL" onclick="delGroup()">删除</a>
+                </div>
+            </div>
+        </div>
+        <div id="page-inner" class="groupDetailPage">
+            <div class="groupDetail">
+                <h3>群组详情</h3>
+                <div class="col-md-12">
+                    <table class="table table-striped detailTable innerTable">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>类型</th>
+                            <th>客户人数</th>
+                            <th>最后刷新时间</th>
+                            <th>创建时间</th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="detailList">
+                        <tr>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="groupCondition">
+                <h3>群组条件</h3>
+                <div id="filterCondition">
+                </div>
+            </div>
+            <div class="line"></div>
+
+        </div>
+        <div id="groupDetail-inner" class="groupDetailPage">
+            <div class="groupAnalysis">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#analysis" data-toggle="tab" >人群分析</a></li>
+                        <li><a href="#tagAnalysis" data-toggle="tab" >标签分析</a></li>
+                        <li><a href="#customerList" data-toggle="tab" >客户列表</a></li>
+                    </ul>
+                    <div class="tab-content">
+                       <!-- 人群分析start -->
+                        <div class="row tab-pane active in " id="analysis">
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="sexChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="ageChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="marriageChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="mapChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="salestageChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="cuscanalChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="levelChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="sourceChart" style="width:100%;height:100%;padding:10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                       <!--  人群分析end -->
+
+                        <!-- 标签分析 -->
+                        <div id="tagAnalysis" class="row tab-pane">
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagEduLevelChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagMaritalChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagChildChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagCarChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagRoomChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagAssetIndexChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagConsumeIndexChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagInvestmentIndexChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagEduFollowChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagHealthFollowChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagElderlyHealthFollowChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagChildHealthFollowChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagIsBuyCarChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagBrandPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagMusicPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagVideoPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagDigitalPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagTravelPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagReadingPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagCameraPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagShoppingPreferChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagConsumerCharacterChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagOnlineGoodsPowerChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagOlinePurchaseActionChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagConlineWebsiteVisitsChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagConsumeFrequencyChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <div class="thumbnail" style="height: 350px;">
+                                    <div id="tagBrowseAvgPriceChart" style="width:100%;height:350px;padding:10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                       <!-- 客户列表start -->
+                        <div id="customerList" class="tab-pane fade marginTop10">
+                            <div class="tab-content">
+                                <div class="row tab-pane fade active in" id="groupCustomerList">
+                                    <div class="col-md-12 paddingLeft20">
+                                        <table class="table table-striped innerTable" id="cusList">
+                                            <thead>
+                                            <tr>
+                                                <th class="textLeft">姓名</th>
+                                                <th>客户标签</th>
+                                                <th>手机号</th>
+                                                <th>销售阶段</th>
+                                                <th>客户来源</th>
+                                                <th>客户负责人</th>
+                                                <th class="textcenter">创建时间</th>
+                                                <th class="textcenter">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="fr">
+                                            <div id="customerListpage"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                       <!-- 客户列表end -->
+                   </div>
+            </div>
+        </div>
+
+
+       <!-- 是否拨打电话 -->
+        <div class="modelContent" id="writeCall">
+            <div class="MotalTit"><i >拨打记录</i><span class="close">&times;</span></div>
+            <div class="contentInfo">
+                <a id="" name="6" href="#6">&nbsp;</a>
+                <div class="PopupCont clearfix">
+                    <ul class="addSignUl">
+                        <li><span>拨打时间：</span><span id="callTime"></span></li>
+                        <li>
+                            <span>沟通结果：</span>
+                            <select name="" id="resultResponse">
+                                <option value="">已购买</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>备&emsp;&emsp;注：</span>
+                            <textarea name="" id="remark" cols="30" rows="10"></textarea>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footerBtn">
+                    <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+                    <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addCall()">保存</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg"></div>
+
+</div>
+<div class="calling hide">
+            <div class="callingcont">
+                <p>拨号呼叫中，请注意接听您的手机</p>
+                <p><img src="../../images/calling.gif" alt=""><span class="numseconds">5</span>秒...</p>
+            </div>
+        </div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/echarts.min.js"></script>
+<script src="../../libs/highcharts/highcharts.js"></script>
+<script src="../../libs/highcharts/map.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/china.js"></script>
+<script src="../../js/customer/groupDetail.js"></script>
+</body>
+</html>

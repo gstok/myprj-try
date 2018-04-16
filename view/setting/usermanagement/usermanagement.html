@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/select2.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/setting.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+
+    <link href='../../css/setting/usermanagement.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+
+    <div class="row topTitle firstTopTitle">
+        <div class="col-md-12 clearfix">
+            <h2 class="fl">
+               <a href="javascript:;"><i class="shu"></i>用户管理</a>
+            </h2>
+            <a href="javascript:;" class="btn fr rightAdd" onclick="addUser()" module="user" permission-code="ADD">+新建用户</a>
+        </div>
+    </div>
+    <div id="page-inner" class="clearfix userbox">
+        <div class="left fl">
+            <!-- <h3>部门</h3> -->
+            <div id="treeDemo" class="ztree"></div>
+        </div>
+        <div class="right fl">
+            <div class="filter userFilter">
+                <ul>
+                    <li class="ckfilter">
+                        <label for="">姓名：</label><input type="text" id="userName">
+                        <label for="">角色：</label>
+                        <select id="role" class="selectpicker show-tick " data-live-search="true">
+                        </select>
+                        <label for="">职位：</label>
+                        <select id="position" class="selectpicker show-tick " data-live-search="true">
+                        </select>
+                    </li>
+                    <li class="clearfix ckfilter">
+                        <div class="fl">
+                            <label for="">直属上级：</label>
+                            <select id="shangji" class="selectpicker show-tick " data-live-search="true">
+
+                            </select>
+                        </div>
+                        <div class="groupBtn fl  chaxunBtn">
+                            <a href="javascript:;" class="cancel tbBtn zcBtn" onclick="reset()" module="user" permission-code="GET">重置</a>
+                            <a href="javascript:;" class="save tbBtn zcBtn" onclick="userList(0,20)" module="user" permission-code="GET">查询</a>
+
+                         </div>
+                    </li>
+                    <!-- <p class="ckmore"><a href="javascript:;"><em>收起</em><i class="icon icon-iconfontjiantou sanjiaojt"></i></a></p> -->
+                     <li><div class="contentLine"></div></li>
+                     <li class="clearfix color666">
+                         <div class="fl">
+                             <input type="checkbox" name="" id="selectAll" class="checkname specheck"><label for="">全选</label><span class="checknum">已选中<i class="manyuser">0</i>个用户</span>
+                         </div>
+                         <div class="groupBtn fr listBtn">
+                            <a href="javascript:;" class='btn-del' onclick="delUser()" module="user" permission-code="DEL"><i class="icon icon-shanchu"></i>删除</a>
+                            <a href="javascript:;" class='btn-fenpei' onclick="permission()" module="user" permission-code="USER_ROLE"><i class="icon icon-fenpei-copy"></i>权限分配</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 客户表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped innerTable" id="userList">
+                            <thead>
+                                <tr>
+                                    <th class="textLeft">姓名</th>
+                                    <th>邮箱</th>
+                                    <th>手机号</th>
+                                    <th>部门</th>
+                                    <th>职位</th>
+                                    <th>直属上级</th>
+                                    <th>角色</th>
+                                    <th class="textLeft">状态</th>
+                                    <th class="caozuo textcenter">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="userListpage"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg"></div>
+<!-- 权限分配 -->
+<div class="modelContent" id="permission">
+    <div class="MotalTit"><i >权限分配</i><span class="close cancelBtn">&times;</span></div>
+    <div class="contentInfo">
+        <a name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <ul id="permissionUl">
+
+            </ul>
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="permissionsure()" module="role" permission-code="ADD">保存</div>
+            <div class="btn btn-dcrm fr addRoleBtn modalBtn" onclick="addRole()" module="role" permission-code="ADD">新建角色</div>
+        </div>
+    </div>
+</div>
+<!-- 新建角色 -->
+<div class="modelContent" id="addRole">
+    <div class="MotalTit"><i >新建角色</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <ul class="addSignUl">
+                <li>
+                    <span>角色名称：</span>
+                    <input type="text" id="roleName">
+                </li>
+            </ul>
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" module="role" permission-code="ADD">取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn addRoleSure" module="role" permission-code="ADD">保存</div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/select2.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
+<script src="../../js/setting/usermanagement/usermanagement.js"></script>
+</body>
+
+<script>
+var $ddd = $(".selectpicker ").select2();
+</script>
+</html>

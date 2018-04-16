@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href="../css/times.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+    <link rel="stylesheet" href="../css/jquery.multiselect.css" type="text/css"/>
+    <link href='../css/customer/customer.css' rel='stylesheet' type='text/css'/>
+    <style>
+
+        .close{float:none;opacity:1.0}
+        .close:hover{opacity:1.0}
+
+
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                   <a href="javascript:;"><i class="shu"></i>标签管理</a>
+                </h2>
+                <a href="javascript:;" class="btn fr rightAdd" onclick="addTag()">+ 添加新标签</a>
+            </div>
+        </div>
+        <div id="page-inner" class="content-inner form-inner">
+            <div class="filter cusFilter tagFilter">
+                        <div class="control-group" style="margin-bottom:20px;margin-top: 20px">
+                            <div class="fl">
+                            <label class="label_txtn fl">标签名</label>
+                            <input name="" class="tagName" value="" type="text" class="span6 label_txt">
+                            </div>
+                            <div class="fl">
+                            <label class="label_txtn fl">字段名</label>
+                            <input name="" class="zdName" value="" type="text" class="span6 label_txt">
+                            </div>
+                            <div class="fl">
+                            <label class="label_txtn fl">表名</label>
+                            <input name="" class="tableName" value="" type="text" class="span6 label_txt">
+                            </div>
+                            <button type="submit" class="btn blue" onclick="tagList(1,10)">搜索</button>
+                        </div>
+                    </li>
+                     <li><div class="contentLine"></div></li>
+                </ul>
+            </div>
+
+            <!-- 用户表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped innerTable" id="tagList">
+                            <thead>
+                                <tr>
+                                    <th class="textLeft">标签名</th>
+                                    <th>字段名</th>
+                                    <th>表名</th>
+                                    <th>状态</th>
+                                    <th>创建日期</th>
+                                    <th>描述</th>
+                                    <th class="caozuo textcenter">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tagTbody">
+                                <tr>
+                                    <th class="textLeft">111</th>
+                                    <th>111</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th class="caozuo textcenter"><a href="javascript:;" class="tbBtn zcBtn" onclick="addTag()">修改</a><a href="javascript:;" class="tbBtn zcBtn" onclick="stopTag()">停用</a></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="tagListpage"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/jquery-ui.min.js"></script>
+<script src="../js/jquery.multiselect.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../js/chosen.jquery.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../libs/jedate/jquery.jedate.js"></script>
+<script src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../js/setting/tagmanage.js"></script>
+</body>
+</html>

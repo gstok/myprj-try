@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../libs/jedate/jedate.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <!--<link href='../css/marketing.css' rel='stylesheet' type='text/css' />-->
+</head>
+<body>
+<div id="wechatdatapage">
+<!-- menu -->
+    <div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <i class="shu"></i>发送记录 / 微信群数据分析
+                </h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="wechatdata.html">页面访问</a></li>
+            </ul>
+            <div class="explainBox">
+                <div class="fl"><span id="dayorhour">时</span>访问人数</div>
+                <div class="explain fl">
+                    <i class="icon icon-wenhao"></i>
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <dl>
+                            <dt><span>按时访问人数：</span>当前1小时内访问该页面的客户数。</dt>
+                            <dd>• 同一客户在当前1小时内多次访问该页面的算1人；</dd>
+                            <dd>• 不管该客户之前有没访问过该页面，在当前1小时内有访问该页面的都算作1人；</dd>
+                        </dl>
+                        <dl>
+                            <dt><span>按日访问人数：</span>当天访问该页面的客户数。</dt>
+                            <dd>• 同一客户在当天多次访问该页面的算1人；</dd>
+                            <dd>• 不管该客户之前有没访问过该页面，在当天有访问该页面的都算作1人；</dd>
+                        </dl>
+                        <dl>
+                            <dt><span>注：</span>按时累加的某一天总的客户访问人数，理论上会大于按天统计的该天客户访问人数</dt>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row nopm">
+                <div class="col-md-12">
+                    <div class="datas-group">
+                        <div class="btn-groupbox clearfix">
+                            <div class='timeGroup'>
+                                <span>时间：</span>
+                                <input type="text" class="form-control wicon margin10" id="inpstart1" placeholder="选择日期" readonly="">
+                                <em>-</em>
+                                <input type="text" class="form-control wicon margin10" id="inpend1" placeholder="选择日期" readonly="">
+                            </div>
+                            <div class="btn-group fl">
+                                <button type="button" class="btn btn-default active" @click="nowday()">&nbsp;&nbsp;&nbsp;当天&nbsp;&nbsp;&nbsp; </button>
+                                <button type="button" class="btn btn-default" @click="week()">最近7天</button>
+                                <button type="button" class="btn btn-default" @click="month()">最近30天</button>
+                            </div>
+                            <button class='btn btn-primary' style='margin-left: 20px;' @click='search()'>搜索</button>
+                        </div>
+                        <div id="chart" class="myCharts" style="height:400px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/echarts.min.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/marketing/wechat/wachatdata.js"></script>
+<script>
+
+    //实现日期选择联动
+    var start1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end1.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start1.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates() {
+        end1.trigger = false;
+        $("#inpend1").jeDate(end1);
+    }
+    $("#inpstart1").jeDate(start1);
+    $("#inpend1").jeDate(end1);
+
+</script>
+</body>
+</html>

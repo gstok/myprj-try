@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link href='../css/setting/selfsetting.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><i class="shu spc"></i>添加新用户</h2>
+                </div>
+            </div>
+            <hr />
+
+            <!-- 设置列表start -->
+            <div id="setting" class="clearfix">
+                <ul class="content fl addusercon">
+                    <li><span>用户名</span><input class="form-control" type="username" id="username1"></li>
+
+                    <li><span>密码</span><input class="form-control " type="password" id="passWord1"></li>
+                    <li><span>客户名</span><input class="form-control" type="text" id="cusName"></li>
+                    <li><span>客户手机号</span><input class="form-control" type="text" id="customerPhone"></li>
+                    <li><span>客户邮箱</span><input class="form-control" type="text" id="companyEmail"></li>
+                    <li><span>公司名称</span><input class="form-control" type="text" id="companyName"></li>
+                    <li><span>公司地址</span><input class="form-control" type="text" id="companyAddress"></li>
+                    <li><span>用户类型</span><input class="form-control" type="text" id="userType"></li>
+                    <li><span>描述</span><textarea class="form-control" name="" id="describe" ></textarea></li>
+
+                    <div class="btnGroup">
+
+                    <a href="javascript:;" class="save btn btn-primary ">保存</a>
+                    <a href="javascript:;" class="cancel btn btn-default cancelPropup" onclick="returnManage()">取消</a>
+                </div>
+                </ul>
+            </div>
+            <!-- 设置列表end -->
+
+        </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.placeholder.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../libs/jedate/jquery.jedate.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/choosetime.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/setting/addTag.js"></script>
+</body>
+</html>

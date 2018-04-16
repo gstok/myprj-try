@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/role.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<div id="rolepage" v-cloak>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+    <div id="page-wrapper" class="setting">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <a href="javascript:;"><i class="shu"></i>角色 / 权限管理</a>
+                </h2>
+
+            </div>
+        </div>
+        <div id="page-inner" class="clearfix">
+            <div class="functionMenu">
+                <div class="addRoleInpBox clearfix" module="role" permission-code="ADD" >
+                    <div class="addRoleInp">
+                        <input type="text" class="form-control" placeholder="请输入角色名称" v-model="addroleName"/>
+                    </div>
+                    <div class="btn btn-primary fr" @click="addPopup()">+ 新建角色</div>
+                </div>
+
+                <div class="roleTreeBox">
+                    <dl v-for="MyCreateRole in MyCreateRoles">
+                        <dt>
+                            <a v-if='hasPermission("role", "GET")' href="javascript:;" @click="roleOperation(MyCreateRole.id,MyCreateRole.roleName)" :data-ins="MyCreateRole.id">{{MyCreateRole.roleName}}</a>
+                            <template v-else>
+                                <a>{{MyCreateRole.roleName}}</a>
+                            </template>
+                        </dt>
+
+                        <dd>
+                            <span v-if='hasPermission("role", "UPDATE")' class="hasborder" data-container="body" data-toggle="popover" data-placement="top" data-content="复制" data-original-title="" title=""><a href="javascript:;" @click="copyPopup(MyCreateRole.id,MyCreateRole.roleName)"><i class="icon icon-fuzhi"></i></a></span>
+                            <template v-else>
+                                <span class="hasborder"><i class="icon icon-fuzhi disabled"></i></span>
+                            </template>
+                            <span v-if='hasPermission("role", "UPDATE")' class="hasborder" data-container="body" data-toggle="popover" data-placement="top" data-content="编辑" data-original-title="" title=""><a href="javascript:;" @click="editPopup(MyCreateRole.id,MyCreateRole.roleName)"><i class="icon icon-bianji"></i></a></span>
+                            <template v-else>
+                                <span class="hasborder"><i class="icon icon-bianji disabled"></i></span>
+                            </template>
+                            <span v-if='hasPermission("role", "DEL")' class="hasborder last" data-container="body" data-toggle="popover" data-placement="top" data-content="删除" data-original-title="" title=""><a href="javascript:;" @click="deleteData(MyCreateRole.id,MyCreateRole.roleName)"><i class="icon icon-shanchu"></i></a></span>
+                            <template v-else>
+                                <span class="hasborder last"><i class="icon icon-shanchu disabled"></i></span>
+                            </template>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="functionCont box-size">
+                <div class="row functionTitle">
+                    <div class="col-md-12 clearfix">
+                        <h2 class="fl">{{showRoleName}}</h2>
+                        <div class="fr btn-save" module="role" permission-code="UPDATE"  style="margin-top: 10px">
+                            <div class="btn fl btn-primary" @click="roleData()">保存</div>
+                        </div>
+                    </div>
+                    <div class="contentLine"></div>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active wechatgroup"><a href="#function" class="normal" data-toggle="tab">功能权限</a>
+                    <li><a class="indexList" href="#data" data-toggle="tab">数据权限</a>
+                </ul>
+                <div class="tab-content">
+                    <!--功能权限  -->
+                    <div class="row tab-pane fade active in" id="function">
+                        <div class="col-md-12">
+                            <div class="content_wrap">
+                                <div class="zTreeDemoBackground left">
+                                    <ul id="treeDemo" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 数据权限 -->
+                    <div class="row tab-pane fade" id="data">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="padding-left: 20px">业务对象</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="querySceneLists.length == 0">
+                                        <td colspan="2" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                        <tr v-for="querySceneList in querySceneLists">
+                                            <td  style="padding-left: 20px">{{querySceneList.name}}</td>
+                                            <td>
+                                                <span v-if='hasPermission("role", "UPDATE")' data-container="body" data-toggle="popover" data-placement="top" data-content="编辑"><a href="javascript:;" @click="jumpUrl(querySceneList.id,querySceneList.code)"><i class="icon icon-bianji"></i></a></span>
+                                                <template v-else>
+                                                    <span><i class="icon icon-bianji disabled"></i></span>
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--复制弹窗 -->
+    <div class="bg"></div>
+    <div class="modelContent" id="editRole">
+        <div class="MotalTit"><i>{{popTit}}</i><span class="close">&times;</span></div>
+        <div class="contentInfo">
+            <div class="PopupCont">
+                <div class="roleNameBox clearfix">
+                    <div class="fl">角色名称：</div>
+                    <div class="roleNameInp">
+                        <input type="text" class="form-control" v-model="roleName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footerBtn">
+                <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+                <div class="btn btn-dcrm fr saveBtn modalBtn" @click="sureData(type)">保存</div>
+            </div>
+        </div>
+    </div>
+<!--复制弹窗 end-->
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
+<script src="../../js/setting/role/role.js"></script>
+</body>
+</html>

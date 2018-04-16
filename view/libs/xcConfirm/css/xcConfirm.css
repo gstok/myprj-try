@@ -1,0 +1,111 @@
+/*垂直居中*/
+.verticalAlign{ vertical-align:middle; display:inline-block; height:100%; margin-left:-1px;}
+.xcConfirm .xc_layer{position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #666; opacity: 0.5; z-index: 2147000000;}
+.xcConfirm .popBox{position: fixed; left: 50%; top: 50%; background-color: #fff; z-index: 2147000001; width: 320px; height: 180px; margin-left:-160px; margin-top: -150px; border-radius: 5px; font-family : 微软雅黑,宋体;font-weight: bold; color: #535e66;}
+.xcConfirm .popBox .ttBox{height:32px; line-height: 20px; padding: 5px 10px; border-bottom: solid 1px #eef0f1;}
+.xcConfirm .popBox .ttBox .tt{font-size: 14px; display: block; float: left; height: 15px; position: relative;}
+.xcConfirm .popBox .ttBox .clsBtn{display: block;cursor: pointer;width: 12px;height: 12px;position: absolute; top: 10px; right: 8px;background-image: url(/view/cont/images/closeicon.png);background-size:cover}
+/*.xcConfirm .popBox .txtBox{margin:10px 20px; height: 60px; overflow: hidden;}*/
+/*.xcConfirm .popBox .txtBox .bigIcon{float: left; margin-right: 15px; width: 48px; height: 48px; background-image: url(../img/cion.png); background-repeat: no-repeat; background-position: 48px 0;}*/
+.xcConfirm .popBox .txtBox p{ height: 100px; margin-top: 10px; line-height: 26px; overflow-x: hidden; overflow-y: auto;font-size: 14px;}
+.xcConfirm .popBox .txtBox p input{width:auto; height: 30px; border: solid 1px #eef0f1;  margin-top: 6px;}
+.xcConfirm .popBox .btnArea{border-top: solid 1px #eef0f1;}
+/*.xcConfirm .popBox .btnGroup{float: right;}*/
+
+.xcConfirm .popBox .btnGroup .sgBtn{margin-top: 10px; margin-right: 10px;}
+.xcConfirm .popBox .btnGroup a:last-of-type{
+    margin-right: 0;
+}
+/*.xcConfirm .popBox .sgBtn{display: block; cursor: pointer; float: left; width: 60px; font-size: 14px; height: 30px; line-height: 30px; text-align: center; color: #FFFFFF; border-radius: 2px;}*/
+
+.xcConfirm .popBox .sgBtn.ok{background-color: #7E8FE1; color: #FFF;}
+.xcConfirm .popBox .sgBtn.ok:active{background:#7381c6;}
+.xcConfirm .popBox .sgBtn.cancel{background-color: #FFF; color: #6b5cfd; border: solid 1px #6b5cfd; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;}
+
+
+
+.xcConfirm .popBox .ttBox{
+	border-bottom: none;
+}
+.xcConfirm .popBox .sgBtn{display: block;
+    cursor: pointer;
+    float: left;
+    width: 78px;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 36px;
+}
+.xcConfirm .popBox .btnGroup{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+ }
+
+ .xcConfirm .popBox .txtBox p {
+    text-align: center;
+    line-height: 26px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 16px;
+    height:150px;
+}
+
+.xcConfirm .popBox .txtBox .bigIcon {
+    width: 52px;
+    height: 52px;
+    background-image: url(../img/cion.png);
+     background-repeat: no-repeat;
+     margin: 15px auto;
+}
+.xcConfirm .popBox .txtBox {
+    margin: 10px 20px;
+}
+.xcConfirm .popBox .ttBox .tt{
+	display: none;
+}
+
+.xcConfirm .popBox .ttBox .clsBtn {
+    display: block;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-image: url(../img/closeicon.png);
+    background-size: cover;
+}
+.xcConfirm .popBox {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    background-color: #fff;
+    z-index: 2147000001;
+    width: 400px;
+    height: 270px;
+    margin-left: -160px;
+    margin-top: -150px;
+    border-radius: 5px;
+    font-family: 微软雅黑,宋体;
+    font-weight: bold;
+    color: #535e66;
+}
+
+.xcConfirm .popBox .sgBtn.cancel{
+    border-color: #7e8fe1;
+    color: #7e8fe1;
+}
+.xcConfirm .popBox .sgBtn.cancel:hover{
+	color: #7381c6;
+    border-color: #465ab7;
+    background: none;
+}
+.xcConfirm .popBox .sgBtn.ok:hover{
+    color: #fff;
+    background-color: #7381c6;
+    border-color: #465ab7;
+}

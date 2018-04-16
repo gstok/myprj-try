@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/jedate/jedate.css"/>
+    <link href='../css/setting/selfsetting.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><i class="shu spc"></i>个人设置</h2>
+                </div>
+            </div>
+            <hr />
+
+            <!-- 设置列表start -->
+            <div id="setting" class="clearfix">
+                <div class="upHead fl">
+                    <div class="uploadimg"><img class="" src="../images/head.png" id="head_img"/></div>
+                    <br>
+                    <div class="btn cancleBtn" id="up_head" onclick="up_head();">上传头像</div>
+                    <form  method="post" >
+                       <input type="file" id="file" name="file"   style="display:none" onchange="upData();"/>
+                    </form>
+                </div>
+                <ul class="content fl">
+                    <li><span>登录账号</span><input  class="form-control cursorDefault" type="text" id="loginname" readonly="readonly" /></li>
+                    <li><span>姓名</span><input class="form-control" type="text" id="username"/></li>
+                    <li>
+                        <span>性别</span>
+                        <input type="radio" name="sex" id="man" value="男"/><label for="sex">男</label>
+                        <input type="radio" name="sex" id="female" value="女"/><label for="sex">女</label>
+                    </li>
+                    <li>
+                        <span>生日</span><input class="form-control wicon" type="text" id='birthday' placeholder="选择日期">
+                    </li>
+                    <li><span>手机号</span><input class="form-control" type="text" id="phone"/></li>
+                    <li><span>邮箱</span><input class="form-control" type="text" id="email"/></li>
+                    <li><span>微信</span><input class="form-control" type="text" id="weixin"/></li>
+                    <li><span>qq</span><input class="form-control" type="text" id="qq"/></li>
+                    <li><span>职位</span><input class="form-control" type="text" id="profession"/></li>
+                    <li class="saveli"><i class="icon icon-save saveicon"></i><input class="btn" type="submit" value="保存" id="save"></li>
+                </ul>
+            </div>
+            <!-- 设置列表end -->
+
+        </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.placeholder.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../libs/jedate/jquery.jedate.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/choosetime.js"></script>
+<script src="../js/ajaxfileupload.js"></script>
+<script src="../js/setting/selfsetting.js"></script>
+</body>
+</html>

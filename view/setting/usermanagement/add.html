@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+     <link href='../../css/select2.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/setting/selfsetting.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/usermanagement.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div id="page-inner" class="content-inner">
+
+                <div class="row title">
+                <div class="col-md-12">
+                    <h2 class="fl"><i class="shu spc"></i><span class="titleSpan"><a href="/view/setting/usermanagement/usermanagement.html">用户管理</a><em> / 添加新用户</em> </span></h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnback()">&times;</a>
+                </div>
+
+            </div>
+            <hr />
+
+            <!-- 设置列表start -->
+            <div id="setting" class="clearfix">
+                <ul class="content fl addusercon">
+                    <li><span>登录账号</span><input class="form-control" type="username" id="aloginName"><span class="star">*</span></li>
+                    <li><span>登录密码</span><input class="form-control " type="password" id="aloginPwd" maxlength="15"/><span class="star">*</span></li>
+                    <li><span>姓名</span><input class="form-control" type="text" id="auserName"><span class="star">*</span></li>
+          <!--           <li><span>员工编号</span><input class="form-control" type="text" id=""></li> -->
+                    <li><span>手机号</span><input class="form-control" type="text" id="amobile" maxlength="11"></li>
+                    <li><span>邮箱</span><input class="form-control" type="text" id="aemail"></li>
+                    <li><span>性别</span>
+                            <select name="" id="asex"  class="form-control">
+                                <option value=" ">请选择</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                                <option value="未知">未知</option>
+                            </select>
+                    </li>
+                    <li><span>公司</span>
+                    <span id="companyId"></span>
+                    </li>
+                    <li><span>部门</span><select name="" id="adepartId"  class="form-control selectpicker show-tick" multiple="multiple"></select></li>
+                    <!--<li><span>职位</span><select name="" id="positionId"  class="form-control selectpicker show-tick"  data-live-search="true" ></select></li>-->
+                    <li><span>职位</span><select name="" id="apositionId"  class="form-control selectpicker show-tick"  data-live-search="true" ></select></li>
+                    <li><span>直属领导</span><select name="" id="aupperId"  class="form-control selectpicker show-tick"  data-live-search="true"></select></li>
+                    <li><span>生日</span> <input type="text" class="form-control wicon" id="userBirthday" placeholder="选择日期" readonly ></li>
+                    <li><span style="width: 110px">财务账号</span> <input type="text" class="form-control" id="FinAccount" readonly><span class="addAccount" style="display: none"><a onclick="addPop()" >+新建账号</a></span></li>
+
+                    <div class="btnGroup">
+
+                    <a href="javascript:;" class="save btn btn-primary " module="user" permission-code="ADD">保存</a>
+                    <a href="javascript:;" class="cancel btn btn-default cancelPropup" onclick="returnback()" module="user" permission-code="ADD">取消</a>
+                </div>
+                </ul>
+            </div>
+            <!-- 设置列表end -->
+
+        </div>
+</div>
+<!--新建财务账户弹窗-->
+    <div class="xcConfirm" id="addBox" >
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" onclick="closeR()"></a><span class="tt">提示</span></div>
+            <div class="txtBox">
+                系统将自动为您生成一个财务账号。
+                <br/>该财务账号将作为您新建的用户的财务账号。
+                <br/>您只有一次生成财务号的机会。
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" onclick="addAccount()" module="user" permission-code="ADD">确定</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--新建财务账户弹窗 end-->
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery.placeholder.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/choosetime.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/select2.js"></script>
+<script src="../../js/setting/usermanagement/add.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/menu.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<div id="menupage" v-cloak>
+    <!-- menu -->
+    <div class="menu"></div>
+    <!-- menu end  -->
+    <div id="page-wrapper" class="setting">
+        <!-- top -->
+        <div id="top">
+            <my-top></my-top>
+        </div>
+        <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                    <a href="javascript:;"><i class="shu"></i><i class="tabName">菜单管理</i></a>
+                </h2>
+                <!--           <a href="javascript:;" class="btn fr rightAdd" onclick="addSign()">+新建签名</a> -->
+            </div>
+        </div>
+        <div id="page-inner" class="clearfix">
+            <div class="functionMenu">
+                <ul id="treeDemo" class="ztree"></ul>
+            </div>
+            <div class="functionCont box-size">
+                <div class="addPopup" v-show="pShow">
+                    <div class="form-group">
+                        <label for="resCode">资源Code：</label>
+                        <input type="text" id="resCode" class="form-control" placeholder="资源Code"/>
+                    </div>
+                    <div class="form-group" v-show="iconShow">
+                        <label for="icon">目录icon：</label>
+                        <input type="text" id="icon" class="form-control" placeholder="目录icon"/>
+                    </div>
+                    <div class="form-group" v-show="classShow">
+                        <label for="resClass">菜单class：</label>
+                        <input type="text" id="resClass" class="form-control" placeholder="菜单class"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="parentId">上级id：</label>
+                        <input type="text" id="parentId" class="form-control" placeholder="上级id" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label for="resName">菜单名：</label>
+                        <input type="text" id="resName" class="form-control" placeholder="菜单名"/>
+                    </div>
+                    <div class="form-group">
+                        <div>资源类型：</div>
+                        <label class="radio-inline">
+                            <input type="radio" name="resType" value="1" disabled> 目录
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="resType" value="2" disabled> 菜单
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="resType" value="3" disabled> 功能
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="resType" value="4" disabled> 操作
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="resUrl">资源访问URL：</label>
+                        <input type="text" id="resUrl" class="form-control" placeholder="资源访问URL"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="appCode">appCode：</label>
+                        <input type="text" id="appCode" class="form-control" placeholder="appCode"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn popleSure">确定</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/setting/menu/menu.js"></script>
+<script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
+</body>
+</html>

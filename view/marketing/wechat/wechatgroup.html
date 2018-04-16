@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/marketing.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/emoji.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="weChatpage" v-cloak>
+        <!-- menu -->
+        <div class="menu"></div>
+        <!-- menu end  -->
+        <div id="page-wrapper">
+            <!-- top -->
+            <div id="top">
+                <my-top></my-top>
+            </div>
+            <!-- top end -->
+            <div class="row topTitle">
+                <div class="col-md-12 clearfix">
+                    <h2 class="fl">
+                        <a href="javascript:;"><i class="shu"></i>微信群</a>
+                    </h2>
+                    <a class="btn fr rightAdd" v-show='addmubanShow' module="wechatGroup" permission-code="ADD" @click=newlyData()>+创建模板</a>
+                    <a class="btn fr rightAdd" v-show='addFShow' module="cust" permission-code="ADDFRIENDS" @click=newlyData()>+添加好友</a>
+                </div>
+            </div>
+            <div id="page-inner" class="nopad page-inner">
+                <ul class="nav nav-tabs">
+                    <li class="active wechatgroup"><a href="#wechatgroup" class="normal" data-toggle="tab" @click="weChatGroupList(0,20)">信息模板</a>
+                        <li><a class="indexList" href="#wgsendrecord" data-toggle="tab" @click="WeChatsendLog(0,20)">发送记录</a>
+                            <li><a class="group" href="#weGroupList" data-toggle="tab" @click="queryWechatGroupList(0,20)">微信群列表</a>
+                                <li><a class="friend" href="#friendList" data-toggle="tab" @click="friendList(0,20)">好友列表</a>
+                </ul>
+
+                <div class="tab-content">
+                    <!--微信群模板  -->
+                    <div class="row nopm tab-pane fade active in" id="wechatgroup">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable">
+                                <thead>
+                                    <tr>
+                                        <th>信息名</th>
+                                        <th class="weChatCont">内容</th>
+                                        <th>信息状态</th>
+                                        <th>创建时间</th>
+                                        <th class="textcenter">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="weChats.length == 0">
+                                        <td colspan="5" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                <tr v-for="weChat in weChats">
+                                    <td>
+                                        <a v-if='hasPermission("wechatGroup", "GET")' class="typeblue" href="javascript:;" @click="editpage(weChat.id)">{{weChat.modelName}}</a>
+                                        <template v-else>
+                                            <a class="typeblue">{{weChat.modelName}}</a>
+                                        </template>
+                                    </td>
+                                    <td class="emailSubBox">
+                                        <div class="emailSub"><span data-container="body" data-toggle="popover" data-placement="top" :data-content="weChat.content">{{weChat.content}}</span></div>
+                                    </td>
+                                    <td :class="{green:weChat.displayStatus=='已发送'}">{{weChat.displayStatus}}</td>
+                                    <td>{{weChat.displayCreateTime}}</td>
+                                    <td class="textcenter">
+                                        <!--<span><a href="javascript:;" @click="testData(weChat.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="测试"><i class="icon icon-jianrongceshi"></i></a></span>&lt;!&ndash; 测试 &ndash;&gt;
+                                        <span class="tdline">▏</span>-->
+                                        <span>
+                                            <a v-if='hasPermission("wechatGroup", "SEND")' href="javascript:;" @click="sendPopup(weChat.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="发送"><i class="icon icon-send"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-send disabled"></i></a>
+                                            </template>
+                                        </span>
+                                        <!-- 发送 -->
+                                        <span class="tdline">▏</span>
+                                        <span>
+                                            <a v-if='hasPermission("wechatGroup", "UPDATE")' href="javascript:;" @click="copyPopup(weChat.id)" data-container="body" data-toggle="popover" data-placement="top" data-content="复制"><i class="icon icon-fuzhi"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-fuzhi disabled"></i></a>
+                                            </template>
+                                        </span>
+                                        <!-- 复制 -->
+                                        <span class="tdline">▏</span>
+                                        <span>
+                                            <a v-if='hasPermission("wechatGroup", "DEL")' href="javascript:;" @click="deleteData(weChat.id,weChat.modelName)" data-container="body" data-toggle="popover" data-placement="top" data-content="删除"><i class="icon icon-shanchu"></i></a>
+                                            <template v-else>
+                                                <a><i class="icon icon-shanchu disabled"></i></a>
+                                            </template>
+                                        </span>
+                                        <!-- 删除 -->
+                                    </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="wechatListpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 发送记录 -->
+                    <div class="row nopm tab-pane fade" id="wgsendrecord">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable" id="">
+                                <thead>
+                                    <tr>
+                                        <th>信息名</th>
+                                        <th :style="{ width: 260 + 'px' }">内容</th>
+                                        <th>信息状态</th>
+                                        <th>发送群</th>
+                                        <th>发送时间</th>
+                                        <th>数据反馈</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="weChatsendlists.length == 0">
+                                        <td colspan="6" class="textcenter">暂无数据</td>
+                                    </tr>
+                                    <template v-else>
+                                <tr v-for="weChatsendlist in weChatsendlists">
+                                    <td class="sendlistTd">{{weChatsendlist.modelName}}</td>
+                                    <td class="emailSubBox">
+                                        <div class="emailSub"><span data-container="body" data-toggle="popover" data-placement="top" :data-content="weChatsendlist.content">{{weChatsendlist.content}}</span></div>
+                                    </td>
+                                    <td class="sendlistTd green">已发送</td>
+                                    <td class="sendlistTd">{{weChatsendlist.wechatName}}</td>
+                                    <td class="sendlistTd">{{weChatsendlist.displayCreateTime}}</td>
+                                    <td class="spctd">
+                                        <p>发送：
+                                            <template v-if="weChatsendlist.targetNum == null||weChatsendlist.targetNum == 0">--</template>
+                                            <template v-else>{{weChatsendlist.targetNum}}人</template>
+                                            <template v-if="weChatsendlist.isHasUrl == 1" data-container="body" data-toggle="popover" data-placement="top" :data-content="sssss">、访问率：
+                                                <template v-if="weChatsendlist.unsubUv == null||weChatsendlist.arriveUv == null||weChatsendlist.arriveUv == 0">0%</template>
+                                                <template v-else>{{100*(weChatsendlist.unsubUv/weChatsendlist.arriveUv).toFixed(1)}}%</template>
+                                            </template>
+                                        </p>
+                                        <p v-if="weChatsendlist.isHasUrl == 1 && (hasPermission('wechatAnaly', 'GET'))"><a :href="'wechatdata.html?id='+weChatsendlist.id" style="color:#7e8fe1">页面访问>></a></p>
+                                        <template v-else></template>
+                                    </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="sendrecordpage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 微信群列表 -->
+                    <div class="row nopm tab-pane fade" id="weGroupList">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable ">
+                                <thead>
+                                    <tr>
+                                        <th>群名称</th>
+                                        <th>邀请人数</th>
+                                        <th>发送时间</th>
+                                        <th>请求发送状态</th>
+                                        <th class="textcenter">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5" class="textcenter"><i class='icon icon-icon nodata'></i>暂无数据
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="weGroupListpage"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- 好友列表 -->
+                    <div class="row nopm tab-pane fade" id="friendList">
+                        <div class="col-md-12">
+                            <table class="table table-striped innerTable ">
+                                <thead>
+                                    <tr>
+                                        <th>微信昵称</th>
+                                        <th>所在微信群</th>
+                                        <th>性别</th>
+                                        <th>所在区域</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class="fr">
+                                <div id="friendListpage"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--复制弹窗-->
+        <div class="copyBox" v-show="copyShow">
+            <input type="hidden" v-model="micropageid" />
+            <div class="xc_layer"></div>
+            <div class="popBox">
+                <div class="ttBox">
+                    <a class="clsBtn" @click="closeSend()"></a><span class="tt">输入</span></div>
+                <div class="txtBox">
+                    <div class="fzdiv">
+                        <span class="poupTitle">信息名</span>
+                        <input class="inputBox fzinput" v-model="modelName">
+                    </div>
+                </div>
+                <div class="btnArea">
+                    <div class="btnGroup"><a class="sgBtn ok" @click="copyData()">确定</a></div>
+                </div>
+            </div>
+
+        </div>
+        <!--复制弹窗 end-->
+        <!--发送弹窗-->
+        <div class="sendWeChartBox sendWeChart" v-show="sendShow">
+            <input type="hidden" v-model="micropageid" />
+            <div class="xc_layer"></div>
+            <div class="popBox">
+                <div class="ttBox">
+                    <a class="clsBtn" @click="closeSend()"></a>
+                    <span class="tt">{{sendWeChartTit}}</span>
+                </div>
+                <ul class="nav nav-tabs" v-show='wwwShow'>
+                    <li class="active"><a href="#groupTeam" data-toggle="tab" id='hrefTogroupTeam'>通过微信群组发送</a>
+                    </li>
+                    <li><a href="#group" data-toggle="tab" id='hrefToGroup'>通过微信群/好友发送</a>
+                    </li>
+                    <li style='display: none'><a href="#Edit" data-toggle="tab" id='hrefToEdit'>编辑</a>
+                    </li>
+                </ul>
+                <div class="txtBox">
+                    <!--微信未登录-->
+                    <div id="qrcode"></div>
+                    <div v-if="status_ == 1||status_ == 401" class="weChartCode">
+                        <!-- <img :src="weChartCodeimgUrl"> -->
+                    </div>
+                    <!--微信未登录  end-->
+                    <!--微信已登录  测试-->
+                    <div v-if="status_ == 200" class="testBox">
+                        <img :src="WeChatimgUrl+'/'+imgId+'/'+weChatGroupId" />
+                    </div>
+                    <!--微信已登录  测试  end-->
+                    <!--微信已登录  群发送-->
+
+
+
+
+
+                    <div class='groupBox' v-else>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="groupTeam">
+                                <table class="table innerTable">
+                                    <tbody>
+                                        <tr v-for='groupTeamlist in groupTeamlists'>
+                                            <td class="checkname">
+                                                <input type='checkbox' v-model="weChatTeamGroup" :value='groupTeamlist.filterExpr'>
+                                            </td>
+                                            <td>群组名称</td>
+                                            <td>{{groupTeamlist.groupName}}</td>
+                                            <td @click='updatePoup(groupTeamlist.id,groupTeamlist.groupName,groupTeamlist.custNum,groupTeamlist.filterExpr)'>编辑</td>
+                                            <td @click='delTeamGroup(groupTeamlist.id)'>删除</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="group">
+                                <dl class="clearfix">
+                                    <dt>群组名称：    </dt>
+                                    <dd><input type="text" v-model='weChatGroupName' /></dd>
+                                    <dd><input type="checkbox" class='saveGroup'>保存为群组</dd>
+                                    <dd class="last"><button class="btn">刷新</button></dd>
+                                </dl>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#WGroups" data-toggle="tab" class="WGroups">微信群</a>
+                                    </li>
+                                    <li>
+                                        <a href="#Wfridens" data-toggle="tab" class="Wfridens">微信好友</a>
+                                    </li>
+                                    <li>
+                                        <a href="#Wall" data-toggle="tab" class="Wall">全部</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="WGroups">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatGrouplist in WeChatGrouplists">
+                                                <input type='checkbox' class='weChatGroupCheck' v-model="weChatGroup" :value="WeChatGrouplist.groupName" @click="WWWchange('group')">
+                                                <input type='checkbox' class='weGroupCheck' v-model="weGroup" :value="WeChatGrouplist.nickName" @click="WWWchange('group')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatGrouplist.groupName" />
+                                                <p :title="WeChatGrouplist.nickName">{{WeChatGrouplist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="Wfridens">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatFriendlist in WeChatFriendlists">
+                                                <input type='checkbox' class='WeChatFriendCheck' v-model="WeChatFriend" :value="WeChatFriendlist.groupName" @click="WWWchange('user')">
+                                                <input type='checkbox' class='WeFriendCheck' v-model="WeFriend" :value="WeChatFriendlist.nickName" @click="WWWchange('user')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatFriendlist.groupName" />
+                                                <p :title="WeChatFriendlist.nickName">{{WeChatFriendlist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="Wall">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatAlllist in WeChatAlllists">
+                                                <input type='checkbox' class='WeChatAllCheck' v-model="WeChatAll" :value="WeChatAlllist.groupName" @click="WWWchange('all')">
+                                                <input type='checkbox' class='WeAllCheck' v-model="WeAll" :value="WeChatAlllist.nickName" @click="WWWchange('all')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatAlllist.groupName" />
+                                                <p :title="WeChatAlllist.nickName">{{WeChatAlllist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="Edit">
+
+                                <dl class="clearfix">
+                                    <dt>群组名称：    </dt>
+                                    <dd><input type="text" v-model='weChatGroupName' /></dd>
+                                    <dd style='display: none'><input type="checkbox" class='saveGroup'>保存为群组</dd>
+                                    <dd class="last"><button class="btn">刷新</button></dd>
+                                </dl>
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#WWGroups" data-toggle="tab" class="WWGroups">微信群</a>
+                                    </li>
+                                    <li>
+                                        <a href="#WWfridens" data-toggle="tab" class="WWfridens">微信好友</a>
+                                    </li>
+                                    <li>
+                                        <a href="#WWall" data-toggle="tab" class="WWall">全部</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="WWGroups">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatGrouplist in WeChatGrouplists">
+                                                <input type='checkbox' class='weChatGroupCheck' v-model="weChatGroup" :value="WeChatGrouplist.groupName" @click="changeWWW('group')">
+                                                <input type='checkbox' class='weGroupCheck' v-model="weGroup" :value="WeChatGrouplist.nickName" @click="changeWWW('group')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatGrouplist.groupName" />
+                                                <p :title="WeChatGrouplist.nickName">{{WeChatGrouplist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="WWfridens">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatFriendlist in WeChatFriendlists">
+                                                <input type='checkbox' class='WeChatFriendCheck' v-model="WeChatFriend" :value="WeChatFriendlist.groupName" @click="changeWWW('user')">
+                                                <input type='checkbox' class='WeFriendCheck' v-model="WeFriend" :value="WeChatFriendlist.nickName" @click="changeWWW('user')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatFriendlist.groupName" />
+                                                <p :title="WeChatFriendlist.nickName">{{WeChatFriendlist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="WWall">
+                                        <ul class="clearfix">
+                                            <li class='checkbox' v-for="WeChatAlllist in WeChatAlllists">
+                                                <input type='checkbox' class='WeChatAllCheck' v-model="WeChatAll" :value="WeChatAlllist.groupName" @click="changeWWW('all')">
+                                                <input type='checkbox' class='WeAllCheck' v-model="WeAll" :value="WeChatAlllist.nickName" @click="changeWWW('all')">
+                                                <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatAlllist.groupName" />
+                                                <p :title="WeChatAlllist.nickName">{{WeChatAlllist.nickName}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <!--微信已登录  群发送 end-->
+                </div>
+                <div v-if="status_ == 1||status_ == 401" class="btnArea">
+                    <div class="btnGroup"><a class="sgBtn ok" @click="closeSend()">确定</a></div>
+                </div>
+                <template v-else>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a v-if="status_ == 200" class="sgBtn ok" @click="testSend()">确定</a><!--测试发送-->
+                    <template v-else>
+                        <a class="sgBtn ok" @click="updateWeChatGroups()" v-show='!wwwShow'>确定</a>
+                        <a class="sgBtn ok" @click="sendData(type)" v-show='wwwShow'>确定</a>
+                    </template>
+                <!--正式发送-->
+                <a class="sgBtn cancel" @click="closeSend()">取消</a>
+            </div>
+        </div>
+        </template>
+    </div>
+    </div>
+    <!--发送弹窗 end-->
+    <!--创建好友弹窗-->
+    <div class="addFriendShow sendWeChartBox " v-show="addFriendShow">
+        <input type="hidden" v-model="micropageid" />
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox">
+                <a class="clsBtn" @click="closeSend()"></a>
+                <span class="tt">{{sendWeChartTit}}</span>
+            </div>
+            <div class="txtBox">
+                <!--微信未登录-->
+                <div id="qrcode1"></div>
+                <div v-if="status_ == 1||status_ == 401" class="weChartCode">
+
+                    <!-- <img :src="weChartCodeimgUrl"> -->
+                </div>
+                <!--微信未登录  end-->
+                <!--微信已登录  测试-->
+                <div v-if="status_ == 200" class="testBox">
+                    <img :src="WeChatimgUrl+'/'+imgId+'/'+weChatGroupId" />
+                </div>
+                <!--微信已登录  测试  end-->
+                <!--微信已登录  群发送-->
+                <ul class="clearfix" v-else>
+                    <li class='checkbox' v-for="WeChatGrouplist in WeChatGrouplists">
+                        <input type='checkbox' v-model="weChatGroup" :value="WeChatGrouplist.groupName">
+                        <img :src="WeChatimgUrl+'/'+imgId+'/'+WeChatGrouplist.groupName" />
+                        <p :title="WeChatGrouplist.nickName">{{WeChatGrouplist.nickName}}</p>
+                    </li>
+                </ul>
+                <!--微信已登录  群发送 end-->
+            </div>
+            <div v-if="status_ == 1||status_ == 401" class="btnArea">
+                <div class="btnGroup"><a class="sgBtn ok" @click="closeSend()">确定</a></div>
+            </div>
+            <template v-else>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a v-if="status_ == 200" class="sgBtn ok" @click="addfriendData()">确定</a>
+                    <template v-else><a class="sgBtn ok" @click="addfriendData()">确定</a></template>
+            <a class="sgBtn cancel" @click="closeSend()">取消</a>
+        </div>
+    </div>
+    </template>
+    </div>
+    </div>
+    <!--创建好友弹窗 end-->
+    </div>
+    <script src="../../js/jquery-2.2.3.min.js"></script>
+    <script src="../../libs/bootstrap/bootstrap.min.js"></script>
+    <script src="../../libs/xcConfirm/xcConfirm.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/paging.js"></script>
+    <script src="../../libs/kindeditor/kindeditor-all-min.js"></script>
+    <script src="../../libs/kindeditor/lang/zh-CN.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/marketing/marketing.js"></script>
+    <script src="../../js/chosen.jquery.js"></script>
+    <script src="../../js/qrcode.js"></script>
+    <script src="../../js/marketing/wechat/wechatgroup.js"></script>
+</body>
+
+</html>

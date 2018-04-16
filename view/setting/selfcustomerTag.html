@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link href='../libs/switch/honeySwitch.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+
+            <div class="row topTitle firstTopTitle">
+                <div class="col-md-12 clearfix">
+                    <h2 class="fl">
+                       <a href="javascript:;"><i class="shu"></i><a href="/view/index.html"></a>客户标签</a>
+                    </h2>
+                    <a href="javascript:;" class="btn fr rightAdd" onclick="addCustomerTag()">+新建标签</a>
+                </div>
+            </div>
+        <div id="page-inner">
+            <!-- 表格区域 -->
+            <div class="tab-content">
+                <div class="row tab-pane fade active in" id="shortmessage">
+                    <div class="col-md-12">
+                        <table class="table table-striped outerTable" id="customerTagList">
+                            <thead>
+                            <tr>
+                                <th class="firsttTh">标签名称</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- <tr>
+                                <td class="firstTh">大户</td>
+                                <td><a href="javascript:;" class="zcBtn tbBtn" onclick="isUse()">禁用</a>
+                                <a href="javascript:;" class="zcBtn tbBtn" onclick='editCustomerTag()'>编辑</a>
+                                <a href="javascript:;" class="zcBtn tbBtn" onclick="delCustTag()">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td class="firstTh">土豪</td>
+                                <td><a href="javascript:;" class="zcBtn tbBtn">禁用</a>
+                                <a href="javascript:;" class="zcBtn tbBtn" onclick='editCustomer()'>编辑</a>
+                                <a href="javascript:;" class="zcBtn tbBtn">删除</a></td>
+                            </tr> -->
+                            </tbody>
+                        </table>
+                        <div class="fr">
+                            <div id="customerTagListpage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="bg"></div>
+<!-- 新建客户标签 -->
+<div class="modelContent" id="addCustomerTag">
+    <div class="MotalTit"><i >新建客户标签</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <dl>
+                <dt>名称:</dt>
+                <dd><input type="text" id="tagNameAdd"></dd>
+            </dl>
+
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addsure()">保存</div>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑客户标签 -->
+<div class="modelContent" id="editCustomerTag">
+    <div class="MotalTit"><i >编辑客户标签</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <dl>
+                <dt>名称:</dt>
+                <dd><input type="text" id="tagNameEdit"></dd>
+            </dl>
+
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn editSure" >保存</div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/paging.js"></script>
+<script type="text/javascript" src="../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../js/setting/selfcustomerTag.js"></script>
+</body>
+</body>
+</html>

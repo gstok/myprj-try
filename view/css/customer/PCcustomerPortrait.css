@@ -1,0 +1,177 @@
+*{padding:0;margin: 0}
+body{background: #27303e;font-family: "微软雅黑";padding-top:20px;color: #fff;text-align: center;}
+.mid{min-width: 1200px;margin: auto}
+.row {margin-right: 0;margin-left: 0}
+img{border:none}
+.custLabel{width: 65px;height: 26px;line-height: 26px;background: #4e63a7;margin:20px auto;font-size: 12px;}
+.portraitTitle{font-size: 12px;}
+dl { *zoom: 1;margin-bottom: 0}
+dl:before, dl:after { display: table; content: ""; height: 0; }
+dl:after { clear: both; }
+.dlHr{height: 1px;width: 100%;margin: 5px auto;
+    background-image:-webkit-linear-gradient(to right, #4b5f9d, #879cdc);
+    background-image:linear-gradient(to right,#4b5f9d,#879cdc);}
+/********基本资料*********/
+.basicDataBox{display: none}
+.basicData{width: 314px;margin: auto;height: 550px;background: url("/view/images/PCcustomerPortrait/basicDatabg.png");padding:28px 30px;}
+.basicData dt{float: left;color: #bbbede;font-weight: normal;line-height: 30px;}
+.basicData dd{float: right;line-height: 30px;}
+.basicData dd.dd{background: #4e63a7;line-height: 20px;margin:5px 0;padding:0 5px;}
+/********基本资料*********/
+/********客户价值*********/
+.customerValueBox{margin-bottom: 80px;opacity: 0;}
+.customerValue{width: 260px;margin: auto;height:180px;background: url("/view/images/PCcustomerPortrait/customerValuebg.png");padding:16px 30px;text-align: left}
+.customerValue dt{color: #88e8ff;font-weight: bold;line-height: 30px;}
+.customerValue dd{line-height: 30px;font-size: 12px;}
+/********客户价值*********/
+/********购买渠道*********/
+.buyChannelBox{/*display: none*/}
+.buyChannel{/*display: none;*/width: 294px;margin: auto;height:274px;background: url("/view/images/PCcustomerPortrait/buyChannelbg.png");padding:16px 24px;text-align: left}
+.buyChannel dt{color: #88e8ff;font-weight: bold;line-height: 30px;}
+.buyChannel dd{line-height: 30px;font-size: 12px;}
+/********购买渠道*********/
+/********人物*********/
+.personLabelBox{/*width:440px;margin: auto*/}
+.fill-datum{width: 234px; height: 702px;position:absolute;left:50%;top:0;margin-left:-117px;color: #fff;background: url("/view/images/PCcustomerPortrait/man.png") no-repeat;background-size:100% 100%;padding:2px;overflow: hidden;box-sizing: border-box}
+.fill-datum.fill-datum-woman{background: url("/view/images/PCcustomerPortrait/woman.png") no-repeat;}
+
+.shadow{width: 440px;height:0;position: absolute;margin-left:-220px;left:50%;top:698px;display: none}
+.shadow img{width: 440px;height:30px;}
+.stage{width: 440px; height:105px;margin-left:-220px;position: absolute;left:50%;top:688px;}
+.stage img{width: 440px; height:105px;}
+.lighting{width:440px;height:0;position: absolute;margin-left:-220px;left:50%;top:690px;display: none}
+.lighting img{width:440px;height:224px;}
+@-webkit-keyframes fadeInDownBig {
+    from {opacity: 1;-webkit-transform: translate3d(0, -2000px, 0);transform: translate3d(0, -2000px, 0);}
+    to {opacity: 1;-webkit-transform: none;transform: none;}}
+@keyframes fadeInDownBig {
+    from {opacity: 1;-webkit-transform: translate3d(0, -2000px, 0);transform: translate3d(0, -2000px, 0);}
+    to {opacity: 1;-webkit-transform: none;transform: none;}}
+.fadeInDownBig{animation-duration:2s;-webkit-animation-duration:2s;}
+
+
+
+
+
+.pointBox1{position: absolute;left:30%;top:150px}
+.pointBox2{position: absolute;left:70%;top:190px}
+.pointBox3{position: absolute;left:70%;top:325px}
+/**圆点**/
+.circle {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+}
+.circle1,
+.circle2{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -8px 0 0 -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border:1px solid #929ec6;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -3px 0 0 -3px;
+    width:6px;
+    height: 6px;
+    border-radius: 3px;
+    background: #7f83c9;
+    line-height: 6px;
+}
+
+.circle1 {
+    animation: circle 3s linear infinite;
+    -webkit-animation: circle 3s linear infinite;
+    -moz-animation: circle 3s linear infinite;
+    -o-animation: circle 3s linear infinite;
+}
+
+.circle2 {
+    animation: circle 3s linear 1.6s infinite;
+    -webkit-animation: circle 3s linear 1.6s infinite;
+    -moz-animation: circle 3s linear 1.6s infinite;
+    -o-animation: circle 3s linear 1.6s infinite;
+}
+
+@keyframes circle {
+    from {
+        opacity: 1;
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -o-transform: scale(0);
+        -ms-transform: scale(0);
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: scale(2);
+        -moz-transform: scale(2);
+        -o-transform: scale(2);
+        -ms-transform: scale(2);
+    }
+}
+@-webkit-keyframes circle {
+    from {
+        opacity: 1;
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -o-transform: scale(0);
+        -ms-transform: scale(0);
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: scale(2);
+        -moz-transform: scale(2);
+        -o-transform: scale(2);
+        -ms-transform: scale(2);
+    }
+}
+
+/**圆点**/
+/**直线**/
+.pointBox1 .line{position: absolute;right:60px;top:-40px;}
+.pointBox1 .line1{position: absolute;right:0;top:0;width:2px;
+    height:30px;
+    background:#4a5e9d;transform: skewX(60deg);}
+.pointBox1 .line1Bg{position: absolute;right:-26px;top:0;width:55px;
+    height:30px;
+    background:#27303e;}
+.pointBox1 .line2{position: absolute;right:25px;top:0;width:0;
+    height:1px;
+    background:#4a5e9d;display: none}
+
+.pointBox2 .line{position: absolute;left:60px;top:-40px;}
+.pointBox2 .line1{position: absolute;left:8px;top:-30px;width:2px;
+    height:60px;
+    background:#4a5e9d;transform: skewX(130deg);}
+.pointBox2 .line1Bg{position: absolute;left:-27px;top:-30px;width:71px;
+    height:60px;
+    background:#27303e;}
+.pointBox2 .line2{position: absolute;left:43px;top:-30px;width:0;
+    height:1px;
+    background:#4a5e9d;display: none}
+
+.pointBox3 .line{position: absolute;left:60px;top:-40px;}
+.pointBox3 .line1{position: absolute;left:0;top:40px;width:2px;
+    height:30px;
+    background:#4a5e9d;transform: skewX(60deg);}
+.pointBox3 .line1Bg{position: absolute;left:-27px;top:29px;width:54px;
+    height:40px;
+    background:#27303e;}
+.pointBox3 .line2{position: absolute;left:25px;top:69px;width:0;
+    height:1px;
+    background:#4a5e9d;}
+/**直线**/
+
+
+
+/********人物*********/

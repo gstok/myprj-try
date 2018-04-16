@@ -1,0 +1,162 @@
+*{margin:0;padding: 0}
+html,body{ height:100%; overflow:hidden;color: #fff;text-align: center;background: #27303e;'font-family': "Microsoft YaHei","微软雅黑","SimSun","宋体";}
+h1{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1; margin: .37em 0;font-size: 2em;}
+.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after { display: table; content: ""; height: 0; }
+.clearfix:after { clear: both; }
+ol,ul,li{ list-style: none; }
+footer{position:fixed;bottom:10px;left: 50%}
+h3{font-size: 0.55rem;margin: 1.8rem 0;font-weight: 500;display: none}
+.section2 h3{margin: 0.5rem 0}
+.section9 h3{margin: 0.6rem 0}
+/*.section1 h3{margin: 0.5rem 0}*/
+.buywayBox .portraitTitle{margin: 0.5rem 0}
+dl { *zoom: 1;margin-bottom: 0}
+dl:before, dl:after { display: table; content: ""; height: 0; }
+dl:after { clear: both; }
+.dlHr{height: 1px;width: 100%;margin: 0.2rem auto;background-image:-webkit-linear-gradient(to right, #4b5f9d, #879cdc);background-image:linear-gradient(to right,#4b5f9d,#879cdc);}
+/*人物*/
+.personLabelBox{/*width:440px;margin: auto*/}
+.custNameBox{position: absolute;right:0.5rem;top:30%;}
+#custName{font-size: 0.4rem}
+.custLabel{width:1.5rem;height:0.6rem;line-height:0.6rem;background: #4e63a7;margin:0.4rem auto;font-size: 0.3rem;}
+.fill-datum{width:10rem; height:14.8rem;position:absolute;left:50%;top:0;margin-left:-5rem;color: #fff;background: url("/view/images/pcProfile/man.png") no-repeat;
+    background-size:5rem 14.8rem;overflow: hidden;box-sizing: border-box}
+.fill-datum span{float:left;word-wrap:break-word;position: absolute;transform:rotate(-15deg);-webkit-transform:rotate(-15deg);}
+.personimg{width:10rem; height:14.8rem;position:absolute;left:0;top:0;}
+.personimg img{width:10rem; height:14.8rem;}
+.shadow{width: 9.36rem;height:0;position: absolute;margin-left:-4.68rem;left:50%;top:14rem;display: none}
+.shadow img{width: 9.36rem;height:0.64rem;}
+.stage{width: 9.36rem; height:2.23rem;margin-left:-4.68rem;position: absolute;left:50%;top:14.26rem;display: none}
+.stage img{width: 9.36rem; height:2.23rem;}
+.lighting{width:9.36rem;height:0;position: absolute;margin-left:-4.68rem;left:50%;top:14.3rem;display: none}
+.lighting img{width:9.36rem;height:2.57rem;}
+@-webkit-keyframes fadeInDownBig {
+    from {opacity: 1;-webkit-transform: translate3d(0, -2000px, 0);transform: translate3d(0, -2000px, 0);}
+    to {opacity: 1;-webkit-transform: none;transform: none;}}
+@keyframes fadeInDownBig {
+    from {opacity: 1;-webkit-transform: translate3d(0, -2000px, 0);transform: translate3d(0, -2000px, 0);}
+    to {opacity: 1;-webkit-transform: none;transform: none;}}
+.fadeInDownBig{animation-duration:2s;-webkit-animation-duration:2s;}
+.fsize0{font-size: 12px;line-height:20px;}
+.fsize1{font-size: 14px;line-height:22px;}
+.fsize2{font-size: 16px;line-height:20px;}
+.fsize3{font-size: 18px;line-height:22px;}
+.fsize4{font-size: 20px;line-height:24px;}
+.fsize5{font-size: 22px;line-height:26px;}
+.fsize6{font-size: 24px;line-height:28px;}
+.fsize7{font-size: 26px;line-height:30px;}
+/*人物*/
+/********基本资料*********/
+.basicDataBox{margin-top:0.5rem;display: none}
+.basicData{width: 7.3rem;margin: auto;height: 11.9rem;background: url("/view/images/pcProfile/basicDatabg.png");
+    background-size: 100% 100%;padding:0.64rem;font-size: 0.4rem}
+.basicData dt{float: left;color: #fff;font-weight: normal;line-height:0.72rem;}
+.basicData dd{float: right;line-height: 0.72rem;color: #cbcfff}
+.basicData dd.dd span{border:2px solid #8d92dc;line-height:0.425rem;margin:0.1rem 1px;padding:0 0.1rem;color: #fff}
+/********基本资料*********/
+/********客户价值*********/
+.customerValueBox{margin-top:1.5rem;display: none}
+.customerValue{width:7.8rem;margin: auto;height:5rem;background: url("/view/images/pcProfile/customerValuebg.png");
+    background-size: 100% 100%;padding:1rem;text-align: left}
+.customerValue dt{color: #88e8ff;font-weight:400;line-height:1rem;font-size: 0.56rem}
+.customerValue dd{line-height:1rem;font-size: 0.42rem;}
+/********客户价值*********/
+/********购买渠道偏好*********/
+.buyChannelBox{margin-top:1rem;display: none}
+.buyChannel{width: 8.05rem;margin: auto;height:7.4rem;background: url("/view/images/pcProfile/buyChannelbg.png");
+    background-size: 100% 100%;padding:0.5rem;text-align: left}
+#Channel{width: 8.05rem;height:7.4rem;}
+/********购买渠道偏好*********/
+/********活跃度*********/
+.vitalityBox{margin-top:1rem;display: none;}
+.vitality{width:8.2rem;margin: auto;height:6.2rem;background: url("/view/images/pcProfile/buyChannelbg.png");
+    background-size: 100% 100%;padding:0.8rem 0.5rem;text-align: left}
+.vitalityNum{font-size: 0.55rem;text-align: center}
+.vitalityNum span{color: #88e8ff}
+.vitalityChange{width: 5.5rem;margin:0.4rem auto 0}
+.vitalityChange li{float: left;font-size: 0.6rem;text-align: center;color: #7f9abe}
+.vitalityChange li.on{color: #fff}
+.vitalityChange li.marL{margin-left: 0.25rem;  width: 0.5rem;  text-align: right;}
+#vitalityChannel{width:8.8rem;height:4.5rem;}
+/********活跃度*********/
+/********商品推荐*********/
+.recommendBox{margin-bottom: 80px;margin-top: 60px;display: none}
+.recommend{width:7.8rem;margin: auto;height:4.6rem;background: url("/view/images/pcProfile/recommendbg.png");
+    background-size: 100% 100%;padding:1rem 0.75rem;text-align: left;overflow:hidden; position:relative;}
+.recommend .hd{ height:0.25rem; overflow:hidden; position:absolute; left:40%; bottom:1.1rem; z-index:1; }
+.recommend .hd ul{ overflow:hidden; zoom:1; float:left;}
+.recommend .hd ul li{ float:left; margin-left:0.25rem;  width:0.25rem; height:0.25rem;border-radius:0.125rem;background:#686dbc; cursor:pointer; }
+.recommend .hd ul li.on{ background:#c6caff;}
+.recommend .bd{ position:relative; height:3rem; z-index:0;}
+.recommend .bd li{ zoom:1; vertical-align:middle; width:7.8rem;}
+.recommend .bd img{ width:7.5rem; height:2.8rem; display:block; box-shadow: 0 0 0.3rem #2c4a78;border:1px solid #91a5e5;padding:0.1rem; }
+.recommend .bd p{font-size: 0.4rem;line-height:1.2rem;text-align: center}
+/********商品推荐*********/
+/********客户传播指数*********/
+.spreadBox{display: none;margin-top:1.5rem;}
+.spread{/*display: none;*/width:7.7rem;margin: auto;height:4.6rem;background: url("/view/images/pcProfile/spreadbg.png");
+    background-size: 100% 100%;padding:0.75rem 0.85rem;text-align: left}
+.spread .spreadTit{font-size: 0.4rem;text-align: center;line-height: 0.7rem}
+.spread .spreadTit dt{font-weight:bold}
+.spread .spreadTit dt #spread{color: #88e8ff}
+.spread .spreadTit dd{font-size: 0.4rem}
+.spread .spreadCont{margin-bottom: 0;margin-top: 0.2rem;}
+.spread .spreadCont li{float: left;width: 33%;text-align: center;margin-top: 0.55rem;}
+.spread .spreadCont li.top1{margin-top:0;}
+.spread .spreadCont li img{width: 1.5rem;height: 1.8rem}
+.spread .spreadCont li.top2 img,
+.spread .spreadCont li.top3 img{width:1.05rem;height: 1.26rem}
+.spread .spreadCont li p{margin-bottom: 0;font-size: 0.2rem;}
+/********客户传播指数*********/
+/********互动情况*********/
+.interactBox{display: none;margin-top:1.5rem;}
+.interact{/*display: none;*/width:7.7rem;margin: auto;height:5.2rem;background: url("/view/images/pcProfile/spreadbg.png");
+    background-size: 100% 100%;padding:1rem 0.85rem;text-align: left}
+.interact .interactTit{font-size: 0.4rem;text-align: center;line-height: 0.7rem;margin-bottom: 0.3rem;font-weight:bold}
+.interact .interactTit span{color: #88e8ff}
+.interact dl{height: 0.8rem;}
+.interact dt{font-size: 0.35rem;font-weight: normal;text-align: right;float: left;width: 2rem;margin-right: 0.4rem;}
+.interact dd{float: left;height:0.14rem;width: 4.9rem;margin-top:0.23rem}
+.interact dd span{display: block;height:0.14rem;border-radius:0.07rem;}
+.interact dd.interact1 span{width: 100%;background: #60c7fb}
+.interact dd.interact2 span{width: 80%;background: #1ad9a1}
+.interact dd.interact3 span{width: 70%;background: #fe9d6d}
+.interact dd.interact4 span{width: 40%;background: #73959b}
+.interact dd.interact5 span{width: 60%;background: #73959b}
+.interact dd.interact6 span{width: 50%;background: #73959b}
+/********互动情况*********/
+/********购买路径*********/
+.buywayBox{display: none;margin-top:0;}
+.buyway{width:6.8rem;margin: auto;height:11.5rem;background: url("/view/images/pcProfile/basicDatabg.png") no-repeat;
+    background-size: 100% 100%;padding:1rem 0.85rem;text-align: left;overflow:hidden}
+.buyway .bg{width:5px;height:37.5rem;/*height:11.5rem;*/position: absolute;left:0.8rem;top:0;z-index: 1;background: linear-gradient(#42d7eb,#c0e903); }
+.box{height:11.5rem;position: relative;overflow-x: hidden;overflow-y: auto}
+.dot{margin-top: 0.7rem;margin-left: 0.35rem;width:1rem;height:1.8rem;z-index:99;float: left;display:none;text-align: center;border-radius: 0.7rem;position: relative;}
+.dot.on{border-color: #fff;}
+.dot img{width:1rem;height:1rem;margin: auto;}
+.msg{float: left;z-index: 99;width: 4.5rem;height: 2.5rem;margin-left:0.7rem;margin-bottom: 1rem;display: none;background: url(/view/images/pcProfile/r1.png) no-repeat left top;background-size:4.5rem 2.5rem;padding-top: 0.5rem;}
+.zheLine{position: absolute;left: 1rem;width:1rem;height:0.4rem;text-align: left;margin-left:0.2rem;background: url(/view/images/pcProfile/zheLineapp.png) no-repeat left top;}
+.r9 {top:0.8rem;}
+.r8 {top: 4.6rem;}
+.r8.msg {height: 2.8rem;background-size: 4.5rem 2.8rem;}
+.r7 {top: 8.9rem;}
+.r7.msg {height: 2.8rem;background-size: 4.5rem 2.8rem;}
+.r6 {top: 13.2rem;}
+.r6.msg {height: 2.5rem;background-size: 4.5rem 2.5rem;}
+.r5 {top: 17.5rem;}
+.r5.msg {width: 4.7rem;height:2.8rem;background-size: 4.7rem 2.8rem;}
+.r4 {top: 21.8rem;}
+.r4.msg {width: 4.7rem;height:2.8rem;background-size: 4.7rem 2.8rem;}
+.r3 {top: 25.8rem;}
+.r3.msg {width:4.7rem;height: 2.8rem;background-size: 4.7rem 2.8rem;}
+.r2 {top: 30rem;}
+.r2.msg {width:4.7rem;height: 2.8rem;background-size: 4.7rem 2.8rem;}
+.r1 {top: 34.4rem;}
+.r1.msg {height: 3.2rem;background-size: 4.5rem 3.2rem;margin-bottom: 0}
+.msg .time{font-size: 0.4rem;color: #33efb8;text-align: left;padding-left: 0.4rem;margin-bottom: 0;}
+.msg .desc{font-size:0.45rem;color:#fff;text-align:left;margin-top:0;padding-left: 0.4rem;width:4rem;height: 1.3rem;display: table-cell;vertical-align: middle;}
+.r1 .desc,.r2 .desc{height:1.06rem;}
+.r3 .desc{height:0.85rem;}
+/********购买路径*********/
+

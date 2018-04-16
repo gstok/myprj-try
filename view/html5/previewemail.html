@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title></title>
+    <style>
+        *{padding:0;margin:0}
+        body{background-color: #fff;font-family: "Microsoft YaHei","微软雅黑","SimSun","宋体";color: #6a778f;max-width: 640px;margin:auto;  }
+        .emailBox{width:100%;}
+        .content{word-wrap: break-word;word-break: normal;}
+    </style>
+</head>
+<body>
+<div class="emailBox">
+    <div class="mailName">发件人：<span></span></div>
+    <div class="subject">邮件主题：<span></span></div>
+    <div class="content"></div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+$(function(){
+    var API={
+        baseUrl:"",
+        baseApi:"/user-apis",
+    };
+
+    function GetQueryString(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var id = (GetQueryString("id"));
+    var token = (GetQueryString("token"));
+
+    $.cookie('token', token, { expires: 1, path: '/' });
+    var data = {
+        id:id
+    }
+    $.ajax({
+        type: 'post',
+        url: API.baseApi+"/common/getEmail.action",
+        async: false,
+        data:data,
+        dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        beforeSend: function (xhr) {
+            // //发送ajax请求之前向http的head里面加入验证信息
+            xhr.setRequestHeader("token", token); // 请求发起前在头部附加token
+        },
+        success: function (res) {
+            if (res.code == 200) {
+                var obj = res.data.email;
+                $(".mailName span").html(obj.senderName);//发件人
+                $(".subject span").html(obj.subject);//邮件主题
+                $(".content").html(obj.content);//内容
+            }
+        }
+    })
+});
+
+</script>
+</body>
+</html>

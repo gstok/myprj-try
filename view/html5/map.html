@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<script src="/view/js/jquery-2.2.3.min.js"></script>
+    <script src="/view/marketing/micro/map/js/echarts.js"></script>
+    <!-- <script src="/view/marketing/micro/map/js/maps.js"></script> -->
+    <script src="/view/html5/js/maps.js"></script>
+<style>
+	table {
+    	border: 1px solid #e6e6e6;width: 100%;margin:0;padding:0;
+	}
+	table th,table td{
+	    border-top: none;
+	    color: #666;
+	    font-size: 12px;
+	    text-align: center;
+	    line-height: 40px;width: 33%;
+	}
+	table th{background: #ccc}
+	/***********滚动条***********/
+div::-webkit-scrollbar {width: 14px;height: 14px;}
+div::-webkit-scrollbar-track,
+div::-webkit-scrollbar-thumb {border-radius: 999px;border: 5px solid transparent;}
+div::-webkit-scrollbar-track {box-shadow: 1px 1px 5px rgba(130,149,206,1.0) inset;  }
+div::-webkit-scrollbar-thumb {min-height: 20px;background-clip: content-box;box-shadow: 0 0 0 5px rgba(130,149,206,1.0) inset;}
+div::-webkit-scrollbar-corner {background: transparent;}
+/***********滚动条  end***********/
+.tableDiv.tabscroll{overflow-y: scroll;}
+</style>
+</head>
+
+<body>
+<div id="main" class="main" style="display: none"></div>
+
+
+
+<div id="chart-map" style="height:400px;"></div>
+
+<div class="tableBox">
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th id='pTH'>省份</th>
+            <th class='pUV'>访问人数</th>
+            <th class='pPV'>访问次数</th>
+        </tr>
+        </thead>
+    </table>
+    <div class='tableDiv' style='height: 350px;'>
+    	<table cellspacing="0" cellpadding="0" >
+	        <tbody>
+	        </tbody>
+	    </table>
+    </div>
+
+</div>
+
+
+
+<script>
+	$("#main").load('/view/marketing/micro/map/maps.html');
+</script>
+
+<!-- <script src="js/exam3333333333333.js"></script> -->
+</body>
+</html>

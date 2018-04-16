@@ -1,0 +1,76 @@
+.filterSecond,.filterThird,.filterFourth{
+	display: inline-block;
+}
+.filterFourth{
+	margin-left: 20px;
+}
+.wicon.fourthend{
+	margin-left: 5px;
+}
+.wicon.fourthstart{
+	margin-right: 5px;
+}
+input.thirdContent{
+	border-radius:4px;
+	margin-right: 15px;
+}
+#groupName{
+	margin-left: 44px;
+	margin-top: 20px;
+}
+#groupName span{
+	margin-right: 20px;
+}
+#groupName input{
+	width: 350px;
+	height: 30px;
+}
+.spcSecond{
+	margin-left: -4px;
+}
+#cusList .textLeft{
+	padding-left: 20px;
+}
+#customerList .textLeft{
+	padding-left: 20px;
+}
+.thirdstart{
+	margin-right: 10px;
+}
+.thirdend{
+	margin-left: 10px;
+}
+#analysis .noperson{
+	text-align: center;
+	padding-top: 20px;
+}
+.nav-tabs{
+	margin-top: -10px;
+}
+#filterCondition{
+	margin-top: 10px;
+}
+#groupDetail-inner{
+	width: 100%;
+    margin: 0px 20px 10px 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 18px #ddd;
+}
+#analysis .thumbnail{
+	box-shadow: 0 0 6px #e2e4f6;
+	padding:3%;
+}
+#tagAnalysis .thumbnail{
+	box-shadow: 0 0 6px #e2e4f6;
+	padding:3%;
+}
+#addIntelligentGroup{
+	margin-top: 10px;
+}
+/*.customerForm span{
+	margin-left: 0;
+	margin-right: 0;
+}*/
+

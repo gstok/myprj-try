@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../libs/xcConfirm/css/xcConfirm.css" rel="stylesheet" />
+    <link href='../../libs/jedate/jedate.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <!--<link href='../css/marketing.css' rel='stylesheet' type='text/css' />-->
+</head>
+<body>
+<div id="emaildatapage" v-cloak>
+<!-- menu -->
+    <div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle">
+            <div class="col-md-12 clearfix">
+                <h2>
+                    <a href="javascript:;" style="line-height: 34px;"><i class="shu"></i>电子邮件 /  邮件数据</a>
+                    <div class="clearfix fr" v-show="isShow">
+                        <div class="selectBox">
+                            <select class="form-control" v-model="SendTit" @change="SendTitChange()">
+                                <option value="">请选择发送批次</option>
+                                <option v-for="Sendlist in Sendlists" :value="Sendlist.id">{{Sendlist.id}}</option>
+                            </select>
+                        </div>
+                        <span class="selectBoxSpan">请选择发送批次</span>
+                        <div class="selectBox">
+                            <select class="form-control" v-model="emailTit" @change="emailTitChange()">
+                                <option value="">请选择邮件模板</option>
+                                <option v-for="emailList in emailLists" :value="emailList.id">{{emailList.mailName}}</option>
+                            </select>
+                        </div>
+                        <span class="selectBoxSpan">请选择邮件模板</span>
+                    </div>
+                </h2>
+            </div>
+        </div>
+        <div id="page-inner" class="nopad page-inner">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#datapage" class="datapage" data-toggle="tab" @click="datapage()">查看</a>
+                </li>
+                <li v-show="hasurlShow"><a href="#accesspage" data-toggle="tab" @click="accesspage()" id="accessPageBtn">页面访问</a>
+                </li>
+                <li><a href="#funnelpage" class="funnelpage" data-toggle="tab" @click="funnelpage()">转化漏斗</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="datapage">
+                    <div class="explainBox">
+                        <div class="fl"><span id="dayorhour">时</span>访问人数</div>
+                        <div class="explain fl">
+                            <i class="icon icon-wenhao"></i>
+                            <div class="popover bottom">
+                                <div class="arrow"></div>
+                                <dl>
+                                    <dt><span>按时访问人数：</span>当前1小时内访问该页面的客户数。</dt>
+                                    <dd>• 同一客户在当前1小时内多次访问该页面的算1人；</dd>
+                                    <dd>• 不管该客户之前有没访问过该页面，在当前1小时内有访问该页面的都算作1人；</dd>
+                                </dl>
+                                <dl>
+                                    <dt><span>按日访问人数：</span>当天访问该页面的客户数。</dt>
+                                    <dd>• 同一客户在当天多次访问该页面的算1人；</dd>
+                                    <dd>• 不管该客户之前有没访问过该页面，在当天有访问该页面的都算作1人；</dd>
+                                </dl>
+                                <dl>
+                                    <dt><span>注：</span>按时累加的某一天总的客户访问人数，理论上会大于按天统计的该天客户访问人数</dt>
+                                </dl>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row nopm">
+                        <div class="col-md-12">
+                            <div class="datas-group">
+                                <!-- <div class="btn-groupbox btn-groupboxD">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default active" @click="todaydata()">&nbsp;&nbsp;&nbsp;当天&nbsp;&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-default" @click="weekdata()">最近7天</button>
+                                        <button type="button" class="btn btn-default" @click="monthdata()">最近30天</button>
+                                    </div>
+                                </div> -->
+                                <div class="btn-groupboxA clearfix">
+                                    <div class='timeGroup'>
+                                        <span>时间：</span>
+                                        <input type="text" class="form-control wicon margin10" id="inpstart1" placeholder="选择日期" readonly="">
+                                        <em>-</em>
+                                        <input type="text" class="form-control wicon margin10" id="inpend1" placeholder="选择日期" readonly="">
+                                    </div>
+                                    <div class="btn-group fl">
+                                        <button type="button" class="btn btn-default active" @click="todaydata()">&nbsp;&nbsp;&nbsp;当天&nbsp;&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-default" @click="weekdata()">最近7天</button>
+                                        <button type="button" class="btn btn-default" @click="monthdata()">最近30天</button>
+                                    </div>
+                                    <button class='btn btn-primary' style='margin-left: 20px;' @click='search(1)'>搜索</button>
+                                </div>
+                                <div id="chart" style="height:400px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="accesspage">
+                    <div class="explainBox">
+                        <div class="fl"><span id="dayorhourA">时</span>访问人数</div>
+                        <div class="explain fl">
+                            <i class="icon icon-wenhao"></i>
+                            <div class="popover bottom">
+                                <div class="arrow"></div>
+                                <dl>
+                                    <dt><span>按时访问人数：</span>当前1小时内访问该页面的客户数。</dt>
+                                    <dd>• 同一客户在当前1小时内多次访问该页面的算1人；</dd>
+                                    <dd>• 不管该客户之前有没访问过该页面，在当前1小时内有访问该页面的都算作1人；</dd>
+                                </dl>
+                                <dl>
+                                    <dt><span>按日访问人数：</span>当天访问该页面的客户数。</dt>
+                                    <dd>• 同一客户在当天多次访问该页面的算1人；</dd>
+                                    <dd>• 不管该客户之前有没访问过该页面，在当天有访问该页面的都算作1人；</dd>
+                                </dl>
+                                <dl>
+                                    <dt><span>注：</span>按时累加的某一天总的客户访问人数，理论上会大于按天统计的该天客户访问人数</dt>
+                                </dl>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row nopm">
+                        <div class="col-md-12">
+                            <div class="datas-group">
+                                <!-- <div class="btn-groupbox btn-groupboxA">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default active" @click="todayaccess()">&nbsp;&nbsp;&nbsp;当天&nbsp;&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-default" @click="weekaccess()">最近7天</button>
+                                        <button type="button" class="btn btn-default" @click="monthaccess()">最近30天</button>
+                                    </div>
+                                </div> -->
+                                <div class="btn-groupboxD clearfix">
+                                    <div class='timeGroup'>
+                                        <span>时间：</span>
+                                        <input type="text" class="form-control wicon margin10" id="inpstart2" placeholder="选择日期" readonly="">
+                                        <em>-</em>
+                                        <input type="text" class="form-control wicon margin10" id="inpend2" placeholder="选择日期" readonly="">
+                                    </div>
+                                    <div class="btn-group fl">
+                                        <button type="button" class="btn btn-default active" @click="todayaccess()">&nbsp;&nbsp;&nbsp;当天&nbsp;&nbsp;&nbsp;</button>
+                                        <button type="button" class="btn btn-default" @click="weekaccess()">最近7天</button>
+                                        <button type="button" class="btn btn-default" @click="monthaccess()">最近30天</button>
+                                    </div>
+                                    <button class='btn btn-primary' style='margin-left: 20px;' @click='search(2)'>搜索</button>
+                                </div>
+                                <h3 style='text-align: center;'>访问次数：{{count}}</h3>
+                                <div id="chart-v" class="myCharts" style="height:400px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="funnelpage">
+                    <div class="row nopm">
+                        <div class="col-md-12">
+                            <div class="funnelChart" id="funnelchart" style="height:400px;width:600px"></div>
+                            <table class="table table-striped table-bordered tableCenter">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th v-for="funnellist in funnellists">{{funnellist}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>人数（人）</td>
+                                    <td v-for="num in nums">{{num}}</td>
+                                </tr>
+                                <tr>
+                                    <td>转化率</td>
+                                    <td v-for="rate in rates">{{rate}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/echarts.min.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/marketing/email/emaildata.js"></script>
+<script>
+
+    //实现日期选择联动
+    var start1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end1.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end1 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start1.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates() {
+        end1.trigger = false;
+        $("#inpend1").jeDate(end1);
+    }
+    $("#inpstart1").jeDate(start1);
+    $("#inpend1").jeDate(end1);
+
+
+
+    var start2 = {
+        format: 'YYYY-MM-DD',
+        minDate: '0000-00-10 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            end2.minDate = datas; //开始日选好后，重置结束日的最小日期
+            endDates2();
+        },
+        okfun:function (elem,datas) {
+            alert(datas)
+        }
+    };
+    var end2 = {
+        format: 'YYYY-MM-DD',
+        minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
+        //festival:true,
+        maxDate: $.nowDate({DD:0}), //最大日期
+        choosefun: function(elem,datas){
+            start2.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    function endDates2() {
+        end2.trigger = false;
+        $("#inpend2").jeDate(end2);
+    }
+    $("#inpstart2").jeDate(start2);
+    $("#inpend2").jeDate(end2);
+
+</script>
+</body>
+</html>

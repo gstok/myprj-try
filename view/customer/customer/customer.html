@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link href='../../css/filter.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../css/jquery.multiselect.css" type="text/css"/>
+    <link href='../../css/select2.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/group.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/wxlogin/wxlogin.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css'/>
+    <style>
+        .close{float:none;opacity:1.0}
+        .close:hover{opacity:1.0}
+        .select2-container--default .select2-selection--multiple .select2-selection__rendered.scrolled {height: 125px;overflow-y: scroll;}
+        #isTelephone{position: absolute;left:-60px;top:16px;display: none}
+        .dropdown-menu{position: absolute;right:100px;top:53px;left:auto;display: none}
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <div class="row topTitle firstTopTitle">
+            <div class="col-md-12 clearfix">
+                <h2 class="fl">
+                   <a href="javascript:;"><i class="shu"></i>客户</a>
+                </h2>
+                <a href="javascript:;" class="btn fr rightAdd" module="cust" permission-code="ADD" onclick="addCustomer('indexaddoid')">+ 创建客户</a>
+            </div>
+        </div>
+        <div id="page-inner" class="content-inner form-inner page-inner">
+
+            <!--普通筛选-->
+            <div class="filter cusFilter pr" id="PTfilterBox">
+                <ul>
+                    <li class="clearfix" style='margin-top: 15px;'>
+                        <select name="" id="allStage"><option value="">全部阶段</option></select>
+                        <select name="" id="allSource"><option value="">全部来源</option></select>
+                        <select name="" id="allSex">
+                            <option value="">性别</option>
+                            <option value="未知">未知</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                        <select name="" id="allUser"><option value="">全部负责人</option></select>
+                        <div class="seabox">
+                            <span>创建时间</span>
+                            <input type="text" class="createInput wicon margin10" id="inpstarthms" placeholder="选择日期" readonly ><em>-</em>
+                            <input type="text" class="createInput wicon margin10" id="inpendhms" placeholder="选择日期" readonly >
+                        </div>
+                        </li>
+
+                    <li class="clearfix">
+                        <span class="seabox">客户标签</span>
+                        <select class="seabox" id='attrValsel'>
+                            <option value="">请选择</option>
+                            <option value="hk_tag">华坤道威标签</option>
+                            <option value="custom_tag">自定义标签</option>
+                        </select>
+                        <!-- <input type="text" style='display: none' class="seabox hk_tag" id="attrTagName"  placeholder="请输入标签" autocomplete="off" data-provide="typeahead"/> -->
+                        <select style='display: none' class="seabox attrVal" multiple="multiple"></select>
+                     <input type="text" placeholder="输入客户id、客户姓名、手机号或微信昵称" class="chaxun seabox" >
+                    <div class="groupBtn seabox chaxunBtn">
+                         <a href="javascript:;" class="cancel tbBtn zcBtn" onclick="reset()">重置</a>
+                         <a href="javascript:;" class="save btn-primary btn" onclick="PTsearch()">查询</a>
+                         <a href="javascript:;" class="save btn-primary btn group spcbtn" data-power="GET" id="GJfilter">高级筛选</a>
+                    </div>
+                    </li>
+                     <li><div class="contentLine"></div></li>
+                </ul>
+            </div>
+            <!--普通筛选-->
+
+            <!--高级筛选-->
+            <div class="pr" id="GJfilterBox">
+                <div class="filterGroup">
+                    <div class="cell-right hide big-cell">且</div>
+                    <div class="term">
+                        <div class="cell-right hide"></div>
+                        <p class="qiehuo"><span>且</span><i class="icon icon-qiehuan"></i></p>
+                        <div class="contains ">
+                            <select name="" class="filterFirst">
+                                <option value="">请选择</option>
+                                <option value="attr">属性</option>
+                                <option value="source">来源</option>
+                                <option value="kpi">指标</option>
+                                <option value="event">事件</option>
+                                <option value="area">所在地区</option>
+                                <option value="stage">销售阶段</option>
+                                <option value="cust_tag">客户标签</option>
+                            </select>
+                            <div class="filterSecond spcSecond">
+                                <select name="" class="moren">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                            <div class="filterThird">
+                                <select name="" class="moren">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                            <div class="filterFourth hide">
+                                <input type="text"  class="wicon fourthstart"  placeholder="选择日期" readonly >-<input type="text"  class="wicon fourthend"  placeholder="选择日期" readonly >
+                            </div>
+                            <span class="delete"><a href="javascript:;">删除</a></span>
+                        </div>
+                        <div class="newItem"><a href='javascript:;'>+ 添加筛选条件</a></div>
+                    </div>
+                </div>
+                <div class="groupBtn chaxunBtn btnGroups">
+                    <a href="javascript:;" class="cancel tbBtn zcBtn" onclick="GJreset()">重置</a>
+                    <a href="javascript:;" class="save btn-primary zcBtn" onclick="GJsearch()">查询</a>
+                    <a href="javascript:;" class="save btn-primary zcBtn" id="PTfilter">普通筛选</a>
+                </div>
+                <div class="contentLine"></div>
+            </div>
+            <!--高级筛选-->
+
+            <!-- 客户表格区域 -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group clearfix allselect">
+                        <div class="fl" style="margin-left: 20px">
+                            <input type="checkbox" name="" id="selectAll" class="checkname specheck">
+                            <label for="">全选</label>
+                            <span class="checknum">已选中<i class="manyuser">0</i>个客户</span>
+                        </div>
+                        <div class="fr">
+                            <button type="button" class="btn-primary btn btn-custAllDel" module="cust" permission-code="DEL" onclick="custAllDelPop()">批量删除</button>
+                            <button type="button" class="btn-primary btn btn-addfriends" module="cust" permission-code="ADDFRIENDS" onclick="batchAdd()">批量添加微信</button>
+                            <button type="button" class="btn-primary btn btn-sendsms"  module="sms" permission-code="SEND" onclick="SendPop(1)" smsctrl>批量发短信</button>
+                            <button type="button" class="btn-primary btn btn-sendemail" module="email" permission-code="SEND" onclick="SendPop(2)">批量发邮件</button>
+                            <button type="button" class="btn-primary btn btn-sendflash" module="flash" permission-code="SEND" onclick="SendPop(3)">批量发弹信</button>
+                            <button type="button" class="btn-primary btn btn-fenpei" module="cust" permission-code="UPDATE" onclick="fenpeiPop()">批量分配</button>
+                        </div>
+                    </div>
+                    <table class="table table-hover table-striped innerTable" id="cusList">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="textLeft">姓名</th>
+                                <th>客户标签</th>
+                      <!--           <th>内容标签</th> -->
+                                <th>手机号</th>
+                                <th>销售阶段</th>
+                                <th>客户来源</th>
+                                <th>客户负责人</th>
+                                <th class="textLeft">创建时间</th>
+                                <th class="caozuo textcenter">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="fr">
+                        <div id="customerListpage"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    <!-- 是否拨打电话 -->
+        <div class="modelContent" id="writeCall">
+            <div class="MotalTit"><i >拨打记录</i><span class="close">&times;</span></div>
+            <div class="contentInfo">
+                <a id="" name="6" href="#6">&nbsp;</a>
+                <div class="PopupCont clearfix">
+                    <ul class="addSignUl">
+                        <li><span>拨打时间：</span><span id="callTime"></span></li>
+                        <li>
+                            <span>沟通结果：</span>
+                            <select name="" id="resultResponse">
+                                <option value="">已购买</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>备&emsp;&emsp;注：</span>
+                            <textarea name="" id="remark" cols="30" rows="10"></textarea>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footerBtn">
+                    <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+                    <div class="btn btn-dcrm fr saveBtn modalBtn" onclick="addCall()">保存</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg"></div>
+        <div class="calling hide">
+            <div class="callingcont">
+                <p>拨号呼叫中，请注意接听您的手机</p>
+                <p><img src="../../images/calling.gif" alt=""><span class="numseconds">5</span>秒...</p>
+            </div>
+        </div>
+
+</div>
+
+
+    <!--添加好友弹窗-->
+    <div class="xcConfirm" id="addBox" style="display: none">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" onclick="noAdd()"></a><span class="tt">添加好友</span></div>
+            <div class="txtBox">
+                <div class="addBigBox">
+                    <div class="form-group">
+                        <label>招呼语设置：</label>
+                        <input type="text" class="form-control" placeholder="招呼语设置" id="helloMessage" />
+                    </div>
+                    <div class="form-group">
+                        <div>添加完成是否退出账号：</div>
+                        <input type="radio" name="logoutOnFinish" value="true"><label>是</label>
+                        <input type="radio" name="logoutOnFinish" value="false" checked="checked"><label>否</label>
+                    </div>
+                </div>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" onclick="add()">添加</a>
+                    <a class="sgBtn cancel" onclick="noAdd()">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="WechartloginBox">
+
+    </div>
+
+    <!--批量发短信-->
+    <div class="xcConfirm" id="SMSBox" style="display: none">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" onclick="noLogin()"></a><span class="tt">批量发短信</span></div>
+            <div class="txtBox">
+                <dl class="clearfix SMSdl">
+                    <dt>群组名：</dt>
+                    <dd><input type="text" id="GroupName" class="form-control"/></dd>
+                </dl>
+                <dl class="clearfix SMSdl">
+                    <dt>发送人数：</dt>
+                    <dd><span id="SMSnum"></span>人</dd>
+                    <input type="hidden" id="smsId">
+                </dl>
+                <dl class="clearfix">
+                    <dt id="SMSmb">短信模板：</dt>
+                    <dd>
+                        <select name="" id="SMSsel" class="form-control">
+
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt id="SMSnr">短信内容：</dt>
+                    <dd id="SMScont"></dd>
+                </dl>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" id="sendBtn">发送</a>
+                    <a class="sgBtn cancel" onclick="noLogin()">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--批量分配-->
+    <div class="xcConfirm" id="FPBox" style="display: none">
+        <div class="xc_layer"></div>
+        <div class="popBox">
+            <div class="ttBox"><a class="clsBtn" onclick="noLogin()"></a><span class="tt">批量分配</span></div>
+            <div class="txtBox">
+
+                <dl class="clearfix">
+                    <dt>客户人数：</dt>
+                    <dd><span id="FPnum"></span>人</dd>
+                    <input type="hidden" id="FPId">
+                </dl>
+                <dl class="clearfix">
+                    <dt>分配给：</dt>
+                    <dd>
+                        <select name="" id="FPsel" multiple="multiple" class="form-control selectpicker show-tick " data-live-search="true">
+                        </select>
+                    </dd>
+                </dl>
+            </div>
+            <div class="btnArea">
+                <div class="btnGroup">
+                    <a class="sgBtn ok" onclick="fenpei()">确定</a>
+
+                    <a class="sgBtn cancel" onclick="noLogin()">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="audio" src="" controls="controls" preload="auto" class="hide">
+        </audio>
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/jquery.multiselect.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap-typeahead.js"></script>
+<script src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/choosetime.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/qrcode.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/filter2.js"></script>
+<script src="../../js/select2.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../libs/wxlogin/wxlogin.js"></script>
+<script src="../../js/customer/filterEvent.js"></script>
+<script src="../../js/customer/customer.js"></script>
+
+<script>
+    $(".selectpicker ").on('change',function(){
+        var h = $('.select2-selection__rendered').height();
+        console.log(h);
+        if(h>94){
+            $('.select2-selection__rendered').addClass('scrolled') ;
+        }else{
+            $('.select2-selection__rendered').removeClass('scrolled');
+        }
+    });
+    $(".selectpicker ").select2();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/setting.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/setting/partialmanagement.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+
+    <div class="row topTitle firstTopTitle">
+        <div class="col-md-12 clearfix">
+            <h2 class="fl">
+               <a href="javascript:;"><i class="shu"></i><i class="tabName">部门 / 职位管理</i></a>
+            </h2>
+  <!--           <a href="javascript:;" class="btn fr rightAdd" onclick="addSign()">+新建签名</a> -->
+        </div>
+    </div>
+    <div id="page-inner" class="positionmanagement">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/view/setting/partialmanagement/partialmanagement.html">部门管理</a></li>
+            <li><a href="/view/setting/positionmanagement/positionmanagement.html">职位管理</a></li>
+        </ul>
+
+            <div class=" tab-pane fade active in" id="ztree">
+                <div id="treeDemo" class="ztree"></div>
+            </div>
+
+
+    </div>
+</div>
+
+
+<div class="bg"></div>
+<div class="modelContent" id="addPartial">
+    <div class="MotalTit"><i id="partName">新建部门</i><span class="close">&times;</span></div>
+    <div class="contentInfo">
+        <a id="" name="6" href="#6">&nbsp;</a>
+        <div class="PopupCont clearfix">
+            <ul class="addSignUl">
+                <li>
+                    <span>部门名称：</span>
+                    <input type="text" id="addPartialName">
+                </li>
+            </ul>
+        </div>
+
+        <div class="footerBtn">
+            <div class="btn btn-dcrm fr cancelBtn modalBtn" >取消</div>
+            <div class="btn btn-dcrm fr saveBtn modalBtn addPartialSure" >保存</div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/paging.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
+<script src="../../js/setting/partialmanagement/partialmanagement.js"></script>
+
+</body>
+<!-- 拖拽效果 -->
+<!-- <script>$("#sortable").sortable();</script> -->
+</html>

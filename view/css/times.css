@@ -1,0 +1,77 @@
+@charset "utf-8";
+/*body{margin:0;font:12px/180% "微软雅黑","宋体";}
+html,body{-webkit-text-size-adjust:none;background:#f7f7f7;}
+
+li{list-style-type:none;}
+ol,ul{list-style:none;}
+input{vertical-align:middle;font-size:100%;}
+img{vertical-align:top;border:0;}
+em,i{font-style:normal;}
+ul, li{list-style:none;}
+a{text-decoration:none;}
+
+
+
+.clearfix{*zoom:1;}
+.clearfix:before,.clearfix:after{display:table;content:"";}
+.clearfix:after{clear:both;}*/
+
+/*#timeContent */
+#timeContent{position:relative;width:1000px;margin:0 auto;
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#timeContent{padding:100px 40px 0 0;width:100%;}
+#timeContent .wrapper{position:relative;width:960px;margin:0 auto;}
+#timeContent .light{position:absolute;left:55px;top:-50px;width:152px;height:191px;background:url("../images/log/light-top.png") no-repeat top center;}
+#timeContent .light i{position:absolute;width:100%;height:100%;top:0;background:url("../images/log/light.png") no-repeat top center;}
+#timeContent .line-left{position:absolute;left:0;top:15px;width:70px;}
+#timeContent .line-right{position:absolute;right:0;top:15px;width:460px;}
+#timeContent .main{background:url("../images/log/line-bg.png") repeat-y 249px 0;}
+#timeContent .main .title{position:absolute;line-height:40px;padding-left:67px;left:230px;top:-20px;color:#606cbf;font-size:24px;background:url("../images/log/clock.png") no-repeat left top;}
+#timeContent .main .year{position:relative;z-index:98;top: -20px;}
+#timeContent .main .year h2{
+	    height: 26px;
+    width: 100px;
+    line-height: 26px;
+    text-align: left;
+    text-indent: 7px;
+    background: #7e8fe1;
+    position: relative;
+    top: -10px;
+    left: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popover{
+    max-width: 355px;
+}
+#timeContent .main .year h2 a{color:white;color: white; font-size: 12px;font-weight: normal;}
+#timeContent .main .year h2 i{display:block;position:relative;height:0;width:0;left:81px;top:-17px;border-width:4px;border-style:solid;border-color:#fff transparent transparent transparent;-webkit-transition:.5s;-moz-transition:.5s;-ms-transition:.5s;-o-transition:.5s;transition:.5s;-webkit-transform-origin:4px 4px;-moz-transform-origin:4px 4px;-ms-transform-origin:4px 4px;-o-transform-origin:4px 4px;transform-origin:4px 4px}
+#timeContent .main .year .list{margin:30px 0;position:relative;overflow:hidden;-webkit-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;-moz-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;-ms-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;-o-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s}
+#timeContent .main .year .list ul{bottom:0;}
+#timeContent .main .year .list li{    margin-bottom: -30px;background:url("../images/type0.png") no-repeat 242px 31px;padding:30px 0;color:#a1a4b8;}
+#timeContent .main .year .list li.type1{background:url("../images/type1.png ") no-repeat 242px 31px;padding:30px 0;color:#a1a4b8;}
+#timeContent .main .year .list ul li.highlight{background-image:url(http://p4.qhimg.com/d/inn/05a63fc5/circle-h.png);}
+.cls{zoom:1;}
+.cls:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+#timeContent .main .year .list ul li.highlight .date, #timeContent .main .year .list ul li.highlight .intro{color:#ec6a13;}
+#timeContent .main .year .list ul li .date,#timeContent .main .year .list ul li .version{float:left;display:block;clear:left;width:200px;line-height:24px;text-align:right}
+#timeContent .main .year .list ul li .date{font-size: 12px;line-height:20px;position: relative;left: 134px;position: relative;}
+#timeContent .main .year .list ul li .more{border-top:none;}
+#timeContent .main .year .list ul li .intro, #timeContent .main .year .list ul li .more{position: relative;left: 62px;text-align: left;float:left;display:block;width:400px;margin-left:100px;line-height:24px;top: -15px}
+#timeContent .main .year .list ul li .intro{ font-weight: 700;font-size:14px;line-height:32px;color:#666;}
+#timeContent .wrapper:first-child .main .year.closes h2 i{transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-o-transform:rotate(-90deg)}
+#timeContent .wrapper:first-child .main .year.closes .list{opacity:0;height:0!important;}
+#timeContent .more{
+	height: auto;
+}
+/*.popover{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}*/
+#timeContent .main .year .list .more p{
+    color: #999;
+    font-size: 11px;
+}

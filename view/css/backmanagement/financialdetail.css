@@ -1,0 +1,243 @@
+#page-inner{
+	background: none;
+}
+.table.tableLeft thead>tr>th:first-child, .table.tableLeft tbody>tr>th:first-child, .table.tableLeft tfoot>tr>th:first-child, .table.tableLeft thead>tr>td:first-child, .table.tableLeft tbody>tr>td:first-child, .table.tableLeft tfoot>tr>td:first-child{
+	color: #666;
+    font-size: 12px;
+    font-weight: normal;
+
+}
+.table.tableLeft thead>tr>th:first-child{
+	font-weight: bold;
+	text-indent: 50px;
+}
+.table tbody tr>td:first-of-type{
+	cursor: default;
+}
+.ypEducate{
+	box-shadow: 0 0 18px #e7e7e7;
+}
+.ypEducate .table tbody tr{
+	height: 50px;
+	border-top: 1px solid #e6e6e6;
+	text-indent: 50px;
+	font-weight: bold;
+	font-size: 14px;
+}
+.ypEducate .table.tableLeft tbody>tr>td:first-child{
+	font-size: 14px;
+text-align: left;
+}
+.ypEducate .table tbody tr td{
+	line-height: 40px;
+	    font-size: 14px;
+}
+.ypEducate .table.tableLeft thead>tr{
+	background: #fff;
+}
+.ypEducate .table.tableLeft tbody{
+	background: #fff;
+}
+.ypEducate .table.tableLeft thead>tr>th.tabletitle{
+	padding-left: 20px;
+	color: #333;
+	font-size: 16px;
+}
+.ypEducate .table-bordered{
+	border:none;
+}
+#page-inner{
+	background: none;
+    box-shadow:none;
+    padding: 0;
+}
+.tcspc{
+	width: 200px;
+	overflow: hidden;
+	white-space: normal;
+}
+#tcdetail{
+	background: white;
+	    padding: 10px;
+	    box-shadow: 0 0 18px #e7e7e7;
+}
+.tabtitle li{
+	float: left;
+	background: #f3f3f3;
+
+}
+.table tbody  tr td.tcspc{
+	line-height: 18px;
+	cursor: pointer;
+}
+
+
+
+.tcxfdetail{
+	margin-left: 10px;
+}
+#tcclassify{
+	margin-bottom: 12px;
+}
+#tcclassify ul{
+	width: 210px;
+	height: 32px;
+	margin:0 auto;
+}
+#tcclassify li{
+	float: left;
+    height: 32px;
+    width: 84px;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    line-height: 32px;
+    margin-left: -1px;
+    cursor: pointer;
+        font-size: 12px;
+}
+#tcclassify li.active{
+	color: #7e8fe1;
+	font-weight: bold;
+
+}
+#tcclassify li:first-child{
+	border-radius: 4px 0 0 4px;
+}
+#tcclassify li:last-child{
+	border-radius: 0 4px 4px 0;
+}
+.totalPay{
+	text-align: right;
+
+    font-weight: bold;
+}
+.totalNum{
+	color: red;
+}
+.tcxfdetail{
+	font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.tcxfstatus{
+	color: #80c269;
+}
+/*账单统计查询*/
+#billStatistics{
+
+	margin-top: 20px;
+}
+.recordtitle{
+	font-weight: bold;
+	font-size: 16px;
+	height: 40px;
+	line-height: 40px;
+	color: #333;
+}
+#billStatistics table{
+	background: white;
+	box-shadow: 0 0 18px #e7e7e7;
+}
+.createInput.wicon {
+    margin-left: 5px;
+    width: 180px;
+    height: 34px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+.billselect a{
+	float: left;
+    height: 32px;
+    width: 84px;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    line-height: 32px;
+    margin-left: -1px;
+    background: white;
+    font-size: 12px;
+}
+.billselect a.on{
+	color: #7e8fe1;
+	font-weight: bold;
+}
+.billselect a:first-child{
+	border-radius: 4px 0 0 4px;
+}
+.billselect a:last-child{
+	border-radius: 0 4px 4px 0;
+}
+#billtable thead tr th{
+	border: 1px solid #e6e6e6;
+	font-size: 14px;
+}
+.div{
+    position: relative;
+    top: 34px;
+    margin-right: 10px;
+}
+.div d{
+	display: none;
+}
+#selectTime{
+	width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    margin-left: 20px;
+    box-shadow: 0 0 18px #e7e7e7;
+        font-size: 12px;
+}
+/*充值记录列表*/
+#cztable{
+	background: white;
+}
+#cztable tfoot tr{
+	height: 70px;
+}
+.tcdgxq{
+	    font-weight: bold;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    color: #333;
+}
+.top{
+	padding: 0;
+}
+
+.table.tableCenter thead>tr>th:first-child, .table.tableCenter tbody>tr>th:first-child, .table.tableCenter tfoot>tr>th:first-child, .table.tableCenter thead>tr>td:first-child, .table.tableCenter tbody>tr>td:first-child, .table.tableCenter tfoot>tr>td:first-child{
+	color: #666;
+	font-weight: normal;
+}
+#spvtit{
+	font-size: 14px;
+	font-weight: bold;
+}
+.createInput.wicon[disabled]{
+	cursor: default;
+	background: #f2f2f2;
+}
+span.des{
+	color: #999;
+}
+.serviceNum{
+	display: flex;
+	height: 80px;
+}
+.serviceNum .div{
+	/*flex: 1;*/
+	width: 70%;
+}
+.serviceNum span{
+	width: 38%;
+}
+.nav-tabs{
+    margin-top: -10px;
+    margin-left: -10px;
+}
+.bold{
+	font-weight: bold;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数聚客</title>
+
+    <link href="../../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/times.css" rel="stylesheet" type="text/css" />
+    <link href='../../css/main.css' rel='stylesheet' type='text/css' />
+    <link href='../../libs/fonts/iconfont.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../libs/xcConfirm/css/xcConfirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../libs/jedate/jedate.css"/>
+    <link href='../../css/chosen.css' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link href='../../css/customer/customer.css' rel='stylesheet' type='text/css' />
+    <link href='../../css/customer/addphonecustomer.css' rel='stylesheet' type='text/css' />
+    <style>
+
+        .close{float:none;opacity:1.0}
+        .close:hover{opacity:1.0}
+
+    </style>
+</head>
+<body>
+<!-- menu -->
+<div class="menu"></div>
+<!-- menu end  -->
+<div id="page-wrapper">
+    <!-- top -->
+    <div id="top">
+        <my-top></my-top>
+    </div>
+    <!-- top end -->
+        <!-- 新建客户start -->
+        <div  class="popup-inner content-inner addCustomer">
+            <div class="row title">
+                <div class="col-md-12">
+                    <h2 class="fl addTitle"><i class="shu spc"></i><a href="/view/customer/customer/customer.html">客户</a><em>/ 创建客户</em> </h2>
+                    <a href="javascript:;" class='closeBtn fr closePropup' onclick="returnBack()">&times;</a>
+                </div>
+            </div>
+            <hr>
+            <div class="customerForm taskForm" >
+                <div class="clearfix ulList">
+                <ul class="oftenUl">
+                </ul>
+                <ul class="moreList hide">
+
+                </ul>
+                <p class="ckmore"><a href="javascript:;"><em>更多</em><i class="icon icon-iconfontjiantou"></i></a></p>
+
+                </div>
+                <div class="btnGroup">
+
+                    <a href="javascript:;" class="save btn btn-primary" onclick="addSure()">保存</a>
+                    <a href="javascript:;" class="cancel btn btn-default cancelPropup" onclick="returnBack()">取消</a>
+                </div>
+            </div>
+        </div>
+        <!-- 新建客户end -->
+</div>
+<script src="../../js/jquery-2.2.3.min.js"></script>
+<script src="../../libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="../../libs/jedate/jquery.jedate.js"></script>
+<script src="../../libs/xcConfirm/xcConfirm.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/chosen.jquery.js"></script>
+<script src="../../js/address.js"></script>
+<script src="../../js/customer/addphonecustomer.js"></script>

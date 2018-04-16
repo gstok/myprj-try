@@ -1,0 +1,226 @@
+{
+  "code": 200,
+  "success": true,
+  "obj": {
+    "attr": {
+      "age": "19-25岁",
+      "sex": "男",
+      "city": "杭州",
+      "married": "已婚",
+      "child": "有",
+      "car": "无",
+      "house": "有",
+      "character": "保守型",
+      "time": "1<t<5",
+      "online": "弱",
+      "brand": "意尔康/花花公子",
+      "tour": "较少",
+      "read": "恐怖/神怪",
+      "shopping": "食品/玩模",
+      "video": "爱情/喜剧",
+      "music": "流行/卡拉OK"
+    },
+    "img": "man-bg.png",
+    "bgImg": "man.png",
+    "custName": "丁福根",
+    "custLabel": "老客户",
+    "custVal": {
+      "totalValue": "3596.23",
+      "totalRank": "3",
+      "totalPercent": "96%",
+      "mValue": "259.88",
+      "mRank": "2",
+      "mPercent": "97%"
+    },
+    "channelNum": "73",
+    "channelData": [
+      {
+        "value": "34",
+        "name": "淘宝\n占比\n46.6%"
+      },
+      {
+        "value": "22",
+        "name": "京东\n占比\n30.1%"
+      },
+      {
+        "value": "17",
+        "name": "京东\n占比\n23.3%"
+      }
+    ],
+    "recommend": [
+      {
+        "img": "recommend1.jpg",
+        "title": "英孚教育暑期夏令营1"
+      },
+      {
+        "img": "recommend2.jpg",
+        "title": "英孚教育暑期夏令营2"
+      },
+      {
+        "img": "recommend3.jpg",
+        "title": "英孚教育暑期夏令营3"
+      }
+    ],
+    "vitalityNum": "30",
+    "vitalityDataX": [
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "vitalityDataY": [
+      [
+        1,
+        32,
+        23,
+        34,
+        16
+      ],
+      [
+        2,
+        32,
+        10,
+        40,
+        20,
+        90,
+        61,
+        70,
+        20
+      ],
+      [
+        20,
+        22,
+        0,
+        34,
+        20,
+        59,
+        10,
+        76,
+        19,
+        28,
+        16,
+        30,
+        50
+      ]
+    ],
+    "spread": "46",
+    "spreadData": [
+      {
+        "img": "spread1.png",
+        "title": "微信群"
+      },
+      {
+        "img": "spread2.png",
+        "title": "微博"
+      },
+      {
+        "img": "spread3.png",
+        "title": "朋友圈"
+      }
+    ],
+    "interactNum": "90",
+    "interactData": [
+      {
+        "title": "微信群",
+        "num": "48%"
+      },
+      {
+        "title": "微信好友",
+        "num": "52%"
+      },
+      {
+        "title": "微信朋友圈",
+        "num": "76%"
+      },
+      {
+        "title": "QQ空间",
+        "num": "36%"
+      },
+      {
+        "title": "短信",
+        "num": "40%"
+      },
+      {
+        "title": "邮件",
+        "num": "20%"
+      }
+    ],
+    "media":[
+      {
+        "icon":"TMALL.png",
+        "date":"7月21日 22:11",
+        "desc":"天猫折扣购买—“暑期托福在线外教口语一对一”"
+      },
+      {
+        "icon":"PEO.png",
+        "date":"7月20日 10:40",
+        "desc":"领取折扣券"
+      },
+      {
+        "icon":"XT.png",
+        "date":"7月20日 10:34",
+        "desc":"邮件发送折扣券"
+      },
+      {
+        "icon":"XT.png",
+        "date":"7月16日 20:02",
+        "desc":"接听客户经理电话"
+      },
+      {
+        "icon":"PUB.png",
+        "date":"7月16日 21:50",
+        "desc":"公众号报名“暑期免费试学活动”"
+      },
+      {
+        "icon":"PUB.png",
+        "date":"7月16日21:20",
+        "desc":"关注公众号"
+      },
+      {
+        "icon":"PEO.png",
+        "date":"7月15日 20:30",
+        "desc":"查看短信"
+      },
+      {
+        "icon":"XT.png",
+        "date":"7月15日 15:28",
+        "desc":"发送营销短信"
+      },
+      {
+        "icon":"BD.png",
+        "date":"7月13日、14日",
+        "desc":"百度搜索托福口语培训"
+      }
+    ],
+    "msg": ""
+  }
+}

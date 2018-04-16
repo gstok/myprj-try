@@ -1,0 +1,101 @@
+.upHead{
+	margin-left: 50px;
+}
+.uploadimg{
+	width: 120px;
+	height: 120px;
+	text-align: center;
+	line-height: 120px;
+}
+#up_head{
+	margin-left: 20px;
+	margin-right: 100px;
+}
+#setting{
+	padding-bottom: 20px;
+}
+#setting .content span:first-of-type{
+	display: inline-block;
+	width: 115px;
+	margin-right: -20px;
+}
+#setting .content li{
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 30px;
+}
+#setting .content li .form-control{
+	width: 510px;
+    height: 36px;
+    border-radius: 2px;
+    display: inline-block;
+}
+#setting .content li label{
+	margin-left: 10px;
+    margin-right: 45px;
+}
+
+.form-control[readonly]{
+	background-color: #fff;
+	cursor: pointer;
+}
+#updatePwd{
+	margin:20px;
+}
+#updatePwd li{
+	line-height: 30px;
+	margin-bottom: 30px;
+}
+#updatePwd li span{
+	margin-right: 30px;
+	width: 100px;
+	text-align: right;
+	display: inline-block;
+}
+#updatePwd li input{
+	width: 268px;
+	border-radius: 5px;
+	border:1px solid #cdd6db;
+}
+#updatePwd li p{
+	margin-left: 130px;
+	margin-top: -20px;
+}
+#updatePwd .btnGroup{
+	margin-top: 70px;
+}
+#head_img{
+	width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.addusercon{
+	margin-left: 40px;
+}
+
+#numCount,#describe{
+	height: 100px!important;
+	resize: none;
+}
+.btnGroup{
+	margin-top: 80px;
+}
+
+#setting .content li.textarea{
+	    height: 100px;
+    line-height: 100px;
+    margin-bottom: 30px;
+}
+
+#setting #userBirthday,#setting #asex{
+	margin-left: -5px;
+}
+#setting .content span:first-of-type.select2-selection__choice__remove{
+	width: 30px;
+    position: relative;
+    top: 3px;
+}
+#setting .addusercon.content li{
+	line-height: 19px;
+}
