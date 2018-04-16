@@ -51,10 +51,25 @@
                             <!-- <span>London</span>
                             <span style="float:right;color:#ccc">U.S.A</span> -->
                         </Option>
-                        <Option label="在中国">2</Option>
+                        <Option value="inChina" label="在中国">2</Option>
                     </OptionGroup>
                 </Select>
             </Col>
+        </Row>
+        <Row>
+            <InputNumber :min="0" :max="5" :step="0.1"></InputNumber>
+        </Row>
+        <Row style="margin-top: 20px">
+            <Transfer
+                filterable
+                :filter-method="filterMethod"
+                :data="totalList"
+                :target-keys="dstKeyList"
+                :render-format="renderFunc"
+                :operations="['向左','向右']"
+                :list-style="listStyle"
+                @on-change="handleChange">
+            </Transfer>
         </Row>
     </Layout>
 </template>
@@ -64,7 +79,6 @@
         name: 'learn',
         data () {
             return {
-
                 cityList: [
                     {
                         value: 'New York',
@@ -93,7 +107,6 @@
                 ],
                 model1: ['London'],
 
-
                 formInline: {
                     user: '',
                     password: ''
@@ -119,6 +132,14 @@
                             trigger: 'blur' 
                         }
                     ]
+                },
+
+                totalList: [],
+                dstKeyList: [],
+
+                listStyle: {
+                    width: '400px',
+                    height: '300px'
                 }
             }
         },
@@ -135,7 +156,34 @@
                         this.$Message.error('失败');
                     }
                 })
+            },
+
+            renderFunc (item) {
+                return item.label + " - " + item.description;
+            },
+            handleChange (newTargetKeys, direction, moveKeys) {
+                console.log(newTargetKeys);
+                console.log(direction);
+                console.log(moveKeys);
+                this.dstKeyList = newTargetKeys;
+            },
+
+            //搜索函数，返回布尔值，一一对比进行判断
+            filterMethod (data, query) {
+                return data.label.indexOf(query) > -1;
             }
+        },
+
+        mounted () {
+            this.totalList = Array(20).fill(0).map((item, index) => {
+                return {
+                    key: index.toString(),
+                    label: 'Content ' + index,
+                    description: 'The desc of content  ' + index,
+                    disabled: false
+                };
+            });
+            this.dstKeyList = ["0", "1", "2"];
         }
     };
 </script>
