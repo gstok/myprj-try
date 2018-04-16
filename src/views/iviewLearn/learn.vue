@@ -5,71 +5,85 @@
 
 <template>
     <Layout>
-        <Row>
-            <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                <FormItem prop="user">
-                    <Input type="text" v-model="formInline.user" placeholder="Username">
-                        <Icon type="ios-person-outline" slot="prepend"></Icon>
-                    </Input>
-                </FormItem>
-                <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" placeholder="Password">
-                        <Icon type="ios-locked-outline" slot="prepend"></Icon>
-                    </Input>
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
-                </FormItem>
-            </Form>
-        </Row>
-        <Row>
-            <Button>默认的按钮</Button>
-            <Button disabled type="primary">主要按钮样式</Button>
-            <Button type="ghost">Ghost</Button>
-            <Button type="dashed">Dashed</Button>
-            <Button type="text">Text</Button>
-            <Button size="large" long shape="circle" type="warning">警告</Button>
-            <Button size="large" type="success" loading>成功</Button>
+        <Row style="margin-top: 20px;">
+            <Tabs type="card" value="name1">
+                <TabPane label="穿梭框学习" name="name1">
+                    <Row style="margin-top: 20px;">
+                        <Transfer
+                            filterable
+                            :filter-method="filterMethod"
+                            :data="totalList"
+                            :target-keys="dstKeyList"
+                            :render-format="renderFunc"
+                            :operations="['向左','向右']"
+                            :list-style="listStyle"
+                            @on-change="handleChange">
+                        </Transfer>
+                    </Row>
+                </TabPane>
+                <TabPane label="各种按钮" name="name2">
+                    <Row>
+                        <Button>默认的按钮</Button>
+                        <Button disabled type="primary">主要按钮样式</Button>
+                        <Button type="ghost">Ghost</Button>
+                        <Button type="dashed">Dashed</Button>
+                        <Button type="text">Text</Button>
+                        <Button size="large" long shape="circle" type="warning">警告</Button>
+                        <Button size="large" type="success" loading>成功</Button>
 
-            <ButtonGroup vertical>
-                <Button type="success">
-                    <Icon type="chevron-left"></Icon>
-                    成功
-                </Button>
-                <Button type="warning">警告</Button>
-                <Button type="error">失败</Button>
-            </ButtonGroup>
-        </Row>
-        <Row>
-            <Col span="4">
-                <Select filterable multiple clearable v-model="model1">
-                    <OptionGroup label="城市">
-                        <Option v-for="(item, index) in cityList" :disabled="index % 2 == 1" :value="item.value" :key="item.value"></Option>
-                    </OptionGroup>
-                    <OptionGroup label="序号">
-                        <Option value="inUSA" label="在美国">
-                            <!-- <span>London</span>
-                            <span style="float:right;color:#ccc">U.S.A</span> -->
-                        </Option>
-                        <Option value="inChina" label="在中国">2</Option>
-                    </OptionGroup>
-                </Select>
-            </Col>
-        </Row>
-        <Row>
-            <InputNumber :min="0" :max="5" :step="0.1"></InputNumber>
-        </Row>
-        <Row style="margin-top: 20px">
-            <Transfer
-                filterable
-                :filter-method="filterMethod"
-                :data="totalList"
-                :target-keys="dstKeyList"
-                :render-format="renderFunc"
-                :operations="['向左','向右']"
-                :list-style="listStyle"
-                @on-change="handleChange">
-            </Transfer>
+                        <ButtonGroup vertical>
+                            <Button type="success">
+                                <Icon type="chevron-left"></Icon>
+                                成功
+                            </Button>
+                            <Button type="warning">警告</Button>
+                            <Button type="error">失败</Button>
+                        </ButtonGroup>
+                    </Row>
+                </TabPane>
+                <TabPane label="Select学习" name="name3">
+                    <Row>
+                        <Col span="4">
+                            <Select filterable multiple clearable v-model="model1">
+                                <OptionGroup label="城市">
+                                    <Option v-for="(item, index) in cityList" :disabled="index % 2 == 1" :value="item.value" :key="item.value"></Option>
+                                </OptionGroup>
+                                <OptionGroup label="序号">
+                                    <Option value="inUSA" label="在美国">
+                                        <!-- <span>London</span>
+                                        <span style="float:right;color:#ccc">U.S.A</span> -->
+                                    </Option>
+                                    <Option value="inChina" label="在中国">2</Option>
+                                </OptionGroup>
+                            </Select>
+                        </Col>
+                    </Row>
+                </TabPane>
+                <TabPane label="行内表单" name="name4">
+                    <Row>
+                        <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+                            <FormItem prop="user">
+                                <Input type="text" v-model="formInline.user" placeholder="Username">
+                                    <Icon type="ios-person-outline" slot="prepend"></Icon>
+                                </Input>
+                            </FormItem>
+                            <FormItem prop="password">
+                                <Input type="password" v-model="formInline.password" placeholder="Password">
+                                    <Icon type="ios-locked-outline" slot="prepend"></Icon>
+                                </Input>
+                            </FormItem>
+                            <FormItem>
+                                <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+                            </FormItem>
+                        </Form>
+                    </Row>
+                </TabPane>
+                <TabPane label="其他小零件" name="name5">
+                    <Row>
+                        <InputNumber :min="0" :max="5" :step="0.1"></InputNumber>
+                    </Row>
+                </TabPane>
+            </Tabs>
         </Row>
     </Layout>
 </template>
