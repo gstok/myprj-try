@@ -40,6 +40,22 @@
                 <Button type="error">失败</Button>
             </ButtonGroup>
         </Row>
+        <Row>
+            <Col span="4">
+                <Select filterable multiple clearable v-model="model1">
+                    <OptionGroup label="城市">
+                        <Option v-for="(item, index) in cityList" :disabled="index % 2 == 1" :value="item.value" :key="item.value"></Option>
+                    </OptionGroup>
+                    <OptionGroup label="序号">
+                        <Option value="inUSA" label="在美国">
+                            <!-- <span>London</span>
+                            <span style="float:right;color:#ccc">U.S.A</span> -->
+                        </Option>
+                        <Option label="在中国">2</Option>
+                    </OptionGroup>
+                </Select>
+            </Col>
+        </Row>
     </Layout>
 </template>
 
@@ -48,6 +64,36 @@
         name: 'learn',
         data () {
             return {
+
+                cityList: [
+                    {
+                        value: 'New York',
+                        label: 'New York'
+                    },
+                    {
+                        value: 'London',
+                        label: 'London'
+                    },
+                    {
+                        value: 'Sydney',
+                        label: 'Sydney'
+                    },
+                    {
+                        value: 'Ottawa',
+                        label: 'Ottawa'
+                    },
+                    {
+                        value: 'Paris',
+                        label: 'Paris'
+                    },
+                    {
+                        value: 'Canberra',
+                        label: 'Canberra'
+                    }
+                ],
+                model1: ['London'],
+
+
                 formInline: {
                     user: '',
                     password: ''
