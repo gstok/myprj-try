@@ -1,7 +1,4 @@
 
-<style lang="less" scoped>
-</style>
-
 <style>
     .custDetail .ivu-modal-mask {
         background-color: rgba(55, 55, 55, 0);
@@ -47,16 +44,17 @@
             <!--群组列表-->
             <g-group ref="Ggroup" @addCust="addCust" @getid="getGroupId" @getGroupLists="getGroupLists"></g-group>
             <!--群组列表-->
+
             <div class='GcustListContBox'>
                 <div class="GcustListCont">
                     <!--搜索区域-->
-                    <g-groupsearch @search="search"
+                    <!-- <g-groupsearch @search="search"
                                    :Gid = 'id'
                                    @reset="reset">
-                    </g-groupsearch>
+                    </g-groupsearch> -->
                     <!--搜索区域-->
                     <!--表格分页-->
-                    <g-table ref="gTable"
+                    <!-- <g-table ref="gTable"
                              :columns="columns"
                              :data="Cutists"
                              :stripe="true"
@@ -68,19 +66,21 @@
                              @on-sort-change="handleSortChange"
                              @on-change="handlePageNumberChange"
                              @on-select-cancel="handleTableSelectCancel">
-                    </g-table>
+                    </g-table> -->
                     <!--表格分页-->
                 </div>
             </div>
+
+            
             <!--微信登录-->
-            <wxLogin ref="wxLogin" :checkedCustNum="checkedCustNum"
+            <!-- <wxLogin ref="wxLogin" :checkedCustNum="checkedCustNum"
                      :single="isSingle" :show = "isShow"
                      @on-finish="addWechatF"
                      @on-cancel="cancel">
-            </wxLogin>
+            </wxLogin> -->
             <!--微信登录-->
             <!--侧边栏批量操作-->
-            <SlidingMenu ref="SlidingMenu"
+            <!-- <SlidingMenu ref="SlidingMenu"
                          :custLists = 'checkedcustLists'
                          :tableSelectAll='tableSelectAll'
                          :checkedCustNum="checkedCustNum"
@@ -89,27 +89,27 @@
                          @fpman="refreshTab"
                          @delpeople="refreshMoveTab"
                          @muhide="muhide">
-            </SlidingMenu>
+            </SlidingMenu> -->
             <!--侧边栏批量操作-->
             <!--单个发送短信-->
-            <singlesend ref="singlesend"
+            <!-- <singlesend ref="singlesend"
                         :Sendshow="singlesendShow"
                         :custName='sendcustName'
                         :custId="sendcustId"
                         @on-cancel="cancel"
                         @on-suc="cancel">
-            </singlesend>
+            </singlesend> -->
             <!--单个发送短信-->
             <!--添加好友招呼语-->
-            <addfriendsgreet ref="addFbox"
+            <!-- <addfriendsgreet ref="addFbox"
                              :sessionId="sessionId"
                              :addShow ='addFShow'
                              @addWechatFridens='addFridens'
                              @cancel="cancel">
-            </addfriendsgreet>
+            </addfriendsgreet> -->
             <!--添加好友招呼语-->
             <!--详情页-->
-            <Modal v-model="detailShow"
+            <!-- <Modal v-model="detailShow"
                    :styles="{width: '100%',top:'70px',bottom:'0','padding-left':'60px'}"
                    :footerHide="true"
                    :mask-closable="false"
@@ -122,7 +122,7 @@
                                 @on-addCustTag="getCustList"
                                 @addFs='detailaddF'>
                 </customerDetail>
-            </Modal>
+            </Modal> -->
             <!--详情页-->
         </div>        
     </div>
