@@ -83,11 +83,13 @@ import Test from "./views/test";
 
 import gstok from "./views/gstok";
 import iviewLearn from "./views/iviewLearn";
+import iviewTable from "./views/iviewTable";
 
 routerConfig = routerConfig.concat(Customer.routers);
 routerConfig = routerConfig.concat(Test.routers);
 routerConfig = routerConfig.concat(gstok.routers);
 routerConfig = routerConfig.concat(iviewLearn.routers);
+routerConfig = routerConfig.concat(iviewTable.routers);
 // routerConfig = routerConfig.concat(Menu.routers);
 
 // 路由配置
