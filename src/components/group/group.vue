@@ -41,7 +41,13 @@
             </div>
 
             <!--这里是新建群组的表单-->
-            <Form v-show='!addGroupShow' label-position="top" ref="formValidate" :model="formValidate" :rules="ruleValidate" style="margin-top: 10px;">
+            <Form
+                v-show='!addGroupShow'
+                label-position="top"
+                ref="formValidate"
+                :model="formValidate"
+                :rules="ruleValidate"
+                style="margin-top: 10px;">
                 <FormItem style="margin-bottom:0" prop="grouptitle">
                     <Input v-model="formValidate.grouptitle" placeholder="请输入群组名称"></Input>
                 </FormItem>
@@ -177,6 +183,7 @@
                 let data = {
                     groupName:that.formValidate.grouptitle
                 };
+                console.log(data);
                 that.$post("/user-apis/pc/newCust/createGroup.action",data).then(res => {
                     if (res.code === 200) {
                         that.getGroupList();
