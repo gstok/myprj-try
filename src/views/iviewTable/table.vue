@@ -46,11 +46,21 @@
                                 }, '女生哦');
                             }
                             else {
-                                hFunc = h("Button", {
-                                    props: {
-                                        type: "ghost"
+                                hFunc = h("div", {
+                                    style: {
+                                        backgroundColor: "pink"
                                     }
-                                }, '未知生物');
+                                },
+                                [
+                                    h("Button", {
+                                        props: {
+                                            type: "ghost"
+                                        },
+                                        style: {
+                                            margin: "10px"
+                                        }
+                                    }, '未知生物')
+                                ]);
                             }
 
 
