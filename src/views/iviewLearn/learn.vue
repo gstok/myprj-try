@@ -7,6 +7,19 @@
     <Layout>
         <Row style="margin-top: 20px;">
             <Tabs type="card" value="name1">
+                <TabPane label="步骤条学习">
+                    <Row>
+                        <Steps :current="curStep" status="error">
+                            <Step title="第一步" content="第一步的操作介绍"></Step>
+                            <Step title="第二步" content="第二步的操作介绍"></Step>
+                            <Step title="第三步" content="第三步的操作介绍"></Step>
+                            <Step title="第四步" content="第四步的操作介绍"></Step>
+                        </Steps>
+                    </Row>
+                    <Row>
+                        <Button type="info" @click="nextStep">下一步</Button>
+                    </Row>
+                </TabPane>
                 <TabPane label="下拉框尝试" name="name7">
                     <Dropdown>
                         <a href="javascript:void(0)">
@@ -212,7 +225,9 @@
                 listStyle: {
                     width: '400px',
                     height: '300px'
-                }
+                },
+
+                curStep: 0
             }
         },
         methods: {
@@ -243,6 +258,13 @@
             //搜索函数，返回布尔值，一一对比进行判断
             filterMethod (data, query) {
                 return data.label.indexOf(query) > -1;
+            },
+
+            nextStep () {
+                this.curStep++;
+                if (this.curStep > 3) {
+                    this.curStep = 0;
+                }
             }
         },
 
