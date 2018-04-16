@@ -248,8 +248,11 @@
             }
         },
         async mounted () {
-            await this.mytest();
-            console.log("你好，世界");
+            let res = await this.$post("/user-apis/pc/newCust/getList.action");
+            if (res.code === 200) {
+                console.log(res.data.data.count);
+                console.log(res.data.data.list);
+            }
         }
     }
 </script>

@@ -781,4 +781,31 @@ textarea {
   top: -20px;
 }
 
+.custDetail .ivu-modal-mask {
+  background-color: rgba(55, 55, 55, 0);
+}
+#Gpage-inner {
+  width: 100%;
+  margin: 10px 20px 10px 0;
+  padding: 10px 0;
+  height: auto;
+  position: relative;
+}
+.GcustListContBox {
+  margin-left: 250px;
+}
+.GcustListCont {
+  background-color: #fff;
+  padding: 10px;
+  float: left;
+  width: 100%;
+  min-height: 600px;
+  border-radius: 5px;
+  height: auto;
+  box-shadow: 0 0 18px #e7e7e7;
+}
+.icon.red {
+  color: red !important;
+}
+
 /*# sourceMappingURL=main.css.map*/
