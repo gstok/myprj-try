@@ -88,42 +88,72 @@
                         title: "年龄",
                         key: "age",
                     },
+                    {
+                        title: "地址",
+                        key: "address",
+                        // type: "expand"
+                    }
                 ],
                 dataList: [
                     {
                         name: "顾世豪",
                         sex: "男",
-                        age: 25
+                        age: 25,
+                        address: "中国浙江省杭州市西湖区"
                     },
                     {
                         name: "习近平",
                         sex: "男",
-                        age: 70
+                        age: 70,
+                        address: "陕西省某个窑洞"
                     },
                     {
                         name: "彭丽媛",
                         sex: "女",
-                        age: 60
+                        age: 60,
+                        address: "夜总会"
                     },
                     {
                         name: "顾世豪",
                         sex: "男",
-                        age: 25
+                        age: 25,
+                        address: "中国浙江省杭州市西湖区"
                     },
                     {
                         name: "习近平",
                         sex: "男",
-                        age: 70
+                        age: 70,
+                        address: "陕西省某个窑洞"
                     },
                     {
                         name: "彭丽媛",
                         sex: "女",
-                        age: 60
+                        age: 60,
+                        address: "夜总会"
+                    },
+                    {
+                        name: "顾世豪",
+                        sex: "男",
+                        age: 25,
+                        address: "中国浙江省杭州市西湖区"
+                    },
+                    {
+                        name: "习近平",
+                        sex: "男",
+                        age: 70,
+                        address: "陕西省某个窑洞"
+                    },
+                    {
+                        name: "彭丽媛",
+                        sex: "女",
+                        age: 60,
+                        address: "夜总会"
                     },
                     {
                         name: "小埋",
                         sex: "未知生物",
-                        age: 14
+                        age: 14,
+                        address: "日本"
                     },
                 ]
             };
