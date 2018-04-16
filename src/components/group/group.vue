@@ -8,7 +8,6 @@
                 </Button>
             </div>
             <p class="GgroupTit">群组</p>
-
             <ul class="groupUl">
                 <li class="groupLi" @click="pushGroupId('')"><i class="icon icon-dankehu"></i>
                     <!--<span title='全部'>全部({{allcustNum}})</span>-->
@@ -220,10 +219,10 @@
             },
 
             //新建客户
-            AddCust(){
+            AddCust () {
                 this.$emit('addCust');
+                this.$emit('gstokTest');
             }
-
         }
     }
 </script>

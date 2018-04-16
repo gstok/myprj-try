@@ -41,10 +41,18 @@
             </a>
         </h2>
         <div id='Gpage-inner' class='clearfix'>
+        
             <!--群组列表-->
-            <g-group ref="Ggroup" @addCust="addCust" @getid="getGroupId" @getGroupLists="getGroupLists"></g-group>
+            <g-group
+                ref="Ggroup"
+                @addCust="addCust"
+                @getid="getGroupId"
+                @gstokTest="gstokTest"
+                @getGroupLists="getGroupLists">
+            </g-group>
             <!--群组列表-->
-
+            
+            
             <div class='GcustListContBox'>
                 <div class="GcustListCont">
                     <!--搜索区域-->
@@ -596,8 +604,16 @@
             },
             //新建客户
             addCust() {
+                console.log("新建客户方法被调用");
                 this.$router.push({path: '/views/customer/addcust'});
             },
+
+
+            gstokTest () {
+                console.log("我的方法被调用了！");
+            },
+
+
             handleTableSelectAll(selection) {
                 this.tableSelectAll = !this.tableSelectAll;
             },
