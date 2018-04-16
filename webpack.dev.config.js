@@ -41,7 +41,7 @@ module.exports = merge(webpackBaseConfig, {
         hot: true,
         compress: true,
         historyApiFallback: true,
-        host: '127.0.0.1',
+        host: '192.168.0.189',
         port: 8080,
         proxy: {
             '/user-apis': {

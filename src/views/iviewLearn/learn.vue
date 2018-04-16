@@ -8,6 +8,60 @@
         <Row style="margin-top: 20px;">
             <Tabs type="card" value="name1">
                 <TabPane label="下拉框尝试" name="name7">
+                    <Dropdown>
+                        <a href="javascript:void(0)">
+                            下拉菜单
+                            <Icon type="arrow-down-b"></Icon>
+                        </a>
+                        <DropdownMenu slot="list">
+                            <DropdownItem>驴打滚</DropdownItem>
+                            <DropdownItem>炸酱面</DropdownItem>
+                            <DropdownItem disabled>豆汁儿</DropdownItem>
+                            <DropdownItem>冰糖葫芦</DropdownItem>
+                            <DropdownItem divided>北京烤鸭</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                    <Dropdown trigger="click" placement="bottom-start" style="margin-left: 20px">
+                        <Button type="primary">
+                            下拉菜单
+                            <Icon type="arrow-down-b"></Icon>
+                        </Button>
+                        <DropdownMenu slot="list">
+                            <DropdownItem>驴打滚</DropdownItem>
+                            <DropdownItem>炸酱面</DropdownItem>
+                            <DropdownItem disabled>豆汁儿</DropdownItem>
+                            <DropdownItem>冰糖葫芦</DropdownItem>
+                            <DropdownItem divided>北京烤鸭</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+
+
+                    <Dropdown>
+                        <!-- <span>
+                            全国各省
+                            <Icon type="arrow-down-b"></Icon>
+                        </span> -->
+                        <a href="javascript:void(0)">
+                            全国各省
+                            <Icon type="arrow-down-b"></Icon>
+                        </a>
+                        <DropdownMenu slot="list">
+                            <DropdownItem>浙江</DropdownItem>
+                            <DropdownItem>江苏</DropdownItem>
+                            <DropdownItem>安徽</DropdownItem>
+                            <Dropdown placement="right-start">
+                                <DropdownItem>
+                                    山东
+                                    <Icon type="ios-arrow-right"></Icon>
+                                </DropdownItem>
+                                <DropdownMenu slot="list">
+                                    <DropdownItem>济南</DropdownItem>
+                                    <DropdownItem>青岛</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            <DropdownItem>福建</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </TabPane>
 
 
